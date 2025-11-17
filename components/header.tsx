@@ -20,7 +20,8 @@ export default function Header() {
   const pathname = usePathname();
 
   // Hide header on privacy pages
-  const isPrivacyPage = pathname?.startsWith('/privacy');
+  const isPrivacyPage =
+    pathname?.startsWith("/privacy") || pathname?.startsWith("/terms");
 
   useEffect(() => {
     const metaThemeColor = document.querySelector("meta[name='theme-color']");
