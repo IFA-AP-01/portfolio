@@ -7,6 +7,8 @@ import { useSectionInView } from "@/lib/hooks";
 import { BsDiscord } from "react-icons/bs";
 import { FaGithubSquare, FaPhone } from "react-icons/fa";
 import ContactSection from "../contact-form";
+import { headlineFont } from "@/lib/fontawesome";
+import { FaMapMarkerAlt } from "react-icons/fa";
 
 export default function Contact() {
   const { ref } = useSectionInView("Contact");
@@ -77,7 +79,13 @@ export default function Contact() {
           <FaPhone />
         </a>
       </motion.div>
-      <ContactSection/>
+      <ContactSection />
+      <p
+        className={`${headlineFont.className} mt-4 text-gray-700 dark:text-gray-200 flex items-center justify-center gap-2 text-lg`}
+      >
+        <FaMapMarkerAlt className="text-tertiary dark:text-primary " /> Danang,
+        Vietnam
+      </p>
     </motion.section>
   );
 }

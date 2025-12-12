@@ -199,6 +199,16 @@ div.canvas-content.dark::after {
   scroll-behavior: smooth;
 }
 
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card-dark {
+  background: rgba(0, 0, 0, 0.25);
+}
+
 /* Reduce motion for accessibility and performance */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -209,3 +219,10 @@ div.canvas-content.dark::after {
     transition-duration: 0.01ms !important;
   }
 }
+
+code[class*="language-"],
+pre[class*="language-"] {
+  background: transparent !important;
+}
+
+@import "prismjs/themes/prism-tomorrow.css";

@@ -23,8 +23,9 @@
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
     "framer-motion": "^10.12.17",
-    "next": "^15.3.1",
+    "next": "15.4.10",
     "postcss": "^8.5.3",
+    "prismjs": "^1.30.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-google-recaptcha-v3": "^1.10.1",
@@ -37,6 +38,7 @@
     "typewriter-effect": "^2.21.0"
   },
   "devDependencies": {
+    "@types/prismjs": "^1.26.5",
     "@types/react-google-recaptcha": "^2.1.9",
     "@types/react-vertical-timeline-component": "^3.3.3"
   }

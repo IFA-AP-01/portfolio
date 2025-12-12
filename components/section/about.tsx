@@ -32,10 +32,11 @@ import {
   SiWoocommerce,
   SiVercel,
   SiSpring,
-  SiNestjs
+  SiNestjs,
 } from "react-icons/si";
 import { headlineFont } from "@/lib/fontawesome";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import CodeCard from "../card/code-card";
 
 const skillIcons: { [key: string]: JSX.Element } = {
   Android: <SiAndroid />,
@@ -109,11 +110,6 @@ export default function About() {
       id="about"
     >
       <SectionHeading highlight="About">About</SectionHeading>
-      <p className="mb-3"></p>
-      <h3 className={`${headlineFont.className} font-bold text-base sm:text-lg text-center px-2 sm:px-0`}>
-        💥 Welcome! We build high-quality apps and solutions for multiple platforms.
-      </h3>
-
       {/* Mobile-Optimized About Cards */}
       <div className="mt-6 sm:mt-8 w-full max-w-4xl">
         <div className="grid gap-4 sm:gap-6 md:gap-8">
@@ -125,21 +121,27 @@ export default function About() {
           >
             <div className="flex items-center gap-3 sm:gap-4">
               <div className="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-gradient-to-br from-blue-200 to-purple-600 rounded-lg sm:rounded-xl flex items-center justify-center text-white text-xl font-bold shadow-lg">
-               <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-lg sm:rounded-xl overflow-hidden p-2">
-                  <DotLottieReact 
-                    src="coder.lottie" 
-                    loop 
-                    autoplay 
+                <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-lg sm:rounded-xl overflow-hidden p-2">
+                  <DotLottieReact
+                    src="coder.lottie"
+                    loop
+                    autoplay
                     className="w-full h-full"
                   />
                 </div>
               </div>
               <div className="flex-1 min-w-0">
-                <h4 className={`${headlineFont.className} font-semibold text-base sm:text-lg text-gray-900 dark:text-white mb-1 sm:mb-2 group-hover:text-blue-500 dark:group-hover:text-blue-300 transition-colors`}>
+                <h4
+                  className={`${headlineFont.className} font-semibold text-base sm:text-lg text-gray-900 dark:text-white mb-1 sm:mb-2 group-hover:text-blue-500 dark:group-hover:text-blue-300 transition-colors`}
+                >
                   5+ Years of Experience
                 </h4>
-                <p className={`${headlineFont.className} text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed`}>
-                  We have participated in complex business projects, projects with stringent security requirements, and several IoT projects.
+                <p
+                  className={`${headlineFont.className} text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed`}
+                >
+                  We have participated in complex business projects, projects
+                  with stringent security requirements, and several IoT
+                  projects.
                 </p>
               </div>
             </div>
@@ -153,20 +155,25 @@ export default function About() {
             <div className="flex items-center gap-3 sm:gap-4">
               <div className="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-gradient-to-br from-green-200 to-teal-600 rounded-lg sm:rounded-xl flex items-center justify-center text-white text-xl">
                 <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-lg sm:rounded-xl overflow-hidden p-2">
-                  <DotLottieReact 
-                    src="handshake.lottie" 
-                    loop 
-                    autoplay 
+                  <DotLottieReact
+                    src="handshake.lottie"
+                    loop
+                    autoplay
                     className="w-full h-full"
                   />
                 </div>
               </div>
               <div className="flex-1 min-w-0">
-                <h4 className={`${headlineFont.className} font-semibold text-base sm:text-lg text-gray-900 dark:text-white mb-1 sm:mb-2 group-hover:text-teal-500 dark:group-hover:text-green-300 transition-colors`}>
+                <h4
+                  className={`${headlineFont.className} font-semibold text-base sm:text-lg text-gray-900 dark:text-white mb-1 sm:mb-2 group-hover:text-teal-500 dark:group-hover:text-green-300 transition-colors`}
+                >
                   Collaborative Approach
                 </h4>
-                <p className={`${headlineFont.className} text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed`}>
-                  We have experience working with marketing and design teams to optimize products for end users.
+                <p
+                  className={`${headlineFont.className} text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed`}
+                >
+                  We have experience working with marketing and design teams to
+                  optimize products for end users.
                 </p>
               </div>
             </div>
@@ -181,20 +188,25 @@ export default function About() {
             <div className="flex items-center gap-3 sm:gap-4">
               <div className="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-gradient-to-br from-orange-200 to-red-500 rounded-lg sm:rounded-xl flex items-center justify-center text-white text-xl overflow-hidden">
                 <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-lg sm:rounded-xl overflow-hidden">
-                  <DotLottieReact 
-                    src="spaceship.lottie" 
-                    loop 
-                    autoplay 
+                  <DotLottieReact
+                    src="spaceship.lottie"
+                    loop
+                    autoplay
                     className="w-full h-full"
                   />
                 </div>
               </div>
               <div className="flex-1 min-w-0">
-                <h4 className={`${headlineFont.className} font-semibold text-base sm:text-lg text-gray-900 dark:text-white mb-1 sm:mb-2 group-hover:text-orange-500 dark:group-hover:text-orange-300 transition-colors`}>
+                <h4
+                  className={`${headlineFont.className} font-semibold text-base sm:text-lg text-gray-900 dark:text-white mb-1 sm:mb-2 group-hover:text-orange-500 dark:group-hover:text-orange-300 transition-colors`}
+                >
                   Innovation Focused
                 </h4>
-                <p className={`${headlineFont.className} text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed`}>
-                  Passionate about exploring and catching up with new technology trends, and always experimenting with personal projects.
+                <p
+                  className={`${headlineFont.className} text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed`}
+                >
+                  Passionate about exploring and catching up with new technology
+                  trends, and always experimenting with personal projects.
                 </p>
               </div>
             </div>
@@ -202,7 +214,7 @@ export default function About() {
         </div>
       </div>
 
-      <motion.h3 
+      <motion.h3
         className={`${headlineFont.className} font-bold mt-8 sm:mt-12 text-base sm:text-lg text-center px-2 sm:px-0`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
