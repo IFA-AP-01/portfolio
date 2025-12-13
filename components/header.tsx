@@ -60,7 +60,7 @@ export default function Header() {
         className="fixed top-4 left-1/2 flex h-16 w-[100%] max-w-[36rem] -translate-x-1/2 items-center justify-center sm:bottom-6 sm:h-16 sm:w-[100%] sm:max-w-[40rem]"
         style={{ WebkitTapHighlightColor: "transparent" }}
       >
-        <ul className="flex w-full items-center justify-evenly gap-1 px-6 text-[0.9rem] font-medium text-gray-500 sm:gap-2 sm:px-2 sm:flex-nowrap sm:justify-center">
+        <ul className="flex w-full items-center justify-evenly gap-1 px-6 text-[0.9rem] font-medium text-gray-500 sm:gap-3 sm:px-2 sm:flex-nowrap sm:justify-center">
           {links.map((link) => (
             <motion.li
               className="h-4/4 flex items-center justify-center relative px-1"
@@ -70,7 +70,7 @@ export default function Header() {
             >
               <Link
                 className={clsx(
-                  "flex w-full items-center justify-center px-3 py-3 hover:text-gray-950 transition dark:text-gray-200 dark:hover:text-gray-300",
+                  "flex w-full items-center justify-center p-2 hover:text-gray-950 transition dark:text-gray-200 dark:hover:text-gray-300",
                   {
                     "text-gray-950 dark:text-white":
                       activeSection === link.name,
@@ -83,10 +83,14 @@ export default function Header() {
                 }}
                 style={{ WebkitTapHighlightColor: "transparent" }}
               >
-                <span className="sm:hidden">
+                <span
+                  className={`sm:hidden text-black  ${activeSection === link.name ? "" : "dark:text-white"}`}
+                >
                   <FontAwesomeIcon icon={link.icon} />
                 </span>
-                <span className="hidden sm:inline-flex items-center gap-2 text-black dark:text-white hover:scale-[1.15] active:scale-105 transition-all">
+                <span
+                  className={`hidden sm:inline-flex items-center gap-2 text-black  ${activeSection === link.name ? "" : "dark:text-white"}`}
+                >
                   {link.name === activeSection && (
                     <FontAwesomeIcon icon={link.icon} />
                   )}
@@ -108,7 +112,7 @@ export default function Header() {
             </motion.li>
           ))}
           <motion.li
-            className="h-4/4 flex items-center justify-center relative px-3 hidden sm:inline-flex"
+            className="h-4/4 flex items-center justify-center relative px-3 sm:inline-flex"
             key="theme"
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}

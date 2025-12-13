@@ -5,7 +5,7 @@ export default function SubmitBtn({ pending }: { pending: boolean }) {
   return (
     <button
       type="submit"
-      className="neo-button group flex items-center justify-center gap-2 h-[3.5rem] w-[9rem] bg-[#E9945B] text-white hover:bg-[#d6854f] disabled:bg-gray-500 disabled:scale-100 disabled:shadow-none dark:bg-[#E9945B] dark:text-white dark:hover:bg-[#d6854f]"
+      className="neo-button group flex items-center justify-center gap-2 h-[3.5rem] w-[9rem] bg-[#E9945B] text-black hover:bg-[#d6854f] disabled:bg-gray-500 disabled:scale-100 disabled:shadow-none dark:bg-[#E9945B] dark:hover:bg-[#d6854f]"
       disabled={pending}
     >
       {pending ? (

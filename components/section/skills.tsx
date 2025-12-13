@@ -29,10 +29,10 @@ export default function Skills() {
     <section
       id="skills"
       ref={ref}
-      className="mb-28 max-w-[75rem] mx-auto scroll-mt-28 text-center sm:mb-40"
+      className="mb-28 max-w-[75rem] mx-auto scroll-mt-28 text-center sm:mb-40 flex flex-col items-center justify-center"
     >
-      <SectionHeading highlight="We Do?">What We Do?</SectionHeading>
-      <p className="text-gray-900 mb-12 dark:text-white max-w-[36rem] text-center mx-auto text-base font-black uppercase tracking-wide">
+      <SectionHeading>What We Do?</SectionHeading>
+      <p className="text-gray-900 mb-12 dark:text-white max-w-[36rem] text-center mx-auto text-xs sm:text-base uppercase tracking-wide">
         We are a team of experienced developers with a passion for creating
         high-quality applications and solutions.
       </p>

@@ -31,7 +31,7 @@ export default function Contact() {
         once: true,
       }}
     >
-      <SectionHeading highlight="Touch">Get in Touch</SectionHeading>
+      <SectionHeading>Get in Touch</SectionHeading>
       <p className="text-gray-900 -mt-6 dark:text-white max-w-[36rem] mx-auto text-base font-bold">
         Please contact us directly at{" "}
         <Link
@@ -45,40 +45,40 @@ export default function Contact() {
 
       {/* Social Links */}
       <motion.div
-        className="flex flex-row items-center justify-center gap-4 text-xl font-bold mt-8 mb-8"
+        className="flex flex-row items-center justify-center gap-4 text-xl font-bold mt-8"
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
       >
-        <a
-          className="bg-white p-4 text-black hover:text-black flex items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer border-2 border-black neo-shadow dark:bg-white dark:text-black hover:bg-gray-100"
+        <Link
+          className="bg-[#F8CB49] p-4 text-black hover:text-black flex items-center gap-2 transition cursor-pointer border-2 border-black neo-shadow hover:bg-gray-100"
           href="https://discord.gg/MdtF7raJ"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Join us on Discord"
         >
           <BsDiscord className="text-2xl" />
-        </a>
+        </Link>
 
-        <a
-          className="bg-white p-4 text-black flex items-center gap-2 text-[1.35rem] rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-black active:scale-105 transition cursor-pointer border-2 border-black neo-shadow dark:bg-white dark:text-black hover:bg-gray-100"
+        <Link
+          className="bg-[#F8CB49] p-4 text-black flex items-center gap-2 text-[1.35rem] cursor-pointer border-2 border-black neo-shadow dark:text-black hover:bg-gray-100"
           href="https://github.com/IFA-AP-01"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="View our GitHub projects"
         >
           <FaGithubSquare className="text-2xl" />
-        </a>
+        </Link>
 
-        <a
-          className="bg-white p-4 text-black flex items-center gap-2 text-[1.35rem] rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-black active:scale-105 transition cursor-pointer border-2 border-black neo-shadow dark:bg-white dark:text-black hover:bg-gray-100"
+        <Link
+          className="bg-[#F8CB49] p-4 text-black flex items-center gap-2 text-[1.35rem] cursor-pointer border-2 border-black neo-shadow dark:text-black hover:bg-gray-100"
           href="tel:+84859885874"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Call us"
         >
-          <FaPhone className="text-xl" />
-        </a>
+          <FaPhone className="text-2xl" />
+        </Link>
       </motion.div>
       <ContactSection />
       <p

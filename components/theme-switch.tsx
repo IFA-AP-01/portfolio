@@ -19,7 +19,7 @@ export default function ThemeSwitch() {
 
   return (
     <button
-      className="sm:hidden fixed right-5 bottom-5 bg-white w-[3.5rem] h-[3.5rem] neo-shadow border-2 border-black rounded-full flex items-center justify-center hover:scale-[1.15] active:scale-105 transition-all dark:bg-black dark:border-white z-50 text-black dark:text-white"
+      className="sm:hidden fixed right-5 bottom-5 bg-white w-10 h-10 border-2 border-black flex items-center justify-center dark:bg-black dark:border-white z-50 text-black dark:text-white"
       onClick={toggleTheme}
       style={{ WebkitTapHighlightColor: "transparent" }}
       aria-label="Toggle theme"

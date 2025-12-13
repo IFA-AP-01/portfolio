@@ -3,33 +3,14 @@ import React from "react";
 
 type SectionHeadingProps = {
   children: React.ReactNode;
-  highlight?: string; // New prop for the text to highlight
 };
 
-export default function SectionHeading({
-  children,
-  highlight,
-}: SectionHeadingProps) {
-  const renderChildren = () => {
-    if (!highlight || typeof children !== "string") {
-      return children;
-    }
-
-    const parts = children.split(highlight);
-    return (
-      <>
-        {parts[0]}
-        <span className="highlight">{highlight}</span>
-        {parts[1]}
-      </>
-    );
-  };
-
+export default function SectionHeading({ children }: SectionHeadingProps) {
   return (
     <h2
-      className={`${headlineFont.className} text-2xl sm:text-4xl capitalize mb-8 text-center font-black tracking-tight text-black dark:text-white uppercase`}
+      className={`${headlineFont.className} p-2 border-2 border-black neo-shadow text-2xl sm:text-4xl capitalize bg-[#E9945B] mb-8 text-center font-black text-black`}
     >
-      {renderChildren()}
+      {children}
     </h2>
   );
 }

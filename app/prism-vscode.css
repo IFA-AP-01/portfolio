@@ -1,0 +1,70 @@
+/* =========================
+   VS Code Prism Theme
+   ========================= */
+
+/* -------- Variables -------- */
+:root {
+  --code-bg: #ffffff;
+  --code-text: #393b43;
+  --token-keyword: #ab36a9;
+  --token-string: #5ea95d;
+  --token-function: #5486f4;
+  --token-class: #267f99;
+  --token-number: #098658;
+  --token-comment: #008000;
+  --token-variable: #001080;
+}
+
+.dark {
+  --code-bg: #1e1e1e;
+  --code-text: #d4d4d4;
+  --token-keyword: #569cd6;
+  --token-string: #5ea95d;
+  --token-function: #dcdcaa;
+  --token-class: #4ec9b0;
+  --token-number: #b5cea8;
+  --token-comment: #6a9955;
+  --token-variable: #9cdcfe;
+}
+
+/* -------- Base -------- */
+.language-typescript {
+  color: var(--code-text);
+  background: transparent;
+}
+
+/* -------- Tokens -------- */
+.token.keyword {
+  color: var(--token-keyword);
+}
+
+.token.string {
+  color: var(--token-string);
+}
+
+.token.function {
+  color: var(--token-function);
+}
+
+.token.class-name {
+  color: var(--token-class);
+}
+
+.token.number {
+  color: var(--token-number);
+}
+
+.token.comment {
+  color: var(--token-comment);
+  font-style: italic;
+}
+
+.token.variable,
+.token.parameter {
+  color: var(--token-variable);
+}
+
+.token.operator,
+.token.punctuation {
+  color: var(--code-text);
+}

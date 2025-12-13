@@ -13,11 +13,15 @@ export default function Members() {
   const memoizedMembers = useMemo(() => membersData, []);
 
   return (
-    <section ref={ref} id="members" className="scroll-mt-28 mb-28">
-      <SectionHeading highlight="Members">Members</SectionHeading>
-      <p className="text-gray-900 mb-8 dark:text-white max-w-[36rem] text-center mx-auto text-base font-black uppercase tracking-wide">
+    <section
+      ref={ref}
+      id="members"
+      className="scroll-mt-28 mb-28 flex flex-col items-center justify-center"
+    >
+      <SectionHeading>Members</SectionHeading>
+      <p className="text-gray-900 mb-8 dark:text-white max-w-[36rem] text-center mx-auto text-xs sm:text-base uppercase tracking-wide">
         Meet our team of talented developers who are passionate about creating
-        amazing products. 😊
+        amazing products.
       </p>
       <div className="space-y-4">
         {memoizedMembers.map((member, index) => (
