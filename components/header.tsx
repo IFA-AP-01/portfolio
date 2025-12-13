@@ -19,6 +19,9 @@ export default function Header() {
   const { theme, toggleTheme } = useTheme();
   const pathname = usePathname();
 
+  // Detect home page
+  const isHomePage = pathname === "/";
+
   // Hide header on privacy pages
   const isPrivacyPage =
     pathname?.startsWith("/privacy") || pathname?.startsWith("/terms");
@@ -44,17 +47,18 @@ export default function Header() {
         <Image
           src={teamImage}
           alt="IFA"
-          width="50"
-          height="50"
-          priority={true}
-          className="w-10 object-cover fixed top-5 left-5 z-1000 hidden  sm:inline-flex"
+          width={50}
+          height={50}
+          priority
+          className="w-10 object-cover fixed top-5 left-5 z-1000 hidden sm:inline-flex"
         />
       </Link>
+
       <motion.div
         className="fixed top-4 left-1/2 h-16 w-[90%] max-w-[30rem] neo-card sm:bottom-6 sm:h-16 sm:w-[100%] sm:max-w-[38rem]"
         initial={{ y: 100, x: "-50%", opacity: 0 }}
         animate={{ y: 0, x: "-50%", opacity: 1 }}
-      ></motion.div>
+      />
 
       <nav
         className="fixed top-4 left-1/2 flex h-16 w-[100%] max-w-[36rem] -translate-x-1/2 items-center justify-center sm:bottom-6 sm:h-16 sm:w-[100%] sm:max-w-[40rem]"
@@ -63,20 +67,20 @@ export default function Header() {
         <ul className="flex w-full items-center justify-evenly gap-1 px-6 text-[0.9rem] font-medium text-gray-500 sm:gap-3 sm:px-2 sm:flex-nowrap sm:justify-center">
           {links.map((link) => (
             <motion.li
-              className="h-4/4 flex items-center justify-center relative px-1"
               key={link.hash}
+              className="flex items-center justify-center relative px-1"
               initial={{ y: 100, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
             >
               <Link
                 className={clsx(
-                  "flex w-full items-center justify-center p-2 hover:text-gray-950 transition dark:text-gray-200 dark:hover:text-gray-300",
+                  "flex w-full items-center justify-center p-2 transition hover:text-gray-950 dark:text-gray-200 dark:hover:text-gray-300",
                   {
                     "text-gray-950 dark:text-white":
                       activeSection === link.name,
                   }
                 )}
-                href={link.hash}
+                href={isHomePage ? link.hash : `/${link.hash}`}
                 onClick={() => {
                   setActiveSection(link.name);
                   setTimeOfLastClick(Date.now());
@@ -84,12 +88,17 @@ export default function Header() {
                 style={{ WebkitTapHighlightColor: "transparent" }}
               >
                 <span
-                  className={`sm:hidden text-black  ${activeSection === link.name ? "" : "dark:text-white"}`}
+                  className={`sm:hidden text-black ${
+                    activeSection === link.name ? "" : "dark:text-white"
+                  }`}
                 >
                   <FontAwesomeIcon icon={link.icon} />
                 </span>
+
                 <span
-                  className={`hidden sm:inline-flex items-center gap-2 text-black  ${activeSection === link.name ? "" : "dark:text-white"}`}
+                  className={`hidden sm:inline-flex items-center gap-2 text-black ${
+                    activeSection === link.name ? "" : "dark:text-white"
+                  }`}
                 >
                   {link.name === activeSection && (
                     <FontAwesomeIcon icon={link.icon} />
@@ -99,21 +108,22 @@ export default function Header() {
 
                 {link.name === activeSection && (
                   <motion.span
-                    className="bg-[#E9945B] absolute inset-0 -z-10 border border-black neo-shadow"
+                    className="absolute inset-0 -z-10 bg-[#E9945B] border border-black neo-shadow"
                     layoutId="activeSection"
                     transition={{
                       type: "spring",
                       stiffness: 380,
                       damping: 30,
                     }}
-                  ></motion.span>
+                  />
                 )}
               </Link>
             </motion.li>
           ))}
+
           <motion.li
-            className="h-4/4 flex items-center justify-center relative px-3 sm:inline-flex"
             key="theme"
+            className="flex items-center justify-center relative px-3 sm:inline-flex"
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
           >

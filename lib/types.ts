@@ -1,3 +1,9 @@
 import { links } from "./data";
 
-export type SectionName = (typeof links)[number]["name"];
+const extraLinks = [
+  { name: "Others", hash: "" },
+] as const;
+
+const allLinks = [...links, ...extraLinks] as const;
+
+export type SectionName = (typeof allLinks)[number]["name"];
