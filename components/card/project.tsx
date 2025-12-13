@@ -32,116 +32,115 @@ export default function Project({
         scale: scaleProgess,
         opacity: opacityProgess,
       }}
-      className="group mb-3 sm:mb-4 last:mb-0"
+      className="group mb-12 last:mb-0"
     >
-      <section className="bg-white max-w-[56rem] rounded-lg overflow-hidden relative flex flex-col sm:flex-row sm:h-[20rem] hover:bg-gray-100 transition dark:text-white dark:bg-white/10 dark:hover:bg-white/20">
-        {videoUrl ? (
-          <video
-            src={videoUrl}
-            autoPlay
-            loop
-            muted
-            className="w-full h-48 sm:hidden object-cover rounded-t-lg object-top"
-            controls={false}
-            disablePictureInPicture
-            onContextMenu={(e) => e.preventDefault()}
-          />
-        ) : (
-          <div className="w-full h-48 sm:hidden relative">
-            <Image
-              src={imageUrl}
-              alt="Project I worked on"
-              quality={95}
-              className="object-cover object-top w-full h-full rounded-t-lg"
-              fill
-            />
-          </div>
-        )}
+      <section className="neo-card neo-hover max-w-[60rem] overflow-hidden relative transition">
+        <div className="flex flex-col sm:flex-row">
+          {/* Mobile Image/Video */}
+          {videoUrl ? (
+            <div className="sm:hidden w-full h-48 border-b-2 border-black dark:border-white relative">
+              <video
+                src={videoUrl}
+                autoPlay
+                loop
+                muted
+                className="w-full h-full object-cover object-top"
+                controls={false}
+                disablePictureInPicture
+                onContextMenu={(e) => e.preventDefault()}
+              />
+            </div>
+          ) : (
+            <div className="w-full h-48 sm:hidden relative border-b-2 border-black dark:border-white">
+              <Image
+                src={imageUrl}
+                alt="Project I worked on"
+                quality={95}
+                className="object-cover object-top w-full h-full"
+                fill
+              />
+            </div>
+          )}
 
-        <div className="pt-4 pb-7 px-5 sm:pl-10 sm:pr-2 sm:pt-10 sm:max-w-[40%] flex flex-col h-full sm:group-even:ml-[28rem]">
-          <h3 className={`${headlineFont.className} text-md sm:text-xl font-semibold text-gray-900 dark:text-white/90`}>{title}</h3>
-          <p className="font-bold mt-2 leading-relaxed text-gray-900 dark:text-white/90 text-xs">
-            {timeline}
-          </p>
-          <p className="mt-2 leading-relaxed text-gray-900 dark:text-white/80 text-xs sm:text-sm">
-            {description}
-          </p>
+          {/* Content */}
+          <div className="pt-6 pb-8 px-6 sm:pl-10 sm:pr-4 sm:pt-10 flex flex-col sm:w-1/2 z-10 relative">
+            <h3
+              className={`${headlineFont.className} text-2xl sm:text-3xl font-black text-black dark:text-white uppercase tracking-tight`}
+            >
+              {title}
+            </h3>
+
+            <p className="font-bold mt-2 leading-relaxed text-gray-700 dark:text-gray-300 text-xs uppercase tracking-wider border-l-4 border-black dark:border-white pl-3">
+              {timeline}
+            </p>
+
+            <p className="mt-4 leading-relaxed text-gray-900 dark:text-gray-100 text-sm sm:text-base font-medium">
+              {description}
+            </p>
+
             {viewUrl && (
-              <div className="mt-2">
-              <a
-                href={viewUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-sm font-semibold text-primary bg-primary/10 rounded-2xl px-3 py-1"
-              >
-                <span>Explore</span>
-                <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
+              <div className="mt-6">
+                <a
+                  href={viewUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="neo-button inline-flex items-center gap-2 text-sm bg-[#E9945B] hover:bg-[#d6854f] transform active:translate-y-1 active:shadow-none"
                 >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </a>
+                  <span className="uppercase tracking-wider">Explore</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-5 h-5 stroke-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2.5}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
+                </a>
               </div>
             )}
-          <ul className="flex flex-wrap mt-4 gap-1 sm:mt-auto">
-            {tags.map((tag, index) => (
-              <li
-                className="bg-primary/20 text-tertiary px-3 py-1 text-[0.7rem] tracking-wider rounded-md dark:text-white/70"
-                key={index}
-              >
-                {tag}
-              </li>
-            ))}
-          </ul>
+
+            <ul className="flex flex-wrap mt-6 gap-2">
+              {tags.map((tag, index) => (
+                <li
+                  className="bg-[#E9945B] text-black px-3 py-1 text-[11px] uppercase tracking-wider font-bold border border-black"
+                  key={index}
+                >
+                  {tag}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Desktop Image/Video */}
+          <div className="hidden sm:block sm:w-1/2 relative overflow-hidden">
+            {videoUrl ? (
+              <video
+                src={videoUrl}
+                autoPlay
+                loop
+                muted
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                controls={false}
+                disablePictureInPicture
+                onContextMenu={(e) => e.preventDefault()}
+              />
+            ) : (
+              <Image
+                src={imageUrl}
+                alt="Project I worked on"
+                quality={95}
+                className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                fill
+              />
+            )}
+          </div>
         </div>
-
-        {videoUrl ? (
-          <video
-            src={videoUrl}
-            autoPlay
-            loop
-            muted
-            className="absolute hidden sm:block top-0 -right-0 w-[28rem] h-full rounded-lg object-cover
-             transition 
-              
-              group-hover:-translate-x-3
-              group-hover:translate-y-3
-              group-hover:-rotate-2
-              group-hover:top-10
-
-              group-even:group-hover:translate-x-3
-              group-even:group-hover:translate-y-3
-              group-even:group-hover:rotate-2
-              group-even:right-[initial] group-even:-left-0"
-            controls={false}
-            disablePictureInPicture
-            onContextMenu={(e) => e.preventDefault()}
-          />
-        ) : (
-          <Image
-            src={imageUrl}
-            alt="Project I worked on"
-            quality={95}
-            className="absolute hidden sm:block top-0 -right-40 w-[38rem] rounded-lg h-full shadow-2xl object-cover object-top
-              transition 
-              group-hover:scale-[1.05]
-              group-hover:-translate-x-3
-              group-hover:translate-y-3
-              group-hover:-rotate-2
-              group-hover:top-10
-
-              group-even:group-hover:translate-x-3
-              group-even:group-hover:translate-y-3
-              group-even:group-hover:rotate-2
-
-              group-even:right-[initial] group-even:-left-40"
-          />
-        )}
       </section>
     </motion.div>
   );

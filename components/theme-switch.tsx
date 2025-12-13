@@ -12,19 +12,23 @@ export default function ThemeSwitch() {
     if (metaThemeColor) {
       metaThemeColor.setAttribute(
         "content",
-        theme === "light" ? "#faf8f1" : "#131313"
+        theme === "light" ? "#faf8f1" : "#191C1E"
       );
     }
   }, [theme]);
 
   return (
     <button
-      className="sm:hidden fixed right-5 bottom-5 bg-white w-[3rem] h-[3rem] shadow-lg  backdrop-blur-[0.5rem] bg-opacity-80 backdrop-blur-[0.5rem] shadow-2xl rounded-full flex items-center justify-center hover:scale-[1.15] active:scale-105 transition-all dark:bg-gray-950"
+      className="sm:hidden fixed right-5 bottom-5 bg-white w-[3.5rem] h-[3.5rem] neo-shadow border-2 border-black rounded-full flex items-center justify-center hover:scale-[1.15] active:scale-105 transition-all dark:bg-black dark:border-white z-50 text-black dark:text-white"
       onClick={toggleTheme}
       style={{ WebkitTapHighlightColor: "transparent" }}
       aria-label="Toggle theme"
     >
-      {theme === "light" ? <BsSun /> : <BsMoon />}
+      {theme === "light" ? (
+        <BsSun className="text-xl" />
+      ) : (
+        <BsMoon className="text-xl" />
+      )}
     </button>
   );
 }

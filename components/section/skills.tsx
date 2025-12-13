@@ -24,7 +24,7 @@ const fadeInAnimationVariants = {
 
 export default function Skills() {
   const { ref } = useSectionInView("Skills", 0.3);
-  
+
   return (
     <section
       id="skills"
@@ -32,14 +32,15 @@ export default function Skills() {
       className="mb-28 max-w-[75rem] mx-auto scroll-mt-28 text-center sm:mb-40"
     >
       <SectionHeading highlight="We Do?">What We Do?</SectionHeading>
-      <p className="text-gray-700 mb-8 dark:text-white/80 max-w-[36rem] text-center mx-auto text-md font-bold">
-        We are a team of experienced developers with a passion for creating high-quality applications and solutions. 
+      <p className="text-gray-900 mb-12 dark:text-white max-w-[36rem] text-center mx-auto text-base font-black uppercase tracking-wide">
+        We are a team of experienced developers with a passion for creating
+        high-quality applications and solutions.
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
         {skillsJob.map((skill, index) => (
           <motion.div
             key={index}
-            className="relative overflow-hidden max-w-[25rem] bg-white rounded-lg hover:shadow-xl transition-all duration-300 dark:bg-white/10"
+            className="neo-card neo-hover relative overflow-hidden max-w-[25rem] bg-white transition-all duration-300 dark:bg-black"
             variants={fadeInAnimationVariants}
             initial="initial"
             whileInView="animate"
@@ -47,42 +48,47 @@ export default function Skills() {
             custom={index}
             whileHover={{ y: -5 }}
           >
-            <div className="flex flex-col h-full">
-              <div className="p-4 flex items-center justify-between">
+            <div className="flex flex-col h-full bg-[#f8f8f8] dark:bg-[#1a1a1a]">
+              <div className="p-6 flex items-center justify-between border-b-2 border-black">
                 <div className="flex items-center">
-                  <div className="bg-primary/20 dark:bg-tertiary/20 p-1 rounded-lg mr-4">
+                  <div
+                    className={`bg-[#F9CC47] p-2 mr-5 border-2 border-black neo-shadow`}
+                  >
                     <Image
                       src={skill.imageUrl}
                       alt={skill.title}
                       width={100}
                       height={100}
-                      className="object-contain"
+                      className="object-contain w-10 h-10"
                     />
                   </div>
-                  <h3 className={`${headlineFont.className} text-xl font-bold text-left text-gray-700 dark:text-white`}>
+                  <h3
+                    className={`${headlineFont.className} text-xl font-black text-left text-black dark:text-white uppercase`}
+                  >
                     {skill.title}
                   </h3>
                 </div>
-                
               </div>
-              
-              <div className="px-6 pb-6 text-left text-black dark:text-white/80 flex-grow text-sm">
-                <p>{skill.description || `Professional ${skill.title} services tailored to your business needs.`}</p>
+
+              <div className="px-6 py-6 text-left text-gray-900 dark:text-gray-100 flex-grow text-sm font-medium">
+                <p>
+                  {skill.description ||
+                    `Professional ${skill.title} services tailored to your business needs.`}
+                </p>
               </div>
-              
-              <div className="px-6 pb-6 flex flex-wrap gap-2">
-                {skill.tags && skill.tags.map((tag, tagIndex) => (
-                  <span 
-                    key={tagIndex}
-                   className="bg-primary/20 text-tertiary px-3 py-1 text-[0.7rem] tracking-wider rounded-md dark:text-white/70"
-                  >
-                    {tag}
-                  </span>
-                ))}
+
+              <div className="px-6 pb-8 flex flex-wrap gap-3">
+                {skill.tags &&
+                  skill.tags.map((tag, tagIndex) => (
+                    <span
+                      key={tagIndex}
+                      className="bg-[#E9945B] text-black px-3 py-1 text-[0.65rem] uppercase tracking-wider font-bold border border-black"
+                    >
+                      {tag}
+                    </span>
+                  ))}
               </div>
             </div>
-            
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5 dark:from-blue-900/10 dark:to-purple-900/10 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
           </motion.div>
         ))}
       </div>

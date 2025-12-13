@@ -6,7 +6,10 @@ type SectionHeadingProps = {
   highlight?: string; // New prop for the text to highlight
 };
 
-export default function SectionHeading({ children, highlight }: SectionHeadingProps) {
+export default function SectionHeading({
+  children,
+  highlight,
+}: SectionHeadingProps) {
   const renderChildren = () => {
     if (!highlight || typeof children !== "string") {
       return children;
@@ -23,7 +26,9 @@ export default function SectionHeading({ children, highlight }: SectionHeadingPr
   };
 
   return (
-    <h2 className={`${headlineFont.className} text-xl sm:text-3xl capitalize mb-8 text-center font-bold`}>
+    <h2
+      className={`${headlineFont.className} text-2xl sm:text-4xl capitalize mb-8 text-center font-black tracking-tight text-black dark:text-white uppercase`}
+    >
       {renderChildren()}
     </h2>
   );

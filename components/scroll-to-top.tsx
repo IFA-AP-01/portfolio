@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -17,17 +17,17 @@ const ScrollToTop = () => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   };
 
   useEffect(() => {
     // Add scroll event listener when the component mounts
-    window.addEventListener('scroll', handleScroll);
-    
+    window.addEventListener("scroll", handleScroll);
+
     // Remove the event listener when the component unmounts
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -36,7 +36,7 @@ const ScrollToTop = () => {
       {isVisible && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-32 right-4 sm:bottom-8 sm:right-8 p-2 bg-primary text-white rounded-full shadow-lg hover:bg-primary/90 transition-all duration-300 z-50 hidden sm:block"
+          className="neo-button fixed bottom-32 right-4 sm:bottom-8 sm:right-8 flex items-center justify-center p-3 bg-[#E9945B] text-black hover:bg-[#d6854f] z-50 hidden sm:block dark:bg-[#E9945B] dark:text-white"
           aria-label="Scroll to top"
         >
           <svg

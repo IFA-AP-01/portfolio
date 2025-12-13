@@ -1,18 +1,18 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import { DM_Sans, Josefin_Sans } from "next/font/google";
+import { DM_Sans, Josefin_Sans, Space_Grotesk } from "next/font/google";
 
 library.add(fas);
-export const bodyFont = DM_Sans({
+export const bodyFont = Space_Grotesk({
     weight: ["400", "700"],
-    style: ["normal", "italic"],
+    style: ["normal"],
     subsets: ["latin"],
     display: "swap",
 });
 
-export const headlineFont = Josefin_Sans({
+export const headlineFont = Space_Grotesk({
     weight: ["400", "700"],
-    style: ["normal", "italic"],
+    style: ["normal"],
     subsets: ["latin"],
     display: "swap",
 });

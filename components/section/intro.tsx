@@ -40,18 +40,18 @@ export default function Intro() {
         transition={{ delay: 0.1 }}
         className="space-y-2"
       >
-        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-center">
-          <span className="text-black/80 dark:text-white">
-            <span className="relative inline-flex items-center gap-2">
-              <span className={`${headlineFont.className} relative z-10`}>
-                Hi, we're IFA Team
+        <h1 className="text-4xl font-black tracking-tight text-center uppercase">
+          <span className="text-black dark:text-white">
+            <span className="relative inline-flex items-center gap-2 flex-wrap justify-center">
+              <span className={`${headlineFont.className} relative z-10 mr-2`}>
+                Hi, we're <span className="text-[#E9945B]">IFA Team</span>
               </span>
               <DotLottieReact
                 src="hand_wave.lottie"
                 loop
                 autoplay
-                style={{ width: 40, height: 40 }}
-                className="w-10 h-10 sm:w-[60px] sm:h-[60px] sm:mb-4 mb-2"
+                style={{ width: 60, height: 60 }}
+                className="w-12 h-12 sm:w-[60px] sm:h-[60px] mb-2 sm:mb-4 neo-shadow border-2 border-black rounded-full p-1 bg-[#E9945B]"
               />
             </span>
           </span>
@@ -59,7 +59,7 @@ export default function Intro() {
       </motion.div>
 
       <motion.div
-        className="w-full lg:min-w-[50rem] min-w-[22rem] py-8 justify-start text-left"
+        className="w-full lg:min-w-[50rem] min-w-[22rem] py-12 justify-start text-left"
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
@@ -69,58 +69,58 @@ export default function Intro() {
 
       {/* CTA Button */}
       <motion.div
-        className="flex flex-col items-center justify-center gap-3 px-4 font-medium"
+        className="flex flex-col items-center justify-center gap-3 px-4 font-bold"
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
       >
         <Link
           href="#contact"
-          className="backdrop-blur-[0.5rem] group bg-gradient-to-r from-primary/90 to-primary/50 text-white text-base px-8 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 hover:shadow-lg hover:from-primary hover:to-primary/80 active:scale-105 transition"
+          className="group bg-[#E9945B] uppercase text-black px-8 py-3 flex items-center gap-3 outline-none focus:scale-110 active:scale-105 transition border-2 border-black neo-shadow hover:bg-[#d6854f]"
           onClick={() => {
             setActiveSection("Contact");
             setTimeOfLastClick(Date.now());
           }}
         >
           Start Your Project With Us{" "}
-          <BsArrowRight className="opacity-80 group-hover:translate-x-1 transition" />
+          <BsArrowRight className="opacity-100 group-hover:translate-x-2 transition font-bold text-xl" />
         </Link>
       </motion.div>
       {/* Social Links */}
       <motion.div
-        className="flex flex-row items-center justify-center gap-3 text-lg font-medium mt-4"
+        className="flex flex-row items-center justify-center gap-4 text-xl font-bold mt-8"
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
       >
         <a
-          className="bg-white p-3 text-gray-700 hover:text-primary flex items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10 dark:text-white/70 dark:hover:text-white"
+          className="bg-[#F8CB49] p-4 text-black hover:text-black flex items-center gap-2 transition cursor-pointer border-2 border-black neo-shadow hover:bg-gray-100"
           href="https://discord.gg/MdtF7raJ"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Join us on Discord"
         >
-          <BsDiscord className="text-xl" />
+          <BsDiscord className="text-2xl" />
         </a>
 
         <a
-          className="bg-white p-3 text-gray-700 flex items-center gap-2 text-[1.35rem] rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-primary active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10 dark:text-white/70 dark:hover:text-white"
+          className="bg-[#F8CB49] p-4 text-black flex items-center gap-2 text-[1.35rem] cursor-pointer border-2 border-black neo-shadow dark:text-black hover:bg-gray-100"
           href="https://github.com/IFA-AP-01"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="View our GitHub projects"
         >
-          <FaGithubSquare />
+          <FaGithubSquare className="text-2xl" />
         </a>
 
         <a
-          className="bg-white p-3 text-gray-700 flex items-center gap-2 text-[1.35rem] rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-primary active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10 dark:text-white/70 dark:hover:text-white"
+          className="bg-[#F8CB49] p-4 text-black flex items-center gap-2 text-[1.35rem] cursor-pointer border-2 border-black neo-shadow dark:text-black hover:bg-gray-100"
           href="tel:+84859885874"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Call us"
         >
-          <FaPhone />
+          <FaPhone className="text-2xl" />
         </a>
       </motion.div>
     </section>

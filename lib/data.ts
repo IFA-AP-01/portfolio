@@ -24,6 +24,7 @@ import uiuxDesignImg from "@/public/7141006.webp";
 import seoOptimizeImg from "@/public/7141024.webp";
 import springImg from "@/public/springImg.webp";
 import stoneFabberImg from "@/public/stonefabber.webp";
+import aioScannerImg from "@/public/aioScanner.webp";
 
 export const links = [
   {
@@ -60,7 +61,7 @@ export const links = [
 
 export const projectsData = [
   {
-    title: "snapbyte.io",
+    title: "snapbyte.io - File & Object Caching System",
     timeline: "June 2025 - Present",
     description:
       "Snapbyte is a file & object caching system designed to help website owners cut bandwidth costs by caching and offloading large files to a globally distributed edge layer.",
@@ -70,7 +71,17 @@ export const projectsData = [
     viewUrl: "https://snapbyte.io",
   },
   {
-    title: "Live Speaker",
+    title: "AIO Scanner - OCR Android & iOS App",
+    timeline: "Oct 2025 - Present",
+    description:
+      "Transform any document into digital text with our advanced OCR scanner. From business cards to handwritten notes, experience the future of document digitization",
+    tags: ["Kotlin", "Swift", "Firebase", "MLKit", "OpenCV", "LLM", "OCR", "App Check"],
+    imageUrl: aioScannerImg,
+    videoUrl: "",
+    viewUrl: "https://scanner.ifateam.dev",
+  },
+  {
+    title: "Live Speaker - Speech to Translation Software & SAAS",
     timeline: "Jan 2025 - Present",
     description:
       "Discover Livespeaker, the innovative voice translation tool that facilitates multilingual communication.",
@@ -80,7 +91,7 @@ export const projectsData = [
     viewUrl: "https://speaker.ohaio.io",
   },
   {
-    title: "Aardwolf India",
+    title: "Aardwolf India - Sales page for material handling",
     timeline: "Mar 2025 - Apr 2025",
     description:
       "Aardwolf manufactures material handling equipment for the stone, glass and metal industries. ",
@@ -90,7 +101,7 @@ export const projectsData = [
     viewUrl: "https://aardwolf.co.in",
   },
   {
-    title: "Stone Fabbers",
+    title: "Stone Fabbers - E-magazine for the stone industry",
     timeline: "Feb 2025",
     description:
       "E-magazine for the stone industry, providing information about stone processing machines and tools.",
@@ -136,16 +147,6 @@ export const projectsData = [
       "A Task Management App will help users easily manage their daily tasks, ensuring they don't miss any important assignments.",
     tags: ["iOS", "SwiftUI", "Github Action", "CoreData"],
     imageUrl: taskManagementImg,
-    videoUrl: "",
-    viewUrl: "",
-  },
-  {
-    title: "My Journal",
-    timeline: "Sep 2021 - Oct 2021",
-    description:
-      "A MyJournalImg app will help users easily and intuitively record and manage their trips, while also preserving memorable moments and planning for future journeys.",
-    tags: ["iOS", "SwiftUI", "CoreData"],
-    imageUrl: MyJournalImg,
     videoUrl: "",
     viewUrl: "",
   },
@@ -222,23 +223,27 @@ export const skillsJob = [
     imageUrl: appDevelopmentImg,
     description: "",
     tags: ["Android", "Kotlin", "Flutter", "iOS",  "Swift"],
+    color: "#EA4C88",
   },
   {
     title: "Web Developement",
     imageUrl: webDevelopmentImg,
     description: "",
     tags: ["React", "Next.js", "Node.js", "NestJs", "Vue", "WordPress"],
+    color: "#1CA091",
   },
   {
     title: "AI Integration",
     imageUrl: uiuxDesignImg,
     description: "",
     tags: ["Chatbot", "RAG", "Object Detection", "ML Kit", "Vertex AI", "Cloudflare Workers AI"],
+    color: "#F9CC47",
   },
   {
     title: "SEO Optimization",
     imageUrl: seoOptimizeImg,
     description: "",
     tags: ["Schema.org", "Google Analytics", "Google Search Console"],
+    color: "#8FA6E9",
   },
 ]

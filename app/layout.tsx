@@ -56,7 +56,7 @@ export default function RootLayout({
       </head>
       <body
         suppressHydrationWarning
-        className={`${bodyFont.className} bg-[#faf8f1] text-gray-950 relative dark:bg-[#131313] dark:text-gray-50 dark:text-opacity-90 transition-colors duration-300`}
+        className={`${bodyFont.className} bg-[#faf8f1] text-gray-950 relative dark:bg-[#191C1E] dark:text-gray-50 dark:text-opacity-90 transition-colors duration-300`}
       >
         <ThemeContextProvider>
           <ActiveSectionContextProvider>

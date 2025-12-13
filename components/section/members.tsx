@@ -15,8 +15,9 @@ export default function Members() {
   return (
     <section ref={ref} id="members" className="scroll-mt-28 mb-28">
       <SectionHeading highlight="Members">Members</SectionHeading>
-      <p className="text-gray-700 mb-8 dark:text-white/80 max-w-[36rem] text-center mx-auto text-md font-bold">
-        Meet our team of talented developers who are passionate about creating amazing products. 😊
+      <p className="text-gray-900 mb-8 dark:text-white max-w-[36rem] text-center mx-auto text-base font-black uppercase tracking-wide">
+        Meet our team of talented developers who are passionate about creating
+        amazing products. 😊
       </p>
       <div className="space-y-4">
         {memoizedMembers.map((member, index) => (

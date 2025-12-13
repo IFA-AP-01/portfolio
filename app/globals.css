@@ -123,14 +123,50 @@ div.canvas-content.dark::after {
   scroll-behavior: smooth;
 }
 
-.glass-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
+/* Neo-Brutalism Utilities */
+@layer components {
+  .neo-border {
+    @apply border-2 border-black;
+  }
 
-.glass-card-dark {
-  background: rgba(0, 0, 0, 0.25);
+  .neo-shadow {
+    box-shadow: 3px 3px 0px 0px #000;
+  }
+
+  .dark .neo-shadow {
+    box-shadow: 3px 3px 0px 0px #404040;
+  }
+
+  .neo-card {
+    @apply border-2 border-black bg-white dark:bg-[#252526];
+    box-shadow: 3px 3px 0px 0px #000;
+  }
+
+  .dark .neo-card {
+    box-shadow: 3px 3px 0px 0px #404040;
+  }
+
+  .neo-button {
+    @apply px-6 py-2 border-2 border-black bg-white font-bold transition-all duration-200 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none dark:bg-black;
+    box-shadow: 3px 3px 0px 0px #000;
+  }
+
+  .dark .neo-button {
+    box-shadow: 3px 3px 0px 0px #404040;
+  }
+
+  /* Hover effects for cards */
+  .neo-hover {
+    @apply transition-all duration-200 hover:-translate-y-1 hover:-translate-x-1;
+  }
+
+  .neo-hover:hover {
+    box-shadow: 6px 6px 0px 0px #000;
+  }
+
+  .dark .neo-hover:hover {
+    box-shadow: 6px 6px 0px 0px #404040;
+  }
 }
 
 /* Reduce motion for accessibility and performance */

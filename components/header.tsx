@@ -28,7 +28,7 @@ export default function Header() {
     if (metaThemeColor) {
       metaThemeColor.setAttribute(
         "content",
-        theme === "light" ? "#faf8f1" : "#131313"
+        theme === "light" ? "#faf8f1" : "#191C1E"
       );
     }
   }, [theme]);
@@ -51,7 +51,7 @@ export default function Header() {
         />
       </Link>
       <motion.div
-        className="fixed top-4 left-1/2 h-16 w-[90%] max-w-[30rem] rounded-full border border-gray-300 border-opacity-40 bg-white bg-opacity-70 shadow-lg backdrop-blur-[0.5rem] sm:bottom-6 sm:h-16 sm:w-[100%] sm:max-w-[38rem] dark:border-black/20 dark:bg-black/30 dark:bg-opacity-70"
+        className="fixed top-4 left-1/2 h-16 w-[90%] max-w-[30rem] neo-card sm:bottom-6 sm:h-16 sm:w-[100%] sm:max-w-[38rem]"
         initial={{ y: 100, x: "-50%", opacity: 0 }}
         animate={{ y: 0, x: "-50%", opacity: 1 }}
       ></motion.div>
@@ -86,7 +86,7 @@ export default function Header() {
                 <span className="sm:hidden">
                   <FontAwesomeIcon icon={link.icon} />
                 </span>
-                <span className="hidden sm:inline-flex items-center gap-2 text-gray-700 dark:text-white hover:scale-[1.15] active:scale-105 transition-all">
+                <span className="hidden sm:inline-flex items-center gap-2 text-black dark:text-white hover:scale-[1.15] active:scale-105 transition-all">
                   {link.name === activeSection && (
                     <FontAwesomeIcon icon={link.icon} />
                   )}
@@ -95,7 +95,7 @@ export default function Header() {
 
                 {link.name === activeSection && (
                   <motion.span
-                    className="bg-black/10 rounded-full absolute inset-0 -z-10 dark:bg-white/10"
+                    className="bg-[#E9945B] absolute inset-0 -z-10 border border-black neo-shadow"
                     layoutId="activeSection"
                     transition={{
                       type: "spring",
@@ -108,19 +108,19 @@ export default function Header() {
             </motion.li>
           ))}
           <motion.li
-              className="h-4/4 flex items-center justify-center relative px-4 hidden sm:inline-flex"
-              key="theme"
-              initial={{ y: 100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-            >
+            className="h-4/4 flex items-center justify-center relative px-3 hidden sm:inline-flex"
+            key="theme"
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+          >
             <button
-                  className="fixed w-[3rem] h-[3rem] text-gray-700 dark:text-white rounded-full flex items-center justify-center hover:scale-[1.2] active:scale-105 transition-all"
-                  onClick={toggleTheme}
-                  style={{ WebkitTapHighlightColor: "transparent" }}
-                >
-                  {theme === "light" ? <BsSun /> : <BsMoon />}
-                </button>
-            </motion.li>
+              className="fixed w-[3rem] h-[3rem] text-black dark:text-white flex items-center justify-center hover:scale-[1.2] active:scale-105 transition-all"
+              onClick={toggleTheme}
+              style={{ WebkitTapHighlightColor: "transparent" }}
+            >
+              {theme === "light" ? <BsSun /> : <BsMoon />}
+            </button>
+          </motion.li>
         </ul>
       </nav>
     </header>

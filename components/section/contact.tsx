@@ -9,6 +9,7 @@ import { FaGithubSquare, FaPhone } from "react-icons/fa";
 import ContactSection from "../contact-form";
 import { headlineFont } from "@/lib/fontawesome";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import Link from "next/link";
 
 export default function Contact() {
   const { ref } = useSectionInView("Contact");
@@ -31,60 +32,59 @@ export default function Contact() {
       }}
     >
       <SectionHeading highlight="Touch">Get in Touch</SectionHeading>
-      <p className="text-gray-700 -mt-6 dark:text-white/80">
+      <p className="text-gray-900 -mt-6 dark:text-white max-w-[36rem] mx-auto text-base font-bold">
         Please contact us directly at{" "}
-        <a
-          className="font-bold text-primary dark:text-primary/80 hover:underline"
+        <Link
+          className="font-black text-[#E9945B] hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
           href="mailto:hi@ifateam.dev"
         >
           hi@ifateam.dev
-        </a>{" "}
+        </Link>{" "}
         or through this form.
       </p>
 
       {/* Social Links */}
       <motion.div
-        className="flex flex-row items-center justify-center gap-3 text-lg font-medium mt-4"
+        className="flex flex-row items-center justify-center gap-4 text-xl font-bold mt-8 mb-8"
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
       >
         <a
-          className="bg-white p-4 text-gray-700 hover:text-primary flex items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10 dark:text-white/70 dark:hover:text-white"
+          className="bg-white p-4 text-black hover:text-black flex items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer border-2 border-black neo-shadow dark:bg-white dark:text-black hover:bg-gray-100"
           href="https://discord.gg/MdtF7raJ"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Join us on Discord"
         >
-          <BsDiscord className="text-xl" />
+          <BsDiscord className="text-2xl" />
         </a>
 
         <a
-          className="bg-white p-4 text-gray-700 flex items-center gap-2 text-[1.35rem] rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-primary active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10 dark:text-white/70 dark:hover:text-white"
+          className="bg-white p-4 text-black flex items-center gap-2 text-[1.35rem] rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-black active:scale-105 transition cursor-pointer border-2 border-black neo-shadow dark:bg-white dark:text-black hover:bg-gray-100"
           href="https://github.com/IFA-AP-01"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="View our GitHub projects"
         >
-          <FaGithubSquare />
+          <FaGithubSquare className="text-2xl" />
         </a>
 
         <a
-          className="bg-white p-4 text-gray-700 flex items-center gap-2 text-[1.35rem] rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-primary active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10 dark:text-white/70 dark:hover:text-white"
+          className="bg-white p-4 text-black flex items-center gap-2 text-[1.35rem] rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-black active:scale-105 transition cursor-pointer border-2 border-black neo-shadow dark:bg-white dark:text-black hover:bg-gray-100"
           href="tel:+84859885874"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Call us"
         >
-          <FaPhone />
+          <FaPhone className="text-xl" />
         </a>
       </motion.div>
       <ContactSection />
       <p
-        className={`${headlineFont.className} mt-4 text-gray-700 dark:text-gray-200 flex items-center justify-center gap-2 text-lg`}
+        className={`${headlineFont.className} mt-8 text-black dark:text-white flex items-center justify-center gap-2 text-xl font-black uppercase tracking-wide`}
       >
-        <FaMapMarkerAlt className="text-tertiary dark:text-primary " /> Danang,
-        Vietnam
+        <FaMapMarkerAlt className="text-red-500" /> Danang, Vietnam
       </p>
     </motion.section>
   );
