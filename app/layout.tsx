@@ -10,6 +10,39 @@ import { Toaster } from "react-hot-toast";
 import { bodyFont } from "@/lib/fontawesome";
 
 import ScrollToTop from "@/components/scroll-to-top";
+import { Metadata, Viewport } from "next";
+
+export const metadata: Metadata = {
+  title: {
+    default: "IFA Team - Application Development Experts",
+    template: "IFA Team - Application Development Experts",
+  },
+  description:
+    "Welcome to The IFA Team! We are experts in application development, delivering high-quality solutions for web, mobile, and enterprise platforms.",
+  keywords: [
+    "IFA Team",
+    "IFA Team - Application Development Experts",
+    "IFA Team - Application Development Experts",
+  ],
+  openGraph: {
+    title: {
+      default: "IFA Team - Application Development Experts",
+      template: "IFA Team - Application Development Experts",
+    },
+    description:
+      "Welcome to The IFA Team! We are experts in application development, delivering high-quality solutions for web, mobile, and enterprise platforms.",
+    images: [
+      "https://res.cloudinary.com/huyhunhngc/image/upload/v1745678359/logo_jmvj9s.webp",
+    ],
+  },
+  alternates: { canonical: "https://ifateam.dev" },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#faf8f1",
+};
 
 export default function RootLayout({
   children,
@@ -19,26 +52,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="!scroll-smooth" suppressHydrationWarning>
       <head>
-        <meta name="theme-color" content="#faf8f1" />
         <title>IFA Team - Application Development Experts</title>
-        <meta
-          name="description"
-          content="Welcome to The IFA Team! We are experts in application development, delivering high-quality solutions for web, mobile, and enterprise platforms."
-        />
-        <meta
-          property="og:title"
-          content="The IFA Team - Application Development Experts"
-        />
-        <meta
-          property="og:description"
-          content="Welcome to The IFA Team! We are experts in application development, delivering high-quality solutions for web, mobile, and enterprise platforms."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://ifateam.dev" />
-        <meta
-          property="og:image"
-          content="https://res.cloudinary.com/huyhunhngc/image/upload/v1745678359/logo_jmvj9s.webp"
-        />
       </head>
       <body
         suppressHydrationWarning

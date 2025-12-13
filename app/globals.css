@@ -1,10 +1,20 @@
+@import "prismjs/themes/prism-tomorrow.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html {
   --line-color: #e5e7eb;
-  font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+  font-family: var(
+    --font-sans,
+    ui-sans-serif,
+    system-ui,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji"
+  );
   position: relative;
   min-height: 100vh;
 }
@@ -56,7 +66,7 @@ body {
   }
 }
 
-.grecaptcha-badge { 
+.grecaptcha-badge {
   visibility: hidden !important;
 }
 
@@ -65,21 +75,21 @@ body {
   height: 100vh;
   overflow: hidden;
   position: absolute;
-  top:0;
-  left:0;    
+  top: 0;
+  left: 0;
 }
 
 .canvas-wrap {
   position: relative;
 }
 
-div.canvas-content{
+div.canvas-content {
   position: relative;
   z-index: 10;
 }
 
 div.canvas-content::after {
-  content: '';
+  content: "";
   position: fixed;
   bottom: -5px;
   left: 0;
@@ -102,92 +112,6 @@ div.canvas-content.dark::after {
     rgba(19, 19, 19, 0.9) 90%
   );
 }
-
-  .glass-card {
-    /* Ultra transparent background */
-    background: rgba(255, 255, 255, 0.05);
-    
-    /* Glass border */
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    
-    /* Subtle shadow */
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  }
-  
-  /* Dark mode adjustments */
-  .dark .glass-card {
-    background: rgba(255, 255, 255, 0.03);
-    border-color: rgba(255, 255, 255, 0.08);
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  }
-  
-  /* Hover state - slightly more visible */
-  .group:hover .glass-card {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.25);
-  }
-  
-  .dark .group:hover .glass-card {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.15);
-  }
-  
-  /* Enhanced backdrop filter support */
-  @supports (backdrop-filter: blur(0)) {
-    .backdrop-blur-md {
-      backdrop-filter: blur(16px) saturate(180%);
-      -webkit-backdrop-filter: blur(16px) saturate(180%);
-    }
-    
-    .hover\\:backdrop-blur-lg:hover {
-      backdrop-filter: blur(24px) saturate(200%);
-      -webkit-backdrop-filter: blur(24px) saturate(200%);
-    }
-  }
-  
-  /* Fallback for browsers without backdrop-filter */
-  @supports not (backdrop-filter: blur(0)) {
-    .glass-card {
-      background: rgba(255, 255, 255, 0.15);
-    }
-    
-    .dark .glass-card {
-      background: rgba(0, 0, 0, 0.2);
-    }
-  }
-  .glass-member {
-          box-shadow: 
-            0 20px 40px -12px rgba(0, 0, 0, 0.08),
-            inset 0 1px 0 rgba(255, 255, 255, 0.2);
-          /* Optimize for better performance */
-          transform: translateZ(0);
-          will-change: auto;
-        }
-        
-        .glass-tech-pill {
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-          transform: translateZ(0);
-        }
-        
-        .glass-avatar {
-          box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-          transform: translateZ(0);
-        }
-
-        .dark .glass-member {
-          box-shadow: 
-            0 20px 40px -12px rgba(0, 0, 0, 0.25),
-            inset 0 1px 0 rgba(255, 255, 255, 0.08);
-        }
-        
-        /* Performance optimizations */
-        .glass-member {
-          contain: layout style paint;
-        }
 
 /* Performance utilities */
 .gpu-accelerated {
@@ -224,5 +148,3 @@ code[class*="language-"],
 pre[class*="language-"] {
   background: transparent !important;
 }
-
-@import "prismjs/themes/prism-tomorrow.css";
