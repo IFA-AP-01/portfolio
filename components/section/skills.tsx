@@ -52,14 +52,14 @@ export default function Skills() {
               <div className="p-6 flex items-center justify-between border-b-2 border-black">
                 <div className="flex items-center">
                   <div
-                    className={`bg-[#F9CC47] p-2 mr-5 border-2 border-black neo-shadow`}
+                    className={`bg-[#F9CC47] p-0 mr-5 border-2 border-black neo-shadow`}
                   >
                     <Image
                       src={skill.imageUrl}
                       alt={skill.title}
-                      width={100}
-                      height={100}
-                      className="object-contain w-10 h-10"
+                      width={500}
+                      height={500}
+                      className="object-contain w-16 h-16"
                     />
                   </div>
                   <h3

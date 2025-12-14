@@ -38,7 +38,7 @@ export default function Project({
         <div className="flex flex-col sm:flex-row">
           {/* Mobile Image/Video */}
           {videoUrl ? (
-            <div className="sm:hidden w-full h-48 border-b-2 border-black dark:border-white relative">
+            <div className="sm:hidden w-full h-48 border-b-2 border-black relative">
               <video
                 src={videoUrl}
                 autoPlay
@@ -51,7 +51,7 @@ export default function Project({
               />
             </div>
           ) : (
-            <div className="w-full h-48 sm:hidden relative border-b-2 border-black dark:border-white">
+            <div className="w-full h-48 sm:hidden relative border-b-2 border-black">
               <Image
                 src={imageUrl}
                 alt="Project I worked on"

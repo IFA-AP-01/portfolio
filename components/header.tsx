@@ -22,10 +22,6 @@ export default function Header() {
   // Detect home page
   const isHomePage = pathname === "/";
 
-  // Hide header on privacy pages
-  const isPrivacyPage =
-    pathname?.startsWith("/privacy") || pathname?.startsWith("/terms");
-
   useEffect(() => {
     const metaThemeColor = document.querySelector("meta[name='theme-color']");
     if (metaThemeColor) {
@@ -37,7 +33,7 @@ export default function Header() {
   }, [theme]);
 
   // Don't render header on privacy pages
-  if (isPrivacyPage) {
+  if (!isHomePage) {
     return null;
   }
 

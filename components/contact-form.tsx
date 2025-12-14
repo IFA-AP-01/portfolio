@@ -53,7 +53,7 @@ const ContactForm = () => {
   return (
     <form className="mt-10 flex flex-col" onSubmit={handleSubmit} ref={formRef}>
       <input
-        className="h-14 px-4 neo-border bg-white dark:bg-black transition-all focus:neo-shadow outline-none"
+        className="h-14 px-4 neo-border focus:neo-shadow bg-white dark:bg-[#252526] transition-all focus:neo-shadow outline-none"
         name="senderEmail"
         type="email"
         required
@@ -62,7 +62,7 @@ const ContactForm = () => {
         disabled={isLoading}
       />
       <textarea
-        className="h-52 my-3 p-4 neo-border bg-white dark:bg-black transition-all resize-none focus:neo-shadow outline-none"
+        className="h-52 my-3 p-4 neo-border focus:neo-shadow bg-white dark:bg-[#252526] transition-all resize-none focus:neo-shadow outline-none"
         name="message"
         placeholder="Your message"
         required

@@ -147,7 +147,7 @@ div.canvas-content.dark::after {
   }
 
   .neo-button {
-    @apply px-6 py-2 border-2 border-black bg-white font-bold transition-all duration-200 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none dark:bg-black;
+    @apply px-6 py-2 border-2 border-black text-black font-bold transition-all duration-200 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none;
     box-shadow: 3px 3px 0px 0px #000;
   }
 
