@@ -15,7 +15,7 @@ import { Metadata, Viewport } from "next";
 export const metadata: Metadata = {
   title: {
     default: "IFA Team - Application Development Experts",
-    template: "IFA Team - Application Development Experts",
+    template: "%s |IFA Team",
   },
   description:
     "Welcome to The IFA Team! We are experts in application development, delivering high-quality solutions for web, mobile, and enterprise platforms.",

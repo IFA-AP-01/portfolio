@@ -1,11 +1,54 @@
 import Image from "next/image";
 import Link from "next/link";
 import teamImage from "@/public/logo.webp";
+import { SoftwareApplication, WithContext } from "schema-dts";
+import Script from "next/script";
 
 export const metadata = {
   title: "JSON to TOON Converter - Convert JSON to TOON Format",
   description:
     "Free JSON to TOON converter that reduces LLM token usage by 30-60% with TOON format",
+  keywords: [
+    "JSON to TOON converter",
+    "TOON format converter",
+    "LLM token reduction",
+    "JSON to TOON",
+    "TOON format",
+    "LLM token usage",
+  ],
+  openGraph: {
+    title: "JSON to TOON Converter - Convert JSON to TOON Format",
+    description:
+      "Free JSON to TOON converter that reduces LLM token usage by 30-60% with TOON format",
+    type: "website",
+    siteName: "JSON to TOON Converter",
+    images: [
+      {
+        url: "https://cdn.ifateam.dev/json2toon.webp",
+        alt: "JSON to TOON Converter",
+      },
+    ],
+  },
+};
+
+const jsonLd: WithContext<SoftwareApplication> = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "JSON to TOON Converter",
+  applicationCategory: "DeveloperApplication",
+  operatingSystem: "All",
+  url: "https://www.ifateam.dev/toonify",
+  description:
+    "Free JSON to TOON converter that reduces LLM token usage by 30-60% with TOON format",
+  image: "https://cdn.ifateam.dev/json2toon.webp",
+  keywords: [
+    "JSON to TOON converter",
+    "TOON format converter",
+    "LLM token reduction",
+    "JSON to TOON",
+    "TOON format",
+    "LLM token usage",
+  ],
 };
 
 export const viewport = {
@@ -22,6 +65,13 @@ export default function JsonConverterLayout({
   return (
     <div>
       <header className="z-[999]">
+        <Script
+          id="org-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd),
+          }}
+        />
         <Link href="/">
           <Image
             src={teamImage}
