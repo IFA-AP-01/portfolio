@@ -1,15 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createShortLink } from "@/app/actions/shorten";
 import { headlineFont } from "@/lib/fontawesome";
+import Link from "next/link";
+import { getFaviconUrl } from "@/lib/utils";
+import Image from "next/image";
+
+const domain = "ifateam.dev";
+
+// Define the type for the cache object
+type LinkCache = Record<string, string>;
 
 export default function ShortenLinkPage() {
   const [url, setUrl] = useState("");
   const [shortUrl, setShortUrl] = useState("");
+  const [shortKey, setShortKey] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
+  const [history, setHistory] = useState<LinkCache>({});
+
+  // Track copied state for individual history items
+  const [historyCopied, setHistoryCopied] = useState<Record<string, boolean>>(
+    {}
+  );
+
+  useEffect(() => {
+    const cacheKey = "shorten-link-cache";
+    const cache = JSON.parse(localStorage.getItem(cacheKey) || "{}");
+    setHistory(cache);
+  }, [shortUrl]); // Refresh history when a new link is created
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,21 +47,21 @@ export default function ShortenLinkPage() {
     }
 
     const cacheKey = "shorten-link-cache";
-    const origin = typeof window !== "undefined" ? window.location.origin : "";
 
     try {
       // Check cache
       const cache = JSON.parse(localStorage.getItem(cacheKey) || "{}");
       if (cache[url]) {
-        setShortUrl(`${origin}/${cache[url]}`);
+        setShortUrl(`https://${domain}/${cache[url]}`);
+        setShortKey(cache[url]);
         setLoading(false);
         return;
       }
 
       const result = await createShortLink(url);
       if (result.success && result.data) {
-        setShortUrl(`${origin}/${result.data.key}`);
-
+        setShortUrl(`https://${domain}/${result.data.key}`);
+        setShortKey(result.data.key);
         // Update cache
         cache[url] = result.data.key;
         localStorage.setItem(cacheKey, JSON.stringify(cache));
@@ -61,31 +82,33 @@ export default function ShortenLinkPage() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const copyHistoryLink = (key: string, link: string) => {
+    navigator.clipboard.writeText(link);
+    setHistoryCopied((prev) => ({ ...prev, [key]: true }));
+    setTimeout(() => {
+      setHistoryCopied((prev) => ({ ...prev, [key]: false }));
+    }, 2000);
+  };
+
   return (
     <div className="min-h-screen pt-32 pb-20 px-4 sm:px-8">
       <div className="max-w-2xl mx-auto">
         <div className="neo-card p-8 sm:p-12 bg-white dark:bg-[#1a1a1a]">
           <h1
-            className={`${headlineFont.className} text-4xl sm:text-5xl font-black mb-8 text-center text-black dark:text-white uppercase tracking-tighter`}
+            className={`${headlineFont.className} text-2xl sm:text-4xl font-black mb-8 text-center text-[#E9945B] dark:text-white uppercase tracking-tighter`}
           >
             Shorten Link
           </h1>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-6">
             <div>
-              <label
-                htmlFor="url"
-                className="block text-sm font-bold uppercase tracking-wider mb-2 text-black dark:text-gray-300"
-              >
-                Enter URL
-              </label>
               <input
                 type="url"
                 id="url"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 placeholder="Paste your link here"
-                className="w-full p-4 border-2 border-black bg-gray-50 dark:bg-black dark:border-white focus:outline-none focus:ring-0 text-lg transition-all neo-shadow"
+                className="w-full px-4 py-2 border-2 border-black bg-gray-50 dark:bg-black dark:border-white focus:outline-none focus:ring-0 text-md transition-all neo-shadow"
                 required
               />
             </div>
@@ -93,7 +116,7 @@ export default function ShortenLinkPage() {
             <button
               type="submit"
               disabled={loading}
-              className={`neo-button w-full sm:w-auto self-end bg-[#E9945B] hover:bg-[#d6854f] text-black text-lg uppercase py-3 px-8 ${
+              className={`neo-button w-full sm:w-auto self-end bg-[#E9945B] hover:bg-[#d6854f] text-black text-lg uppercase py-2 px-8 ${
                 loading ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
@@ -113,8 +136,8 @@ export default function ShortenLinkPage() {
                 Your Shortened Link:
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <div className="flex-grow p-4 border-2 border-black bg-green-50 dark:bg-green-900/20 font-mono text-lg break-all">
-                  {shortUrl}
+                <div className="flex-grow px-4 py-2 border-2 border-black bg-green-50 dark:bg-green-900/20 text-md break-all">
+                  {`${domain}/${shortKey}`}
                 </div>
                 <button
                   onClick={copyToClipboard}
@@ -126,6 +149,69 @@ export default function ShortenLinkPage() {
             </div>
           )}
         </div>
+
+        {/* History Section - Only show if there are history items */}
+        {Object.keys(history).length > 0 && (
+          <div className="mt-12 neo-card p-8 bg-[#FEF3C0] dark:bg-[#1a1a1a]">
+            <h2
+              className={`${headlineFont.className} text-xl sm:text-2xl font-black mb-6 text-black dark:text-white uppercase tracking-tighter`}
+            >
+              History
+            </h2>
+            <div className="flex flex-col gap-4">
+              {Object.entries(history)
+                .reverse()
+                .map(([originalUrl, key]) => {
+                  const shortLink = `${domain}/${key}`;
+                  const favicon = getFaviconUrl(originalUrl);
+                  return (
+                    <div
+                      key={key}
+                      className="p-4 border-2 border-black dark:border-white/20 bg-gray-50 dark:bg-black/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                    >
+                      <div className="flex-grow min-w-0">
+                        <Link
+                          href={`https://${shortLink}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-md text-[#E9945B] hover:underline break-all"
+                        >
+                          {shortLink}
+                        </Link>
+                        <div className="flex items-center gap-2 max-w-full pt-2">
+                          {favicon && (
+                            <Image
+                              src={favicon}
+                              alt=""
+                              width={20}
+                              height={20}
+                              className="w-5 h-5 shrink-0"
+                              loading="lazy"
+                            />
+                          )}
+
+                          <p
+                            className="text-xs text-black dark:text-white truncate"
+                            title={originalUrl}
+                          >
+                            {originalUrl}
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() =>
+                          copyHistoryLink(key, `https://${shortLink}`)
+                        }
+                        className="neo-button text-sm bg-[#90EE90] hover:bg-[#7bc67b] text-black dark:text-white whitespace-nowrap px-4 py-2 h-min"
+                      >
+                        {historyCopied[key] ? "Copied!" : "Copy"}
+                      </button>
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

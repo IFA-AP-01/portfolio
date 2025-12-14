@@ -24,3 +24,12 @@ export const getErrorMessage = (error: unknown): string => {
 
   return message;
 };
+
+export function getFaviconUrl(url: string) {
+  try {
+    const { hostname } = new URL(url);
+    return `https://www.google.com/s2/favicons?sz=64&domain=${hostname}`;
+  } catch {
+    return null;
+  }
+}
