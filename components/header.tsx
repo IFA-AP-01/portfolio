@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useTheme } from "@/context/theme-context";
 import teamImage from "@/public/logo.webp";
 import { BsMoon, BsSun } from "react-icons/bs";
-import { faLink, faExchange } from "@fortawesome/free-solid-svg-icons";
+import { faLink, faExchange, faBlog } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
@@ -23,11 +23,11 @@ const menuItems = [
     href: "/shorten-link",
     icon: faLink,
   },
-  // {
-  //   name: "Blog",
-  //   href: "/blog",
-  //   icon: faBook,
-  // },
+  {
+    name: "Blog",
+    href: "/blog",
+    icon: faBlog,
+  },
 ];
 
 export default function Header() {
@@ -46,7 +46,7 @@ export default function Header() {
 
   return (
     <header className="z-[999] relative">
-      <nav className="neo-card fixed top-3 inset-x-4 max-w-4xl mx-auto flex h-16 items-center">
+      <nav className="neo-card fixed top-3 inset-x-4 max-w-5xl mx-auto flex h-16 items-center">
         <ul className="flex w-full items-center justify-between gap-1 text-[0.9rem] font-medium text-gray-500 sm:gap-3 sm:flex-nowrap">
           <Link href="/" className="flex items-center px-3">
             <div className="neo-shadow border-black border-2 w-10 h-10 flex bg-[#E9945B]">

@@ -1,6 +1,7 @@
 import Header from "@/components/header";
 import "@/lib/fontawesome";
 import "./globals.css";
+import "./markdown.css";
 
 import ActiveSectionContextProvider from "@/context/active-section-context";
 import Footer from "@/components/footer";

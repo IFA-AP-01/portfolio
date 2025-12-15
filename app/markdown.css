@@ -1,0 +1,78 @@
+/* Markdown Content Styles */
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+  @apply font-black mt-8 mb-4 text-gray-900 dark:text-gray-50;
+}
+
+.markdown-content h1 {
+  @apply text-4xl;
+}
+.markdown-content h2 {
+  @apply text-3xl border-b-4 border-yellow-300 inline-block pr-6;
+}
+.markdown-content h3 {
+  @apply text-2xl;
+}
+.markdown-content h4 {
+  @apply text-xl;
+}
+
+.markdown-content p {
+  @apply mb-6 leading-relaxed text-lg text-gray-800 dark:text-gray-200;
+}
+
+.markdown-content ul {
+  @apply list-disc list-inside mb-6 space-y-2 ml-4;
+}
+
+.markdown-content ol {
+  @apply list-decimal list-inside mb-6 space-y-2 ml-4;
+}
+
+.markdown-content li {
+  @apply pl-2;
+}
+
+.markdown-content a {
+  @apply font-bold underline decoration-2 underline-offset-2 decoration-yellow-400 hover:bg-yellow-200 hover:decoration-transparent text-black dark:text-white transition-all duration-200;
+}
+
+.markdown-content blockquote {
+  @apply border-l-4 border-black pl-6 italic bg-gray-50 dark:bg-[#1e1e1e] p-6 my-8 text-xl font-medium;
+}
+
+.markdown-content code {
+  @apply bg-gray-200 dark:bg-gray-700 px-1.5 py-0.5 rounded font-mono text-sm border border-black/10 dark:border-white/10 text-red-600 dark:text-red-400 font-bold;
+}
+
+.markdown-content pre {
+  @apply bg-[#1e1e1e] text-gray-100 p-6 rounded-none border-2 border-black overflow-x-auto mb-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_#ffffff];
+}
+
+.markdown-content pre code {
+  @apply bg-transparent p-0 border-none text-sm text-gray-100 font-normal;
+}
+
+.markdown-content img {
+  @apply border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_#ffffff] my-8 max-w-full h-auto;
+}
+
+.markdown-content hr {
+  @apply border-t-2 border-black my-12 border-dashed;
+}
+
+.markdown-content table {
+  @apply w-full border-collapse border-2 border-black mb-8;
+}
+
+.markdown-content th {
+  @apply border-2 border-black bg-yellow-200 p-3 text-left font-bold text-black;
+}
+
+.markdown-content td {
+  @apply border-2 border-black p-3;
+}
