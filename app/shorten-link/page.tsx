@@ -7,6 +7,7 @@ import Link from "next/link";
 import { getFaviconUrl } from "@/lib/utils";
 import Image from "next/image";
 import SubmitBtn from "@/components/submit-btn";
+import { FaChartBar } from "react-icons/fa";
 
 const domain = "ifateam.dev";
 
@@ -93,7 +94,7 @@ export default function ShortenLinkPage() {
 
   return (
     <div className="px-4 sm:px-8">
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <div className="neo-card p-4 sm:p-8 bg-white dark:bg-[#1a1a1a]">
           <form onSubmit={handleSubmit} className="flex flex-col gap-6">
             <div>
@@ -185,14 +186,23 @@ export default function ShortenLinkPage() {
                           </p>
                         </div>
                       </div>
-                      <button
-                        onClick={() =>
-                          copyHistoryLink(key, `https://${shortLink}`)
-                        }
-                        className="neo-button text-sm bg-[#90EE90] hover:bg-[#7bc67b] text-black dark:text-white whitespace-nowrap px-4 py-2 h-min"
-                      >
-                        {historyCopied[key] ? "Copied!" : "Copy"}
-                      </button>
+                      <div className="flex gap-2 shrink-0">
+                        <Link
+                          href={`/${key}/stats`}
+                          className="neo-button text-sm bg-blue-200 hover:bg-blue-300 text-black dark:text-white whitespace-nowrap px-4 py-2 h-min flex items-center justify-center gap-2"
+                        >
+                          <FaChartBar />
+                          Stats
+                        </Link>
+                        <button
+                          onClick={() =>
+                            copyHistoryLink(key, `https://${shortLink}`)
+                          }
+                          className="neo-button text-sm bg-[#90EE90] hover:bg-[#7bc67b] text-black dark:text-white whitespace-nowrap px-4 py-2 h-min"
+                        >
+                          {historyCopied[key] ? "Copied!" : "Copy"}
+                        </button>
+                      </div>
                     </div>
                   );
                 })}
