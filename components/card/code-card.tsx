@@ -70,7 +70,7 @@ export default function CodeCard() {
       </div>
 
       {/* Code Editor */}
-      <div className="w-full bg-white dark:bg-[#252526] sm:py-6 sm:px-4 font-mono text-[11px] sm:text-sm leading-6 border-b-2 border-black">
+      <div className="w-full bg-white dark:bg-[#252526] p-2 font-mono text-[11px] sm:text-sm leading-6 border-b-2 border-black">
         {linesToRender.map((line) => {
           let highlighted = "";
           if (line.hasContent) {

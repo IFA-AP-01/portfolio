@@ -46,7 +46,7 @@ export default function Header() {
 
   return (
     <header className="z-[999] relative">
-      <nav className="neo-card fixed top-3 inset-x-4 max-w-[50rem] mx-auto flex h-16 items-center">
+      <nav className="neo-card fixed top-3 inset-x-4 max-w-4xl mx-auto flex h-16 items-center">
         <ul className="flex w-full items-center justify-between gap-1 text-[0.9rem] font-medium text-gray-500 sm:gap-3 sm:flex-nowrap">
           <Link href="/" className="flex items-center px-3">
             <div className="neo-shadow border-black border-2 w-10 h-10 flex bg-[#E9945B]">

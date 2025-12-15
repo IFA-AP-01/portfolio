@@ -103,7 +103,7 @@ export default function About() {
   return (
     <motion.section
       ref={ref}
-      className="mb-16 sm:mb-28 max-w-[50rem] leading-8 sm:leading-8 scroll-mt-28 sm:mx-[16px] flex flex-col items-center justify-center"
+      className="mb-16 sm:mb-28 max-w-4xl leading-8 sm:leading-8 scroll-mt-28 sm:mx-[16px] flex flex-col items-center justify-center"
       initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.175 }}

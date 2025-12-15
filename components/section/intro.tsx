@@ -23,7 +23,7 @@ export default function Intro() {
       id="home"
       className="min-h-screen w-full flex items-center justify-center py-16 sm:py-12"
     >
-      <div className="w-full max-w-6xl mx-auto">
+      <div className="w-full max-w-5xl mx-auto">
         <div className="w-full grid lg:grid-cols-2 gap-12 items-center">
           {/* LEFT COLUMN */}
           <motion.div

@@ -29,7 +29,7 @@ export default function Skills() {
     <section
       id="skills"
       ref={ref}
-      className="mb-28 max-w-[75rem] mx-auto scroll-mt-28 text-center sm:mb-40 flex flex-col items-center justify-center"
+      className="mb-28 max-w-4xl mx-auto scroll-mt-28 text-center sm:mb-40 flex flex-col items-center justify-center"
     >
       <SectionHeading>What We Do?</SectionHeading>
       <p className="text-gray-900 mb-8 dark:text-white max-w-[36rem] text-center mx-auto text-xs sm:text-base uppercase tracking-wide">
@@ -40,7 +40,7 @@ export default function Skills() {
         {skillsJob.map((skill, index) => (
           <motion.div
             key={index}
-            className="neo-card neo-hover relative overflow-hidden max-w-[25rem] bg-white transition-all duration-300 dark:bg-black"
+            className="neo-card neo-hover relative overflow-hidden w-full bg-white transition-all duration-300 dark:bg-black"
             variants={fadeInAnimationVariants}
             initial="initial"
             whileInView="animate"

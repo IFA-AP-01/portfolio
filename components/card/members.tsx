@@ -32,7 +32,7 @@ const Member = memo(function Member({
       }}
       viewport={{ once: true, margin: "-100px" }}
     >
-      <div className="neo-card neo-hover relative overflow-hidden max-w-[50rem]">
+      <div className="neo-card neo-hover relative overflow-hidden w-full">
         <div className="flex flex-row items-center sm:h-[18rem] relative z-10">
           {/* Content Section */}
           <motion.div

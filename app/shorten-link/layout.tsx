@@ -3,27 +3,27 @@ import Script from "next/script";
 import { headlineFont } from "@/lib/fontawesome";
 
 export const metadata = {
-  title: "Shorten Link - Free link shortener. Quick and easy",
+  title: "Link Shorter - Free link shorter. Quick and easy",
   description:
-    "Free link shortener. Quick and easy. No registration required. No ads.",
+    "Free link shorter. Quick and easy. No registration required. No ads.",
   keywords: [
     "shorten link",
-    "link shortener",
-    "free link shortener",
+    "link shorter",
+    "free link shorter",
     "quick and easy",
     "no registration required",
     "no ads",
   ],
   openGraph: {
-    title: "Shorten Link - Free link shortener. Quick and easy",
+    title: "Link Shorter - Free link shorter. Quick and easy",
     description:
-      "Free link shortener. Quick and easy. No registration required. No ads.",
+      "Free link shorter. Quick and easy. No registration required. No ads.",
     type: "website",
-    siteName: "Shorten Link",
+    siteName: "Link Shorter",
     images: [
       {
-        url: "https://cdn.ifateam.dev/shorten-link.webp",
-        alt: "Shorten Link",
+        url: "https://cdn.ifateam.dev/easy-link-shorter.webp",
+        alt: "Easy Link Shorter",
       },
     ],
   },
@@ -33,17 +33,17 @@ export const metadata = {
 const jsonLd: WithContext<SoftwareApplication> = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "Shorten Link",
+  name: "Link Shorter",
   applicationCategory: "DeveloperApplication",
   operatingSystem: "All",
   url: "https://www.ifateam.dev/shorten-link",
   description:
-    "Free link shortener. Quick and easy. No registration required. No ads.",
-  image: "https://cdn.ifateam.dev/shorten-link.webp",
+    "Free link shorter. Quick and easy. No registration required. No ads.",
+  image: "https://cdn.ifateam.dev/easy-link-shorter.webp",
   keywords: [
     "shorten link",
-    "link shortener",
-    "free link shortener",
+    "link shorter",
+    "free link shorter",
     "quick and easy",
     "no registration required",
     "no ads",
@@ -77,11 +77,11 @@ export default function ShortenLinkLayout({
         <h1
           className={`${headlineFont.className} text-2xl sm:text-4xl font-black mb-8 text-center text-black dark:text-white uppercase tracking-tighter`}
         >
-          <span className="text-[#E9945B]">Easy</span> Link Shorter
+          Easy <span className="text-[#E9945B]">Link Shorter</span>
         </h1>
         <p className="text-gray-500 dark:text-gray-400 text-center pb-8">
-          <span className="text-[#e9945b]">Free</span> link shortener. Quick and
-          easy. No registration required.
+          <span className="text-[#e9945b]">Free</span> link shorter - Quick and
+          easy to share - Monitor your links.
         </p>
         {children}
       </main>

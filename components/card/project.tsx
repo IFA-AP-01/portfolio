@@ -32,7 +32,7 @@ export default function Project({
       }}
       className="group mb-6 sm:mb-12 last:mb-0"
     >
-      <section className="neo-card neo-hover max-w-[60rem] overflow-hidden relative transition">
+      <section className="neo-card neo-hover max-w-4xl overflow-hidden relative transition">
         <div className="flex flex-col sm:flex-row">
           {/* Mobile Image/Video */}
           {videoUrl ? (
