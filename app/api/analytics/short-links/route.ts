@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const RANGE_MAP = {
-  "60m": { interval: "60 MINUTE", cache: 60 },
-  "24h": { interval: "24 HOUR", cache: 300 },
-  "7d": { interval: "7 DAY", cache: 1800 },
+  "60m": { interval: "60 MINUTE" },
+  "24h": { interval: "24 HOUR" },
+  "7d": { interval: "7 DAY" },
 };
 
 export async function GET(request: NextRequest) {
@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Invalid params" }, { status: 400 });
   }
 
-  const { interval, cache } = RANGE_MAP[range];
+  const { interval } = RANGE_MAP[range];
 
   const res = await fetch(
     `${process.env.POSTHOG_HOST}/api/projects/${process.env.POSTHOG_PROJECT_ID}/query/`,
@@ -60,11 +60,6 @@ export async function GET(request: NextRequest) {
           country: p.country,
         };
       }
-    ),
-    {
-      headers: {
-        "Cache-Control": `public, s-maxage=${cache}, stale-while-revalidate=${cache * 2}`,
-      },
-    }
+    )
   );
 }

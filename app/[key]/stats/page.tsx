@@ -25,7 +25,7 @@ const ResponsiveContainer = OriginalResponsiveContainer as any;
 export default function StatsPage() {
   const params = useParams();
   const key = params?.key as string;
-  const [range, setRange] = useState<TimeRange>("24h");
+  const [range, setRange] = useState<TimeRange>("60m");
 
   const { data, isLoading, error } = useLinkStats(key, range);
 
