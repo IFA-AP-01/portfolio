@@ -1,21 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const RANGE_MAP = {
-  "60m": {
-    interval: "60 MINUTE",
-    bucket: "toStartOfMinute(timestamp)",
-    cache: 60, // seconds
-  },
-  "24h": {
-    interval: "24 HOUR",
-    bucket: "toStartOfHour(timestamp)",
-    cache: 300,
-  },
-  "7d": {
-    interval: "7 DAY",
-    bucket: "toDate(timestamp)",
-    cache: 1800,
-  },
+  "60m": { interval: "60 MINUTE", cache: 60 },
+  "24h": { interval: "24 HOUR", cache: 300 },
+  "7d": { interval: "7 DAY", cache: 1800 },
 };
 
 export async function GET(request: NextRequest) {
@@ -27,7 +15,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Invalid params" }, { status: 400 });
   }
 
-  const { interval, bucket, cache } = RANGE_MAP[range];
+  const { interval, cache } = RANGE_MAP[range];
 
   const res = await fetch(
     `${process.env.POSTHOG_HOST}/api/projects/${process.env.POSTHOG_PROJECT_ID}/query/`,
@@ -42,15 +30,15 @@ export async function GET(request: NextRequest) {
           kind: "HogQLQuery",
           query: `
             SELECT
-              ${bucket} AS time,
-              count() AS total
+              timestamp,
+              properties
             FROM events
             WHERE
               event = 'short_link_redirected'
               AND properties.short_key = {key}
               AND timestamp >= now() - INTERVAL ${interval}
-            GROUP BY time
-            ORDER BY time
+            ORDER BY timestamp DESC
+            LIMIT 1000
           `,
           values: { key },
         },
@@ -61,13 +49,20 @@ export async function GET(request: NextRequest) {
   const data = await res.json();
 
   return NextResponse.json(
-    data.results.map(([time, total]: [string, number]) => ({
-      time,
-      total,
-    })),
+    data.results.map(
+      ([timestamp, properties]: [string, string]) => {
+        const p = JSON.parse(properties);
+        return {
+          timestamp,
+          destination_domain: p.destination_domain,
+          referer: p.referer,
+          user_agent: p.user_agent,
+          country: p.country,
+        };
+      }
+    ),
     {
       headers: {
-        // CDN cache
         "Cache-Control": `public, s-maxage=${cache}, stale-while-revalidate=${cache * 2}`,
       },
     }
