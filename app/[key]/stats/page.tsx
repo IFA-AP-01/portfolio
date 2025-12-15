@@ -10,11 +10,6 @@ import {
   CartesianGrid as OriginalCartesianGrid,
   Tooltip as OriginalTooltip,
   ResponsiveContainer as OriginalResponsiveContainer,
-  BarChart as OriginalBarChart,
-  Bar as OriginalBar,
-  Cell as OriginalCell,
-  PieChart as OriginalPieChart,
-  Pie as OriginalPie,
 } from "recharts";
 import { FaGlobe, FaMobileAlt, FaChartLine } from "react-icons/fa";
 import { useLinkStats, TimeRange } from "@/hooks/useLinkStats";
@@ -26,13 +21,6 @@ const YAxis = OriginalYAxis as any;
 const CartesianGrid = OriginalCartesianGrid as any;
 const Tooltip = OriginalTooltip as any;
 const ResponsiveContainer = OriginalResponsiveContainer as any;
-const BarChart = OriginalBarChart as any;
-const Bar = OriginalBar as any;
-const Cell = OriginalCell as any;
-const PieChart = OriginalPieChart as any;
-const Pie = OriginalPie as any;
-
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884d8"];
 
 export default function StatsPage() {
   const params = useParams();
@@ -130,28 +118,32 @@ export default function StatsPage() {
           </div>
         </div>
 
-        {isLoading ? (
-          <div className="neo-card p-12 text-center bg-white dark:bg-[#1a1a1a]">
-            <div className="animate-pulse text-xl font-bold flex items-center gap-2">
-              <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-black"></div>
-              Loading stats...
-            </div>
-          </div>
-        ) : error ? (
+        {error ? (
           <div className="neo-card p-12 text-center bg-red-100 border-red-500 text-red-600">
             <div className="text-xl font-bold">Failed to load statistics</div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div
+            className={`grid grid-cols-1 md:grid-cols-2 gap-8 ${
+              isLoading ? "opacity-50 pointer-events-none" : ""
+            }`}
+          >
             {/* Timeline Chart */}
-            <div className="neo-card p-6 bg-white dark:bg-[#1a1a1a] md:col-span-2">
+            <div className="neo-card p-3 sm:p-6 bg-white dark:bg-[#1a1a1a] md:col-span-2 relative">
               <div className="flex items-center gap-3 mb-6">
                 <FaChartLine className="text-2xl text-[#E9945B]" />
                 <h2 className="text-xl font-black uppercase">
                   Clicks Over Time
                 </h2>
               </div>
-              <div className="h-[300px] w-full">
+
+              <div className="h-[300px] w-full relative">
+                {isLoading && (
+                  <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/70 dark:bg-black/60">
+                    <div className="h-10 w-10 animate-spin rounded-full border-4 border-black border-t-transparent dark:border-white dark:border-t-transparent" />
+                  </div>
+                )}
+
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={processedData.timeline}>
                     <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
@@ -161,7 +153,8 @@ export default function StatsPage() {
                       axisLine={{ stroke: "#666" }}
                     />
                     <YAxis
-                      tick={{ fill: "#666", fontSize: 12 }}
+                      width={20}
+                      tick={{ fill: "#666", fontSize: 11 }}
                       axisLine={{ stroke: "#666" }}
                       allowDecimals={false}
                     />
@@ -191,95 +184,84 @@ export default function StatsPage() {
             </div>
 
             {/* Country Stats */}
-            <div className="neo-card p-6 bg-white dark:bg-[#1a1a1a]">
+            <div className="neo-card p-3 sm:p-6 bg-white dark:bg-[#1a1a1a]">
               <div className="flex items-center gap-3 mb-6">
                 <FaGlobe className="text-2xl text-blue-500" />
                 <h2 className="text-xl font-black uppercase">Top Countries</h2>
               </div>
-              <div className="h-[300px] w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart
-                    data={processedData.countries}
-                    layout="vertical"
-                    margin={{ top: 5, right: 30, left: 40, bottom: 5 }}
-                  >
-                    <CartesianGrid
-                      strokeDasharray="3 3"
-                      opacity={0.3}
-                      horizontal={false}
-                    />
-                    <XAxis type="number" hide />
-                    <YAxis
-                      dataKey="name"
-                      type="category"
-                      width={100}
-                      tick={{ fill: "#666", fontSize: 12 }}
-                    />
-                    <Tooltip
-                      contentStyle={{
-                        backgroundColor: "#fff",
-                        border: "2px solid #000",
-                        boxShadow: "4px 4px 0px #000",
-                      }}
-                    />
-                    <Bar dataKey="value" fill="#8884d8" radius={[0, 4, 4, 0]}>
-                      {processedData.countries.map((entry, index) => (
-                        <Cell
-                          key={`cell-${index}`}
-                          fill={COLORS[index % COLORS.length]}
-                          stroke="#000"
-                          strokeWidth={2}
-                        />
-                      ))}
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
+
+              <div className="space-y-4">
+                <div className="flex justify-between text-sm font-bold text-gray-400 border-b-2 border-dashed border-gray-200 dark:border-gray-700 pb-2">
+                  <span>COUNTRY</span>
+                  <span>VISITORS</span>
+                </div>
+                <div className="space-y-4">
+                  {processedData.countries.map((item, index) => {
+                    const maxVal = Math.max(
+                      ...processedData.countries.map((c) => c.value)
+                    );
+                    return (
+                      <div key={item.name} className="flex flex-col gap-1">
+                        <div className="flex justify-between items-end font-bold text-sm">
+                          <span className="truncate pr-4">{item.name}</span>
+                          <span>{item.value}</span>
+                        </div>
+                        <div className="h-2 w-full bg-gray-100 dark:bg-gray-800 rounded-none relative overflow-hidden">
+                          <div
+                            className="h-full bg-[#0088FE]"
+                            style={{ width: `${(item.value / maxVal) * 100}%` }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+                  {processedData.countries.length === 0 && (
+                    <div className="text-center text-gray-500 py-2">
+                      No country data available
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 
             {/* Device Stats */}
-            <div className="neo-card p-6 bg-white dark:bg-[#1a1a1a]">
+            <div className="neo-card p-3 sm:p-6 bg-white dark:bg-[#1a1a1a]">
               <div className="flex items-center gap-3 mb-6">
-                <FaMobileAlt className="text-2xl text-green-500" />
+                <FaMobileAlt className="text-2xl text-[#00C49F]" />
                 <h2 className="text-xl font-black uppercase">Devices</h2>
               </div>
-              <div className="h-[300px] w-full relative">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={processedData.devices}
-                      cx="50%"
-                      cy="50%"
-                      labelLine={false}
-                      label={({
-                        name,
-                        percent,
-                      }: {
-                        name: string;
-                        percent: number;
-                      }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                      outerRadius={100}
-                      fill="#8884d8"
-                      dataKey="value"
-                    >
-                      {processedData.devices.map((entry, index) => (
-                        <Cell
-                          key={`cell-${index}`}
-                          fill={COLORS[index % COLORS.length]}
-                          stroke="#000"
-                          strokeWidth={2}
-                        />
-                      ))}
-                    </Pie>
-                    <Tooltip
-                      contentStyle={{
-                        backgroundColor: "#fff",
-                        border: "2px solid #000",
-                        boxShadow: "4px 4px 0px #000",
-                      }}
-                    />
-                  </PieChart>
-                </ResponsiveContainer>
+
+              <div className="space-y-4">
+                <div className="flex justify-between text-sm font-bold text-gray-400 border-b-2 border-dashed border-gray-200 dark:border-gray-700 pb-2">
+                  <span>DEVICE</span>
+                  <span>VISITORS</span>
+                </div>
+                <div className="space-y-4">
+                  {processedData.devices.map((item, index) => {
+                    const maxVal = Math.max(
+                      ...processedData.devices.map((d) => d.value)
+                    );
+                    return (
+                      <div key={item.name} className="flex flex-col gap-1">
+                        <div className="flex justify-between items-end font-bold text-sm">
+                          <span className="truncate pr-4">{item.name}</span>
+                          <span>{item.value}</span>
+                        </div>
+                        <div className="h-2 w-full bg-gray-100 dark:bg-gray-800 rounded-none relative overflow-hidden">
+                          <div
+                            className="h-full bg-[#00C49F]"
+                            style={{ width: `${(item.value / maxVal) * 100}%` }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+                  {processedData.devices.length === 0 && (
+                    <div className="text-center text-gray-500 py-2">
+                      No device data available
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>

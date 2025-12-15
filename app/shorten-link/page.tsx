@@ -7,7 +7,7 @@ import Link from "next/link";
 import { getFaviconUrl } from "@/lib/utils";
 import Image from "next/image";
 import SubmitBtn from "@/components/submit-btn";
-import { FaChartBar } from "react-icons/fa";
+import { FaChartBar, FaCheck, FaCopy, FaLink } from "react-icons/fa";
 
 const domain = "ifateam.dev";
 
@@ -162,8 +162,9 @@ export default function ShortenLinkPage() {
                           href={`https://${shortLink}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-md text-[#E9945B] hover:underline break-all"
+                          className="text-md text-[#E9945B] hover:underline break-all flex items-center gap-2"
                         >
+                          <FaLink />
                           {shortLink}
                         </Link>
                         <div className="flex items-center gap-2 max-w-full pt-2">
@@ -189,18 +190,19 @@ export default function ShortenLinkPage() {
                       <div className="flex gap-2 shrink-0">
                         <Link
                           href={`/${key}/stats`}
-                          className="neo-button text-sm bg-blue-200 hover:bg-blue-300 text-black dark:text-white whitespace-nowrap px-4 py-2 h-min flex items-center justify-center gap-2"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="neo-button text-sm bg-blue-200 hover:bg-blue-300 text-black whitespace-nowrap p-2 h-min flex items-center justify-center gap-2"
                         >
                           <FaChartBar />
-                          Stats
                         </Link>
                         <button
                           onClick={() =>
                             copyHistoryLink(key, `https://${shortLink}`)
                           }
-                          className="neo-button text-sm bg-[#90EE90] hover:bg-[#7bc67b] text-black dark:text-white whitespace-nowrap px-4 py-2 h-min"
+                          className="neo-button text-sm bg-[#90EE90] hover:bg-[#7bc67b] text-black whitespace-nowrap p-2 h-min"
                         >
-                          {historyCopied[key] ? "Copied!" : "Copy"}
+                          {historyCopied[key] ? <FaCheck /> : <FaCopy />}
                         </button>
                       </div>
                     </div>
