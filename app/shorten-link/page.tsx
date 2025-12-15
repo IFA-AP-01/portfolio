@@ -7,7 +7,15 @@ import Link from "next/link";
 import { getFaviconUrl } from "@/lib/utils";
 import Image from "next/image";
 import SubmitBtn from "@/components/submit-btn";
-import { FaChartBar, FaCheck, FaCopy, FaLink } from "react-icons/fa";
+import {
+  FaChartBar,
+  FaCheck,
+  FaCopy,
+  FaLink,
+  FaQrcode,
+  FaTimes,
+} from "react-icons/fa";
+import { QRCodeSVG } from "qrcode.react";
 
 const domain = "ifateam.dev";
 
@@ -27,6 +35,8 @@ export default function ShortenLinkPage() {
   const [historyCopied, setHistoryCopied] = useState<Record<string, boolean>>(
     {}
   );
+  const [showQrModal, setShowQrModal] = useState(false);
+  const [qrUrl, setQrUrl] = useState("");
 
   useEffect(() => {
     const cacheKey = "shorten-link-cache";
@@ -188,6 +198,16 @@ export default function ShortenLinkPage() {
                         </div>
                       </div>
                       <div className="flex gap-2 shrink-0">
+                        <button
+                          onClick={() => {
+                            setQrUrl(`https://${shortLink}`);
+                            setShowQrModal(true);
+                          }}
+                          className="neo-button text-sm bg-[#FFB6C1] hover:bg-[#ff9aa2] text-black whitespace-nowrap p-2 h-min"
+                          title="Show QR Code"
+                        >
+                          <FaQrcode />
+                        </button>
                         <Link
                           href={`/${key}/stats`}
                           target="_blank"
@@ -208,6 +228,32 @@ export default function ShortenLinkPage() {
                     </div>
                   );
                 })}
+            </div>
+          </div>
+        )}
+
+        {/* QR Code Modal */}
+        {showQrModal && (
+          <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+            <div className="bg-white dark:bg-[#1a1a1a] p-6 border-4 border-black neo-shadow max-w-sm w-full relative">
+              <button
+                onClick={() => setShowQrModal(false)}
+                className="absolute top-4 right-4 text-black dark:text-white hover:text-red-500"
+              >
+                <FaTimes size={24} />
+              </button>
+
+              <h3 className="text-xl font-black uppercase mb-6 text-center text-black dark:text-white">
+                QR Code
+              </h3>
+
+              <div className="flex justify-center mb-6 p-4 bg-white border-2 border-black">
+                <QRCodeSVG value={qrUrl} size={200} />
+              </div>
+
+              <p className="text-center font-bold text-sm text-black dark:text-gray-300 break-all border-2 border-black p-2 bg-gray-50 dark:bg-black/20">
+                {qrUrl}
+              </p>
             </div>
           </div>
         )}
