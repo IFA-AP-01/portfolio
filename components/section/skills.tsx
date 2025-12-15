@@ -32,11 +32,11 @@ export default function Skills() {
       className="mb-28 max-w-[75rem] mx-auto scroll-mt-28 text-center sm:mb-40 flex flex-col items-center justify-center"
     >
       <SectionHeading>What We Do?</SectionHeading>
-      <p className="text-gray-900 mb-12 dark:text-white max-w-[36rem] text-center mx-auto text-xs sm:text-base uppercase tracking-wide">
+      <p className="text-gray-900 mb-8 dark:text-white max-w-[36rem] text-center mx-auto text-xs sm:text-base uppercase tracking-wide">
         We are a team of experienced developers with a passion for creating
         high-quality applications and solutions.
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {skillsJob.map((skill, index) => (
           <motion.div
             key={index}

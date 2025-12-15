@@ -13,7 +13,7 @@ export default function Projects() {
     <section
       ref={ref}
       id="projects"
-      className="scroll-mt-28 mb-28 flex flex-col items-center justify-center"
+      className="scroll-mt-28 mb-24 flex flex-col items-center justify-center"
     >
       <SectionHeading>Our projects</SectionHeading>
       <p className="text-gray-900 mb-8 dark:text-white max-w-[36rem] text-center mx-auto text-xs sm:text-base uppercase tracking-wide">

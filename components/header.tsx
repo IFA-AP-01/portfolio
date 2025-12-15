@@ -3,24 +3,36 @@
 import React, { useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { links } from "@/lib/data";
 import Link from "next/link";
-import clsx from "clsx";
-import { useActiveSectionContext } from "@/context/active-section-context";
 import { useTheme } from "@/context/theme-context";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import teamImage from "@/public/logo.webp";
 import { BsMoon, BsSun } from "react-icons/bs";
+import { faLink, faExchange } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import clsx from "clsx";
 import { usePathname } from "next/navigation";
 
-export default function Header() {
-  const { activeSection, setActiveSection, setTimeOfLastClick } =
-    useActiveSectionContext();
-  const { theme, toggleTheme } = useTheme();
-  const pathname = usePathname();
+const menuItems = [
+  {
+    name: "Converter",
+    href: "/toonify",
+    icon: faExchange,
+  },
+  {
+    name: "Link shorter",
+    href: "/shorten-link",
+    icon: faLink,
+  },
+  // {
+  //   name: "Blog",
+  //   href: "/blog",
+  //   icon: faBook,
+  // },
+];
 
-  // Detect home page
-  const isHomePage = pathname === "/";
+export default function Header() {
+  const { theme, toggleTheme } = useTheme();
+  const activeSection = usePathname();
 
   useEffect(() => {
     const metaThemeColor = document.querySelector("meta[name='theme-color']");
@@ -32,77 +44,54 @@ export default function Header() {
     }
   }, [theme]);
 
-  // Don't render header on privacy pages
-  if (!isHomePage) {
-    return null;
-  }
-
   return (
     <header className="z-[999] relative">
-      <Link href="/">
-        <Image
-          src={teamImage}
-          alt="IFA"
-          width={50}
-          height={50}
-          priority
-          className="w-10 object-cover fixed top-5 left-5 z-1000 hidden sm:inline-flex"
-        />
-      </Link>
-
-      <motion.div
-        className="fixed top-4 left-1/2 h-16 w-[90%] max-w-[30rem] neo-card sm:bottom-6 sm:h-16 sm:w-[100%] sm:max-w-[38rem]"
-        initial={{ y: 100, x: "-50%", opacity: 0 }}
-        animate={{ y: 0, x: "-50%", opacity: 1 }}
-      />
-
-      <nav
-        className="fixed top-4 left-1/2 flex h-16 w-[100%] max-w-[36rem] -translate-x-1/2 items-center justify-center sm:bottom-6 sm:h-16 sm:w-[100%] sm:max-w-[40rem]"
-        style={{ WebkitTapHighlightColor: "transparent" }}
-      >
-        <ul className="flex w-full items-center justify-evenly gap-1 px-6 text-[0.9rem] font-medium text-gray-500 sm:gap-3 sm:px-2 sm:flex-nowrap sm:justify-center">
-          {links.map((link) => (
-            <motion.li
-              key={link.hash}
-              className="flex items-center justify-center relative px-1"
-              initial={{ y: 100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-            >
+      <nav className="neo-card fixed top-3 inset-x-4 max-w-[50rem] mx-auto flex h-16 items-center">
+        <ul className="flex w-full items-center justify-between gap-1 text-[0.9rem] font-medium text-gray-500 sm:gap-3 sm:flex-nowrap">
+          <Link href="/" className="flex items-center px-3">
+            <div className="neo-shadow border-black border-2 w-10 h-10 flex bg-[#E9945B]">
+              <Image
+                src={teamImage}
+                alt="IFA"
+                width={50}
+                height={50}
+                priority
+                className="w-10 object-contain flex"
+              />
+            </div>
+          </Link>
+          <div className="flex items-center gap-3">
+            {menuItems.map((item) => (
               <Link
+                key={item.name}
                 className={clsx(
-                  "flex w-full items-center justify-center p-2 transition hover:text-gray-950 dark:text-gray-200 dark:hover:text-gray-300",
+                  " relative flex items-center justify-center p-2 transition hover:text-gray-950 dark:text-gray-200 dark:hover:text-gray-300",
                   {
                     "text-gray-950 dark:text-white":
-                      activeSection === link.name,
+                      activeSection === item.href,
                   }
                 )}
-                href={isHomePage ? link.hash : `/${link.hash}`}
-                onClick={() => {
-                  setActiveSection(link.name);
-                  setTimeOfLastClick(Date.now());
-                }}
+                href={item.href}
                 style={{ WebkitTapHighlightColor: "transparent" }}
               >
                 <span
-                  className={`sm:hidden text-black ${
-                    activeSection === link.name ? "" : "dark:text-white"
+                  className={`sm:hidden text-black w-6 h-6 flex items-center justify-center ${
+                    activeSection === item.href ? "" : "dark:text-white"
                   }`}
                 >
-                  <FontAwesomeIcon icon={link.icon} />
+                  <FontAwesomeIcon icon={item.icon} />
                 </span>
 
                 <span
                   className={`hidden sm:inline-flex items-center gap-2 text-black ${
-                    activeSection === link.name ? "" : "dark:text-white"
+                    activeSection === item.href ? "" : "dark:text-white"
                   }`}
                 >
-                  {link.name === activeSection && (
-                    <FontAwesomeIcon icon={link.icon} />
-                  )}
-                  {link.name}
+                  <FontAwesomeIcon icon={item.icon} />
+                  {item.name}
                 </span>
 
-                {link.name === activeSection && (
+                {item.href === activeSection && (
                   <motion.span
                     className="absolute inset-0 -z-10 bg-[#E9945B] border border-black neo-shadow"
                     layoutId="activeSection"
@@ -114,17 +103,16 @@ export default function Header() {
                   />
                 )}
               </Link>
-            </motion.li>
-          ))}
-
+            ))}
+          </div>
           <motion.li
             key="theme"
-            className="flex items-center justify-center relative px-3 sm:inline-flex"
+            className="flex items-center justify-center px-3 sm:inline-flex"
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
           >
             <button
-              className="fixed w-[3rem] h-[3rem] text-black dark:text-white flex items-center justify-center hover:scale-[1.2] active:scale-105 transition-all"
+              className="w-10 h-10 border-2 border-black text-black dark:text-white flex items-center justify-center"
               onClick={toggleTheme}
               style={{ WebkitTapHighlightColor: "transparent" }}
             >

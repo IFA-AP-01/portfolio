@@ -1,6 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
-import teamImage from "@/public/logo.webp";
 import { SoftwareApplication, WithContext } from "schema-dts";
 import Script from "next/script";
 
@@ -72,19 +69,9 @@ export default function JsonConverterLayout({
             __html: JSON.stringify(jsonLd),
           }}
         />
-        <Link href="/">
-          <Image
-            src={teamImage}
-            alt="IFA"
-            width={50}
-            height={50}
-            priority
-            className="w-10 object-cover fixed top-5 left-5 z-1000"
-          />
-        </Link>
       </header>
 
-      <main className="flex flex-col items-center justify-center min-h-screen py-16 px-4 sm:px-10">
+      <main className="flex flex-col items-center justify-center min-h-screen py-28 px-4 sm:px-10">
         <h1 className="max-w-4xl text-2xl sm:text-4xl font-bold mb-8 text-center text-gray-950 dark:text-gray-50 tracking-widest">
           JSON to <span className="text-[#e9945b]">TOON</span> Converter
         </h1>

@@ -1,8 +1,6 @@
-import Image from "next/image";
-import Link from "next/link";
-import teamImage from "@/public/logo.webp";
 import { SoftwareApplication, WithContext } from "schema-dts";
 import Script from "next/script";
+import { headlineFont } from "@/lib/fontawesome";
 
 export const metadata = {
   title: "Shorten Link - Free link shortener. Quick and easy",
@@ -73,19 +71,20 @@ export default function ShortenLinkLayout({
             __html: JSON.stringify(jsonLd),
           }}
         />
-        <Link href="/">
-          <Image
-            src={teamImage}
-            alt="IFA"
-            width={50}
-            height={50}
-            priority
-            className="w-10 object-cover fixed top-5 left-5 z-1000"
-          />
-        </Link>
       </header>
 
-      <main>{children}</main>
+      <main className="min-h-screen pt-28 pb-20 justify-center">
+        <h1
+          className={`${headlineFont.className} text-2xl sm:text-4xl font-black mb-8 text-center text-black dark:text-white uppercase tracking-tighter`}
+        >
+          <span className="text-[#E9945B]">Easy</span> Link Shorter
+        </h1>
+        <p className="text-gray-500 dark:text-gray-400 text-center pb-8">
+          <span className="text-[#e9945b]">Free</span> link shortener. Quick and
+          easy. No registration required.
+        </p>
+        {children}
+      </main>
     </div>
   );
 }

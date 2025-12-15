@@ -71,7 +71,7 @@ const Member = memo(function Member({
             </div>
 
             {/* Description */}
-            <p className="leading-relaxed text-gray-900 dark:text-gray-100 text-base sm:text-lg mb-8 sm:mb-auto font-medium">
+            <p className="text-gray-900 dark:text-gray-100 text-sm mb-8 sm:mb-auto font-medium">
               {description}
             </p>
 

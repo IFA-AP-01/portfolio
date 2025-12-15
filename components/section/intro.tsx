@@ -21,19 +21,19 @@ export default function Intro() {
     <section
       ref={ref}
       id="home"
-      className="min-h-screen flex items-center justify-center py-16 sm:py-12"
+      className="min-h-screen w-full flex items-center justify-center py-16 sm:py-12"
     >
-      <div className="max-w-6xl w-full">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Column - Hero & CTA */}
+      <div className="w-full max-w-6xl mx-auto">
+        <div className="w-full grid lg:grid-cols-2 gap-12 items-center">
+          {/* LEFT COLUMN */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
-            className="space-y-4 sm:space-y-6"
+            className="w-full flex flex-col space-y-4 sm:space-y-6"
           >
-            {/* Hero Image */}
-            <div className="flex items-center justify-center lg:justify-start">
+            {/* Hero Image Wrapper */}
+            <div className="w-full flex items-center justify-center lg:justify-start">
               <DotLottieReact
                 src="window_layout.lottie"
                 loop
@@ -42,8 +42,8 @@ export default function Intro() {
               />
             </div>
 
-            {/* Team Name & Tagline */}
-            <div className="space-y-2 text-center lg:text-left">
+            {/* Team Name */}
+            <div className="w-full text-center lg:text-left space-y-2">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight uppercase">
                 <span className="text-black dark:text-white">
                   <span className="inline-flex items-center gap-2 flex-wrap justify-center lg:justify-start">
@@ -61,25 +61,23 @@ export default function Intro() {
               </h1>
             </div>
 
-            {/* CTA Button */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 font-bold">
+            <div className="w-full grid grid-cols-1 sm:flex sm:flex-row sm:justify-start gap-3 font-bold">
               <Link
                 href="#contact"
-                className="group bg-[#E9945B] uppercase text-black px-6 py-3 sm:px-8 flex items-center gap-3 outline-none focus:scale-110 active:scale-105 transition border-2 border-black neo-shadow hover:bg-[#d6854f] text-sm sm:text-base w-full sm:w-auto justify-center"
+                className="group w-full sm:w-auto bg-[#E9945B] uppercase text-black px-6 py-3 sm:px-8 flex items-center justify-center gap-3 outline-none focus:scale-110 active:scale-105 transition border-2 border-black neo-shadow hover:bg-[#d6854f] text-sm sm:text-base"
                 onClick={() => {
                   setActiveSection("Contact");
                   setTimeOfLastClick(Date.now());
                 }}
               >
-                Start Your Project
+                Start Your Project with US
                 <BsArrowRight className="opacity-100 group-hover:translate-x-2 transition font-bold text-xl" />
               </Link>
             </div>
 
-            {/* Social Links */}
-            <div className="flex flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 text-xl font-bold">
+            <div className="w-full flex flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 text-xl font-bold">
               <Link
-                className="bg-[#F8CB49] p-3 sm:p-4 text-black hover:text-black flex items-center gap-2 transition cursor-pointer border-2 border-black neo-shadow hover:bg-gray-100"
+                className="bg-[#F8CB49] p-3 sm:p-4 text-black hover:text-black flex items-center justify-center gap-2 transition cursor-pointer border-2 border-black neo-shadow hover:bg-gray-100"
                 href="https://discord.gg/MdtF7raJ"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -89,7 +87,7 @@ export default function Intro() {
               </Link>
 
               <Link
-                className="bg-[#F8CB49] p-3 sm:p-4 text-black flex items-center gap-2 cursor-pointer border-2 border-black neo-shadow dark:text-black hover:bg-gray-100"
+                className="bg-[#F8CB49] p-3 sm:p-4 text-black flex items-center justify-center gap-2 cursor-pointer border-2 border-black neo-shadow dark:text-black hover:bg-gray-100"
                 href="https://github.com/IFA-AP-01"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -99,7 +97,7 @@ export default function Intro() {
               </Link>
 
               <Link
-                className="bg-[#F8CB49] p-3 sm:p-4 text-black flex items-center gap-2 cursor-pointer border-2 border-black neo-shadow dark:text-black hover:bg-gray-100"
+                className="bg-[#F8CB49] p-3 sm:p-4 text-black flex items-center justify-center gap-2 cursor-pointer border-2 border-black neo-shadow dark:text-black hover:bg-gray-100"
                 href="tel:+84859885874"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -110,14 +108,14 @@ export default function Intro() {
             </div>
           </motion.div>
 
-          {/* Right Column - Code Card */}
+          {/* RIGHT COLUMN - Code Card */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
-            className="w-full md:min-w-[30rem] lg:min-w-[40rem]"
+            className="w-full"
           >
-            <div className="w-full sm:mx-0 sm:max-w-[50rem] sm:mx-auto">
+            <div className="w-full">
               <CodeCard />
             </div>
           </motion.div>

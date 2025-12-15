@@ -23,16 +23,14 @@ export default function Project({
     offset: ["0 1", "1.33 1"],
   });
   const scaleProgess = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
-  const opacityProgess = useTransform(scrollYProgress, [0, 1], [0.6, 1]);
 
   return (
     <motion.div
       ref={ref}
       style={{
         scale: scaleProgess,
-        opacity: opacityProgess,
       }}
-      className="group mb-12 last:mb-0"
+      className="group mb-6 sm:mb-12 last:mb-0"
     >
       <section className="neo-card neo-hover max-w-[60rem] overflow-hidden relative transition">
         <div className="flex flex-col sm:flex-row">

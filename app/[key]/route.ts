@@ -33,7 +33,6 @@ export async function GET(
         user_agent: request.headers.get("user-agent"),
       },
     });
-    await posthog.shutdown()
 
     return NextResponse.redirect(url, 302);
   }

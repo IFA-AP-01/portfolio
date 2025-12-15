@@ -6,6 +6,7 @@ import { headlineFont } from "@/lib/fontawesome";
 import Link from "next/link";
 import { getFaviconUrl } from "@/lib/utils";
 import Image from "next/image";
+import SubmitBtn from "@/components/submit-btn";
 
 const domain = "ifateam.dev";
 
@@ -91,15 +92,9 @@ export default function ShortenLinkPage() {
   };
 
   return (
-    <div className="min-h-screen pt-32 pb-20 px-4 sm:px-8">
+    <div className="px-4 sm:px-8">
       <div className="max-w-2xl mx-auto">
-        <div className="neo-card p-8 sm:p-12 bg-white dark:bg-[#1a1a1a]">
-          <h1
-            className={`${headlineFont.className} text-2xl sm:text-4xl font-black mb-8 text-center text-[#E9945B] dark:text-white uppercase tracking-tighter`}
-          >
-            Shorten Link
-          </h1>
-
+        <div className="neo-card p-4 sm:p-8 bg-white dark:bg-[#1a1a1a]">
           <form onSubmit={handleSubmit} className="flex flex-col gap-6">
             <div>
               <input
@@ -113,15 +108,7 @@ export default function ShortenLinkPage() {
               />
             </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className={`neo-button w-full sm:w-auto self-end bg-[#E9945B] hover:bg-[#d6854f] text-black text-lg uppercase py-2 px-8 ${
-                loading ? "opacity-50 cursor-not-allowed" : ""
-              }`}
-            >
-              {loading ? "Shortening..." : "Shorten URL"}
-            </button>
+            <SubmitBtn pending={loading} />
           </form>
 
           {error && (
@@ -152,7 +139,7 @@ export default function ShortenLinkPage() {
 
         {/* History Section - Only show if there are history items */}
         {Object.keys(history).length > 0 && (
-          <div className="mt-12 neo-card p-8 bg-[#FEF3C0] dark:bg-[#1a1a1a]">
+          <div className="mt-12 neo-card p-4 sm:p-8 bg-[#FEF3C0] dark:bg-[#1a1a1a]">
             <h2
               className={`${headlineFont.className} text-xl sm:text-2xl font-black mb-6 text-black dark:text-white uppercase tracking-tighter`}
             >

@@ -130,7 +130,7 @@ div.canvas-content.dark::after {
   }
 
   .neo-shadow {
-    box-shadow: 3px 3px 0px 0px #000;
+    box-shadow: 3px 3px 0px 0px #c5c5c5;
   }
 
   .dark .neo-shadow {
@@ -139,7 +139,7 @@ div.canvas-content.dark::after {
 
   .neo-card {
     @apply border-2 border-black bg-white dark:bg-[#252526];
-    box-shadow: 3px 3px 0px 0px #000;
+    box-shadow: 3px 3px 0px 0px #c5c5c5;
   }
 
   .dark .neo-card {
@@ -148,7 +148,7 @@ div.canvas-content.dark::after {
 
   .neo-button {
     @apply px-6 py-2 border-2 border-black text-black font-bold transition-all duration-200 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none;
-    box-shadow: 3px 3px 0px 0px #000;
+    box-shadow: 3px 3px 0px 0px #c5c5c5;
   }
 
   .dark .neo-button {
@@ -161,7 +161,7 @@ div.canvas-content.dark::after {
   }
 
   .neo-hover:hover {
-    box-shadow: 6px 6px 0px 0px #000;
+    box-shadow: 6px 6px 0px 0px #c5c5c5;
   }
 
   .dark .neo-hover:hover {

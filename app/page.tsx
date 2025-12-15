@@ -5,6 +5,7 @@ import Members from "@/components/section/members";
 import Projects from "@/components/section/projects";
 import SectionDivider from "@/components/section-divider";
 import Skills from "@/components/section/skills";
+import SectionNavigation from "@/components/section-navigation";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <Members />
       <Projects />
       <Contact />
+      <SectionNavigation />
     </main>
   );
 }

@@ -144,7 +144,7 @@ export default function JsonConverter() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={`Paste your ${inputFormat.toUpperCase()} here...`}
-            className="w-full h-96 p-4 font-mono text-sm neo-border hover:neo-shadow resize-none focus:outline-none bg-white dark:bg-[#1d1d20] dark:text-white"
+            className="w-full h-64 sm:h-96 p-4 font-mono text-sm neo-border hover:neo-shadow resize-none focus:outline-none bg-white dark:bg-[#1d1d20] dark:text-white"
           />
 
           {/* TOON Decode Options */}
@@ -189,7 +189,7 @@ export default function JsonConverter() {
             readOnly
             value={output}
             placeholder="Result will appear here..."
-            className="w-full h-96 p-4 font-mono text-sm neo-border hover:neo-shadow resize-none focus:outline-none bg-gray-50 dark:bg-[#1d1d20] dark:text-white"
+            className="w-full h-64 sm:h-96 p-4 font-mono text-sm neo-border hover:neo-shadow resize-none focus:outline-none bg-gray-50 dark:bg-[#1d1d20] dark:text-white"
           />
 
           {/* TOON Encode Options */}
