@@ -15,7 +15,7 @@ import { Metadata, Viewport } from "next";
 export const metadata: Metadata = {
   title: {
     default: "IFA Team - Application Development Experts",
-    template: "%s |IFA Team",
+    template: "%s | IFA Team",
   },
   description:
     "Welcome to The IFA Team! We are experts in application development, delivering high-quality solutions for web, mobile, and enterprise platforms.",
@@ -27,13 +27,15 @@ export const metadata: Metadata = {
   openGraph: {
     title: {
       default: "IFA Team - Application Development Experts",
-      template: "IFA Team - Application Development Experts",
+      template: "%s | IFA Team",
     },
     description:
       "Welcome to The IFA Team! We are experts in application development, delivering high-quality solutions for web, mobile, and enterprise platforms.",
-    images: [
-      "https://res.cloudinary.com/huyhunhngc/image/upload/v1745678359/logo_jmvj9s.webp",
-    ],
+    images: ["https://cdn.ifateam.dev/thumnail-ifa.jpg"],
+    url: "https://ifateam.dev",
+    siteName: "IFA Team - Application Development Experts",
+    locale: "en",
+    type: "website",
   },
   alternates: { canonical: "https://ifateam.dev" },
 };

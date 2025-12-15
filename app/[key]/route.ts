@@ -1,8 +1,8 @@
 import { getOriginalUrl } from "@/app/actions/shorten";
-import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
+import PostHogClient from "../posthog";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export async function GET(
   request: NextRequest,
@@ -10,7 +10,6 @@ export async function GET(
 ) {
   const { key } = await params;
 
-  // Ignore favicon and common static files
   if (
     key === "favicon.ico" ||
     key.startsWith("_next") ||
@@ -22,9 +21,22 @@ export async function GET(
   const url = await getOriginalUrl(key);
 
   if (url) {
-    redirect(url);
+    const posthog = PostHogClient();
+
+    posthog.capture({
+      distinctId: key,
+      event: "short_link_redirected",
+      properties: {
+        short_key: key,
+        destination_domain: new URL(url).hostname,
+        referer: request.headers.get("referer"),
+        user_agent: request.headers.get("user-agent"),
+      },
+    });
+    await posthog.shutdown()
+
+    return NextResponse.redirect(url, 302);
   }
 
   return NextResponse.json({ error: "Link not found" }, { status: 404 });
 }
-
