@@ -5,7 +5,7 @@ import SectionHeading from "../section-heading";
 import { motion } from "framer-motion";
 import { useSectionInView } from "@/lib/hooks";
 import { BsDiscord } from "react-icons/bs";
-import { FaGithubSquare, FaPhone } from "react-icons/fa";
+import { FaGithubSquare } from "react-icons/fa";
 import ContactSection from "../contact-form";
 import { headlineFont } from "@/lib/fontawesome";
 import { FaMapMarkerAlt } from "react-icons/fa";
@@ -52,7 +52,7 @@ export default function Contact() {
       >
         <Link
           className="bg-[#F8CB49] p-4 text-black hover:text-black flex items-center gap-2 transition cursor-pointer border-2 border-black neo-shadow hover:bg-gray-100"
-          href="https://discord.gg/MdtF7raJ"
+          href="https://discord.gg/DaeSfrkfnS"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Join us on Discord"
@@ -62,22 +62,12 @@ export default function Contact() {
 
         <Link
           className="bg-[#F8CB49] p-4 text-black flex items-center gap-2 text-[1.35rem] cursor-pointer border-2 border-black neo-shadow dark:text-black hover:bg-gray-100"
-          href="https://github.com/IFA-AP-01"
+          href="https://github.com/huyhunhngc"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="View our GitHub projects"
         >
           <FaGithubSquare className="text-2xl" />
-        </Link>
-
-        <Link
-          className="bg-[#F8CB49] p-4 text-black flex items-center gap-2 text-[1.35rem] cursor-pointer border-2 border-black neo-shadow dark:text-black hover:bg-gray-100"
-          href="tel:+84859885874"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Call us"
-        >
-          <FaPhone className="text-2xl" />
         </Link>
       </motion.div>
       <ContactSection />

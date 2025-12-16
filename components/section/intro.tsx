@@ -3,8 +3,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { BsDiscord } from "react-icons/bs";
-import { FaGithubSquare, FaPhone } from "react-icons/fa";
+import { BsDiscord, BsMailbox2 } from "react-icons/bs";
+import { FaGithubSquare } from "react-icons/fa";
 import { BsArrowRight } from "react-icons/bs";
 
 import { useSectionInView } from "@/lib/hooks";
@@ -78,7 +78,7 @@ export default function Intro() {
             <div className="w-full flex flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 text-xl font-bold">
               <Link
                 className="bg-[#F8CB49] p-3 sm:p-4 text-black hover:text-black flex items-center justify-center gap-2 transition cursor-pointer border-2 border-black neo-shadow hover:bg-gray-100"
-                href="https://discord.gg/MdtF7raJ"
+                href="https://discord.gg/DaeSfrkfnS"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Join us on Discord"
@@ -88,7 +88,7 @@ export default function Intro() {
 
               <Link
                 className="bg-[#F8CB49] p-3 sm:p-4 text-black flex items-center justify-center gap-2 cursor-pointer border-2 border-black neo-shadow dark:text-black hover:bg-gray-100"
-                href="https://github.com/IFA-AP-01"
+                href="https://github.com/huyhunhngc"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="View our GitHub projects"
@@ -98,12 +98,12 @@ export default function Intro() {
 
               <Link
                 className="bg-[#F8CB49] p-3 sm:p-4 text-black flex items-center justify-center gap-2 cursor-pointer border-2 border-black neo-shadow dark:text-black hover:bg-gray-100"
-                href="tel:+84859885874"
+                href="mailto:support@ifateam.dev"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Call us"
               >
-                <FaPhone className="text-xl sm:text-2xl" />
+                <BsMailbox2 className="text-xl sm:text-2xl" />
               </Link>
             </div>
           </motion.div>
