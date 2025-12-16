@@ -9,9 +9,9 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative z-10 w-full border-t-2 border-black bg-white dark:bg-[#191C1E] dark:border-white/10 pt-16 pb-8">
+    <footer className="relative z-10 w-full border-t-2 px-4 border-black bg-white dark:bg-[#191C1E] dark:border-white/10 pt-16 pb-8 flex justify-center items-center">
       {/* Main Container */}
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl inset-x-0 mx-auto">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {/* Brand Section */}
           <div className="flex flex-col items-start space-y-4">

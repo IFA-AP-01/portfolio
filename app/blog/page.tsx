@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { getSortedPostsData } from "@/lib/posts";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight, FaTimes } from "react-icons/fa";
 
 export const metadata = {
-  title: "Blog | IFA Team",
+  title: "Tech Blog",
   description: "Read our latest articles and updates.",
 };
 
@@ -12,11 +12,15 @@ const POSTS_PER_PAGE = 4;
 export default async function BlogPage({
   searchParams,
 }: {
-  searchParams: Promise<{ page?: string }>;
+  searchParams: Promise<{ page?: string; tag?: string }>;
 }) {
   const params = await searchParams;
   const currentPage = Number(params?.page) || 1;
-  const allPostsData = getSortedPostsData();
+  const tag = params?.tag;
+  const allPostsData = getSortedPostsData().filter((post) => {
+    if (!tag) return true;
+    return post.tags && post.tags.includes(tag);
+  });
 
   const totalPosts = allPostsData.length;
   const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
@@ -27,38 +31,57 @@ export default async function BlogPage({
   return (
     <main className="flex flex-col items-center px-4 py-28 min-h-screen">
       <div className="w-full max-w-5xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          {currentPosts.map(({ slug, date, title, description, tags }) => (
-            <Link key={slug} href={`/blog/${slug}`} className="group h-full">
-              <article className="h-full neo-card p-6 flex flex-col justify-between transition-transform duration-200 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[6px_6px_0px_0px_#404040]">
-                <div>
-                  <div className="mb-4 flex items-center justify-between">
-                    <span className="text-sm font-mono font-bold border-2 border-black px-2 py-0.5 bg-purple-300 text-black">
-                      {new Date(date).toISOString().split("T")[0]}
-                    </span>
-                  </div>
-                  <h2 className="text-2xl font-black mb-3 group-hover:underline decoration-4 underline-offset-4 decoration-yellow-400">
-                    {title}
-                  </h2>
-                  <p className="text-gray-700 dark:text-gray-300 mb-6 font-medium leading-relaxed">
-                    {description}
-                  </p>
-                </div>
-
-                <div className="flex flex-wrap gap-2 mt-auto">
-                  {tags &&
-                    tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-xs font-bold px-2 py-1 border-2 border-black bg-white dark:bg-black dark:text-white"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-                </div>
-              </article>
+        {tag && (
+          <div className="mb-8 flex items-center gap-4">
+            <h1 className="text-2xl font-bold">
+              Posts tagged with <span className="text-[#E9945B]">#{tag}</span>
+            </h1>
+            <Link
+              href="/blog"
+              className="flex items-center gap-2 text-sm font-bold border-2 border-black px-3 py-1 hover:bg-red-100"
+            >
+              Clear filter <FaTimes />
             </Link>
-          ))}
+          </div>
+        )}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          {currentPosts.map(
+            ({ slug, date, title, description, tags, readingTime }) => (
+              <Link key={slug} href={`/blog/${slug}`} className="group h-full">
+                <article className="h-full neo-card p-6 flex flex-col justify-between transition-transform duration-200 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[6px_6px_0px_0px_#404040]">
+                  <div>
+                    <div className="mb-4 flex items-center justify-between">
+                      <span className="text-sm font-mono font-bold border-2 border-black px-2 py-0.5 bg-purple-300 text-black">
+                        {new Date(date).toISOString().split("T")[0]}
+                      </span>
+                      <span className="text-sm font-bold text-gray-500 dark:text-gray-400">
+                        {readingTime}
+                      </span>
+                    </div>
+                    <h2 className="text-2xl font-black mb-3 group-hover:underline decoration-4 underline-offset-4 decoration-yellow-400">
+                      {title}
+                    </h2>
+                    <p className="text-gray-700 dark:text-gray-300 mb-6 font-medium leading-relaxed">
+                      {description}
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    {tags &&
+                      tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-xs font-bold px-2 py-1 border-2 border-black bg-white dark:bg-black dark:text-white"
+                        >
+                          #{tag}
+                        </span>
+                      ))}
+                  </div>
+                </article>
+              </Link>
+            )
+          )}
         </div>
 
         {/* Pagination Controls */}
@@ -66,7 +89,9 @@ export default async function BlogPage({
           <div className="flex justify-center items-center gap-4">
             {currentPage > 1 ? (
               <Link
-                href={`/blog?page=${currentPage - 1}`}
+                href={`/blog?page=${currentPage - 1}${
+                  tag ? `&tag=${tag}` : ""
+                }`}
                 className="neo-button flex items-center gap-2 bg-white hover:bg-yellow-200"
               >
                 <FaArrowLeft /> Previous
@@ -86,7 +111,9 @@ export default async function BlogPage({
 
             {currentPage < totalPages ? (
               <Link
-                href={`/blog?page=${currentPage + 1}`}
+                href={`/blog?page=${currentPage + 1}${
+                  tag ? `&tag=${tag}` : ""
+                }`}
                 className="neo-button flex items-center gap-2 bg-white hover:bg-yellow-200"
               >
                 Next <FaArrowRight />

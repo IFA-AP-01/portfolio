@@ -50,12 +50,6 @@ const jsonLd: WithContext<SoftwareApplication> = {
   ],
 };
 
-export const viewport = {
-  width: "device-width",
-  initialScale: 1,
-  themeColor: "#faf8f1",
-};
-
 export default function ShortenLinkLayout({
   children,
 }: {

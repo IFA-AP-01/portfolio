@@ -8,6 +8,47 @@ import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";
 import rehypeRaw from "rehype-raw";
 import rehypeStringify from "rehype-stringify";
+import rehypeSlug from "rehype-slug";
+import { visit } from "unist-util-visit";
+
+import GithubSlugger from "github-slugger";
+import { toString } from "mdast-util-to-string";
+
+function calculateReadingTime(content: string): string {
+  const wordsPerMinute = 200;
+  const words = content.trim().split(/\s+/).length;
+  const minutes = Math.ceil(words / wordsPerMinute);
+  return `${minutes} min read`;
+}
+
+export interface TOCItem {
+  id: string;
+  text: string;
+  level: number;
+}
+
+function extractTOC(content: string): TOCItem[] {
+  const toc: TOCItem[] = [];
+  const slugger = new GithubSlugger();
+
+  try {
+    const processor = remark().use(remarkGfm);
+    const tree = processor.parse(content);
+
+    visit(tree, "heading", (node: any) => {
+      const text = toString(node);
+      const id = slugger.slug(text);
+      const level = node.depth;
+      if (level > 2) return;
+
+      toc.push({ id, text, level });
+    });
+  } catch (e) {
+    console.error("Error in extractTOC:", e);
+  }
+
+  return toc;
+}
 
 const postsDirectory = path.join(process.cwd(), "content");
 
@@ -18,6 +59,8 @@ export interface PostData {
   date: string;
   description: string;
   tags: string[];
+  readingTime: string;
+  toc: TOCItem[];
   contentHtml?: string;
 }
 
@@ -55,6 +98,8 @@ export function getSortedPostsData(): PostData[] {
         date: matterResult.data.date?.toString() || new Date().toISOString(),
         description: matterResult.data.description || "",
         tags: matterResult.data.tags || [],
+        readingTime: calculateReadingTime(matterResult.content),
+        toc: extractTOC(matterResult.content),
         ...matterResult.data,
       };
     });
@@ -86,6 +131,8 @@ export async function getPostData(slug: string): Promise<PostData> {
   const processedContent = await remark()
     .use(remarkGfm)
     .use(remarkRehype, { allowDangerousHtml: true })
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeSlug)
     .use(rehypeRaw)
     .use(rehypeStringify)
     .process(matterResult.content);
@@ -93,6 +140,7 @@ export async function getPostData(slug: string): Promise<PostData> {
   const contentHtml = processedContent.toString();
 
   return {
+    ...matterResult.data,
     slug,
     contentHtml,
     title: matterResult.data.title || "Untitled",
@@ -100,6 +148,7 @@ export async function getPostData(slug: string): Promise<PostData> {
     date: matterResult.data.date?.toString() || new Date().toISOString(),
     description: matterResult.data.description || "",
     tags: matterResult.data.tags || [],
-    ...matterResult.data,
+    readingTime: calculateReadingTime(matterResult.content),
+    toc: extractTOC(matterResult.content),
   };
 }
