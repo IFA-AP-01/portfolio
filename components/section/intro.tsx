@@ -4,7 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { BsDiscord, BsMailbox2 } from "react-icons/bs";
-import { FaGithubSquare } from "react-icons/fa";
+import { FaGithubSquare, FaMapMarkerAlt } from "react-icons/fa";
 import { BsArrowRight } from "react-icons/bs";
 
 import { useSectionInView } from "@/lib/hooks";
@@ -74,6 +74,11 @@ export default function Intro() {
                 <BsArrowRight className="opacity-100 group-hover:translate-x-2 transition font-bold text-xl" />
               </Link>
             </div>
+            <p
+              className={`${headlineFont.className} mt-8 text-black dark:text-white flex items-center gap-2 text-xl font-black uppercase tracking-wide`}
+            >
+              <FaMapMarkerAlt className="text-red-500" /> Danang, Vietnam
+            </p>
 
             <div className="w-full flex flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 text-xl font-bold">
               <Link

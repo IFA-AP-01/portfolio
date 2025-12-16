@@ -46,7 +46,7 @@ export default function Header() {
 
   return (
     <header className="z-[999] relative">
-      <nav className="neo-card fixed top-3 inset-x-4 max-w-5xl mx-auto flex h-16 items-center">
+      <nav className="sm:neo-card border-b border-black bg-white dark:bg-[#191C1E] fixed sm:top-3 inset-x-0 max-w-5xl mx-auto flex h-16 items-center">
         <ul className="flex w-full items-center justify-between gap-1 text-[0.9rem] font-medium text-gray-500 sm:gap-3 sm:flex-nowrap">
           <Link href="/" className="flex items-center px-3">
             <div className="neo-shadow border-black border-2 w-10 h-10 flex bg-[#E9945B]">
@@ -105,20 +105,18 @@ export default function Header() {
               </Link>
             ))}
           </div>
-          <motion.li
+          <li
             key="theme"
             className="flex items-center justify-center px-3 sm:inline-flex"
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
           >
             <button
-              className="w-10 h-10 border-2 border-black text-black dark:text-white flex items-center justify-center"
+              className="w-10 h-10 border-2 border-[#E9945B] text-[#E9945B] font-bold flex items-center justify-center"
               onClick={toggleTheme}
               style={{ WebkitTapHighlightColor: "transparent" }}
             >
               {theme === "light" ? <BsSun /> : <BsMoon />}
             </button>
-          </motion.li>
+          </li>
         </ul>
       </nav>
     </header>

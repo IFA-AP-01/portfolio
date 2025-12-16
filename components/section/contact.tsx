@@ -71,11 +71,6 @@ export default function Contact() {
         </Link>
       </motion.div>
       <ContactSection />
-      <p
-        className={`${headlineFont.className} mt-8 text-black dark:text-white flex items-center justify-center gap-2 text-xl font-black uppercase tracking-wide`}
-      >
-        <FaMapMarkerAlt className="text-red-500" /> Danang, Vietnam
-      </p>
     </motion.section>
   );
 }

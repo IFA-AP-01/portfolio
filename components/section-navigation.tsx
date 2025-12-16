@@ -20,7 +20,7 @@ export default function SectionNavigation() {
     <div className="hidden xl:block z-[999]">
       {/* Navigation */}
       <nav
-        className="fixed left-6 top-1/2 -translate-y-1/2"
+        className="fixed right-6 top-1/2 -translate-y-1/2 neo-card p-2"
         style={{ WebkitTapHighlightColor: "transparent" }}
       >
         <ul className="flex flex-col items-center justify-center gap-4 py-4">

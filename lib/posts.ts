@@ -14,6 +14,7 @@ const postsDirectory = path.join(process.cwd(), "content");
 export interface PostData {
   slug: string;
   title: string;
+  author: string;
   date: string;
   description: string;
   tags: string[];
@@ -50,6 +51,7 @@ export function getSortedPostsData(): PostData[] {
       return {
         slug,
         title: matterResult.data.title || "Untitled",
+        author: matterResult.data.author || "IFA Team",
         date: matterResult.data.date?.toString() || new Date().toISOString(),
         description: matterResult.data.description || "",
         tags: matterResult.data.tags || [],
@@ -94,6 +96,7 @@ export async function getPostData(slug: string): Promise<PostData> {
     slug,
     contentHtml,
     title: matterResult.data.title || "Untitled",
+    author: matterResult.data.author || "IFA Team",
     date: matterResult.data.date?.toString() || new Date().toISOString(),
     description: matterResult.data.description || "",
     tags: matterResult.data.tags || [],

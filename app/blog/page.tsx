@@ -81,7 +81,7 @@ export default async function BlogPage({
             )}
 
             <span className="font-bold text-lg">
-              Page {currentPage} of {totalPages}
+              {currentPage} of {totalPages}
             </span>
 
             {currentPage < totalPages ? (

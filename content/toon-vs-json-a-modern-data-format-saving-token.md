@@ -1,7 +1,7 @@
 +++
 author = "huyhunhngc"
 title = "TOON vs JSON: A Modern Data Format Showdown"
-date = "2025-08-01"
+date = "2025-11-30"
 description = "A practical comparison between JSON and TOON, exploring token efficiency, readability, and why TOON is emerging as a data format optimized for the LLM and GenAI era."
 tags = [
     "Data",
