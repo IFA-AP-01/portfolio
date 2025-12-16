@@ -17,7 +17,7 @@ export default function SectionNavigation() {
   if (pathname !== "/") return null;
 
   return (
-    <div className="hidden lg:block z-[999]">
+    <div className="hidden xl:block z-[999]">
       {/* Navigation */}
       <nav
         className="fixed left-6 top-1/2 -translate-y-1/2"

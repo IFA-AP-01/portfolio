@@ -27,11 +27,6 @@ export default async function BlogPage({
   return (
     <main className="flex flex-col items-center px-4 py-28 min-h-screen">
       <div className="w-full max-w-5xl">
-        <h1 className="text-5xl font-black mb-12 text-center relative inline-block">
-          <span className="relative z-10">IFA Blog</span>
-          <span className="absolute bottom-2 left-0 w-full h-4 bg-yellow-400 -z-0"></span>
-        </h1>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           {currentPosts.map(({ slug, date, title, description, tags }) => (
             <Link key={slug} href={`/blog/${slug}`} className="group h-full">

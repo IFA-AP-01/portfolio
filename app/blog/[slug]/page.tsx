@@ -40,7 +40,7 @@ export default async function Post({
           ← Back to Blog
         </Link>
 
-        <article className="w-full neo-card p-4 sm:p-6 md:p-12 mb-12">
+        <article className="w-full sm:neo-card sm:p-6 md:p-12 mb-12">
           <header className="mb-10 border-b-2 border-black pb-8">
             <h1 className="text-2xl md:text-4xl font-black mb-6 leading-tight">
               {postData.title}

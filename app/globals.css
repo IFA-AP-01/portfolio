@@ -184,3 +184,42 @@ code[class*="language-"],
 pre[class*="language-"] {
   background: transparent !important;
 }
+
+.markdown-content table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+  border: none;
+}
+
+.markdown-content th,
+.markdown-content td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.markdown-content th {
+  background-color: #e9945b;
+  color: #000;
+  font-weight: 800;
+}
+
+.dark .markdown-content th {
+  background-color: #e9945b;
+}
+
+@media screen and (max-width: 500px) {
+  .markdown-content table {
+    overflow-x: auto;
+  }
+  .markdown-content h2,
+  .markdown-content h3,
+  .markdown-content h4,
+  .markdown-content h5,
+  .markdown-content h6,
+  .markdown-content p {
+    font-size: 16px !important;
+  }
+}

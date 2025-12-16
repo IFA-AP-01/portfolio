@@ -24,7 +24,7 @@ export default function Intro() {
       className="min-h-screen w-full flex items-center justify-center py-16 sm:py-12"
     >
       <div className="w-full max-w-5xl mx-auto">
-        <div className="w-full grid lg:grid-cols-2 gap-12 items-center">
+        <div className="w-full grid xl:grid-cols-2 gap-12 items-center">
           {/* LEFT COLUMN */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -61,7 +61,7 @@ export default function Intro() {
               </h1>
             </div>
 
-            <div className="w-full grid grid-cols-1 sm:flex sm:flex-row sm:justify-start gap-3 font-bold">
+            <div className="w-full grid grid-cols-1 md:flex sm:flex-row sm:justify-start justify-center items-center gap-3 font-bold">
               <Link
                 href="#contact"
                 className="group w-full sm:w-auto bg-[#E9945B] uppercase text-black px-6 py-3 sm:px-8 flex items-center justify-center gap-3 outline-none focus:scale-110 active:scale-105 transition border-2 border-black neo-shadow hover:bg-[#d6854f] text-sm sm:text-base"

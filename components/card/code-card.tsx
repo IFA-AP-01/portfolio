@@ -5,15 +5,13 @@ import Prism from "prismjs";
 import "prismjs/components/prism-typescript";
 
 const CODE = `async function buildForYou() {
-  const mobile = await MobileApps.create();
-  const web = await WebSolutions.syncWith(mobile);
-  const ai = await AIIntegration.enhance(web);
-  const seo = await SEOOptimize.boost(ai);
+  await createWebApps();
+  await integrateAI();
+  await optimizeSEO();
+  await enforceSecurity();
+  await deploy();
 
-  await Security.enforceStrictPolicies();
-  await IoT.connectIfNeeded(seo);
-
-  return Delivery.ship(seo, { quality: "High 🚀" });
+  return ship();
 }`;
 
 export default function CodeCard() {
