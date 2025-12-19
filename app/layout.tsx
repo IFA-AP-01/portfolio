@@ -12,6 +12,7 @@ import { bodyFont } from "@/lib/fontawesome";
 
 import ScrollToTop from "@/components/scroll-to-top";
 import { Metadata, Viewport } from "next";
+import NextTopLoader from "nextjs-toploader";
 
 export const metadata: Metadata = {
   title: {
@@ -61,6 +62,7 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${bodyFont.className} bg-[#faf8f1] text-gray-950 relative dark:bg-[#191C1E] dark:text-gray-50 dark:text-opacity-90 transition-colors duration-300`}
       >
+        <NextTopLoader color="#E9945B" height={3} showSpinner={false} />
         <ThemeContextProvider>
           <ActiveSectionContextProvider>
             <Header />

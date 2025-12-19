@@ -75,7 +75,7 @@ export default function Intro() {
               </Link>
             </div>
             <p
-              className={`${headlineFont.className} mt-8 text-black dark:text-white flex items-center gap-2 text-xl font-black uppercase tracking-wide`}
+              className={`${headlineFont.className} w-full mt-8 text-black dark:text-white md:flex sm:flex-row sm:justify-start justify-center flex items-center gap-2 text-xl font-black uppercase tracking-wide`}
             >
               <FaMapMarkerAlt className="text-red-500" /> Danang, Vietnam
             </p>

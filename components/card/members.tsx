@@ -80,7 +80,7 @@ const Member = memo(function Member({
               {tags.map((tag, index) => (
                 <div
                   key={index}
-                  className="bg-purple-200 dark:bg-purple-900 border-2 border-black p-2.5 hover:bg-yellow-200 dark:hover:bg-yellow-800 transition-colors duration-200 neo-shadow transform hover:-translate-y-1"
+                  className="border-2 border-black p-2 bg-[#E9945B] transition-colors duration-200 neo-shadow"
                 >
                   <Image
                     className="w-6 h-6 object-contain rounded-full"

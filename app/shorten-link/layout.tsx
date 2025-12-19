@@ -73,7 +73,7 @@ export default function ShortenLinkLayout({
         >
           Easy <span className="text-[#E9945B]">Link Shorter</span>
         </h1>
-        <p className="text-gray-500 dark:text-gray-400 text-center pb-8">
+        <p className="text-gray-500 dark:text-gray-400 text-center pb-8 px-4">
           <span className="text-[#e9945b]">Free</span> link shorter - Quick and
           easy to share - Monitor your links.
         </p>

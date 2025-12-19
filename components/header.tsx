@@ -48,8 +48,8 @@ export default function Header() {
     <header className="z-[999] relative sm:px-4">
       <nav className="sm:neo-card border-b border-black bg-white dark:bg-[#191C1E] fixed sm:top-3 inset-x-0 max-w-5xl mx-auto flex h-16 items-center">
         <ul className="flex w-full items-center justify-between gap-1 text-[0.9rem] font-medium text-gray-500 sm:gap-3 sm:flex-nowrap">
-          <Link href="/" className="flex items-center px-3">
-            <div className="neo-shadow border-black border-2 w-10 h-10 flex bg-[#E9945B]">
+          <Link href="/" className="flex items-center justify-center px-3">
+            <div className="neo-shadow border-black border-2 w-10 h-10 flex items-center justify-center bg-[#E9945B]">
               <Image
                 src={teamImage}
                 alt="IFA"
