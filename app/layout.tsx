@@ -1,10 +1,9 @@
-import Header from "@/components/header";
 import "@/lib/fontawesome";
 import "./globals.css";
 import "./markdown.css";
 
 import ActiveSectionContextProvider from "@/context/active-section-context";
-import Footer from "@/components/footer";
+import SiteLayout from "@/components/site-layout";
 import ThemeSwitch from "@/components/theme-switch";
 import ThemeContextProvider from "@/context/theme-context";
 import { Toaster } from "react-hot-toast";
@@ -65,9 +64,7 @@ export default function RootLayout({
         <NextTopLoader color="#E9945B" height={3} showSpinner={false} />
         <ThemeContextProvider>
           <ActiveSectionContextProvider>
-            <Header />
-            {children}
-            <Footer />
+            <SiteLayout>{children}</SiteLayout>
             <Toaster position="top-right" />
             <ScrollToTop />
           </ActiveSectionContextProvider>
