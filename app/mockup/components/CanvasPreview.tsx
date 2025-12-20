@@ -55,13 +55,23 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
               template.layout === "text-overlay" ||
               template.layout === "phone-left" ||
               template.layout === "phone-right") && (
-              <div className="text-center mb-8 pt-20 px-8">
+              <div
+                className="mb-8 pt-20 px-8"
+                style={{ textAlign: data.textAlign }}
+              >
                 <h1
                   style={{
                     color: data.titleColor,
                     fontFamily: data.fontFamily,
-                    fontSize: "3.5rem",
-                    fontWeight: "bold",
+                    fontSize: `${data.titleFontSize}px`,
+                    fontWeight: data.titleFontWeight,
+                    fontStyle: data.titleFontStyle,
+                    textDecoration: data.titleTextDecoration,
+                    letterSpacing: `${data.titleLetterSpacing}em`,
+                    lineHeight: data.titleLineHeight,
+                    textShadow: data.titleTextShadow
+                      ? "2px 2px 4px rgba(0,0,0,0.5)"
+                      : "none",
                     marginBottom: "1rem",
                   }}
                 >
@@ -71,7 +81,15 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
                   style={{
                     color: data.subtitleColor,
                     fontFamily: data.fontFamily,
-                    fontSize: "2rem",
+                    fontSize: `${data.subtitleFontSize}px`,
+                    fontWeight: data.subtitleFontWeight,
+                    fontStyle: data.subtitleFontStyle,
+                    textDecoration: data.subtitleTextDecoration,
+                    letterSpacing: `${data.subtitleLetterSpacing}em`,
+                    lineHeight: data.subtitleLineHeight,
+                    textShadow: data.subtitleTextShadow
+                      ? "2px 2px 4px rgba(0,0,0,0.5)"
+                      : "none",
                   }}
                 >
                   {data.subtitle}
@@ -115,7 +133,7 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
                       alt="App Screenshot"
                       width={template.defaultDimensions.width}
                       height={template.defaultDimensions.height}
-                      className="w-full h-full object-contain rounded-[10rem]"
+                      className="w-full h-full object-contain rounded-[6rem]"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-gray-500 bg-gray-100 text-3xl font-bold rounded-[10rem]">
@@ -128,13 +146,23 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
 
             {/* Text Bottom Section */}
             {isTextBottom && (
-              <div className="text-center mt-8 pb-20 px-8">
+              <div
+                className="mt-8 pb-20 px-8"
+                style={{ textAlign: data.textAlign }}
+              >
                 <h1
                   style={{
                     color: data.titleColor,
                     fontFamily: data.fontFamily,
-                    fontSize: "3.5rem",
-                    fontWeight: "bold",
+                    fontSize: `${data.titleFontSize}px`,
+                    fontWeight: data.titleFontWeight,
+                    fontStyle: data.titleFontStyle,
+                    textDecoration: data.titleTextDecoration,
+                    letterSpacing: `${data.titleLetterSpacing}em`,
+                    lineHeight: data.titleLineHeight,
+                    textShadow: data.titleTextShadow
+                      ? "2px 2px 4px rgba(0,0,0,0.5)"
+                      : "none",
                     marginBottom: "1rem",
                   }}
                 >
@@ -144,7 +172,15 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
                   style={{
                     color: data.subtitleColor,
                     fontFamily: data.fontFamily,
-                    fontSize: "2rem",
+                    fontSize: `${data.subtitleFontSize}px`,
+                    fontWeight: data.subtitleFontWeight,
+                    fontStyle: data.subtitleFontStyle,
+                    textDecoration: data.subtitleTextDecoration,
+                    letterSpacing: `${data.subtitleLetterSpacing}em`,
+                    lineHeight: data.subtitleLineHeight,
+                    textShadow: data.subtitleTextShadow
+                      ? "2px 2px 4px rgba(0,0,0,0.5)"
+                      : "none",
                   }}
                 >
                   {data.subtitle}

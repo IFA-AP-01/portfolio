@@ -21,7 +21,7 @@ export const SlideList: React.FC<SlideListProps> = ({
   onDeleteSlide,
 }) => {
   return (
-    <div className="w-full h-40 bg-gray-200 border-t border-gray-300 flex items-center gap-4 px-8 overflow-x-auto shrink-0 custom-scrollbar">
+    <div className="w-full h-40 border-t border-gray-300 flex items-center gap-4 px-8 overflow-x-auto shrink-0 custom-scrollbar">
       {slides.map((slide, index) => {
         const template =
           ALL_TEMPLATES.find((t) => t.id === slide.templateId) ||
@@ -29,9 +29,9 @@ export const SlideList: React.FC<SlideListProps> = ({
         return (
           <div
             key={index}
-            className={`relative group shrink-0 w-24 h-[8.5rem] cursor-pointer border-2 rounded-lg overflow-hidden transition-all ${
+            className={`relative group shrink-0 w-24 h-[8.5rem] cursor-pointer border-2 overflow-hidden transition-all ${
               currentSlideIndex === index
-                ? "border-blue-600 shadow-md ring-2 ring-blue-300"
+                ? "border-[#E9945B] shadow-md ring-2 ring-[#E9945B]"
                 : "border-gray-300 hover:border-gray-400"
             }`}
             onClick={() => onSelectSlide(index)}
@@ -43,7 +43,7 @@ export const SlideList: React.FC<SlideListProps> = ({
                   height: template.defaultDimensions.height,
                 }}
               >
-                <CanvasPreview data={slide} template={template} scale={1} />
+                <CanvasPreview data={slide} template={template} scale={0.37} />
               </div>
             </div>
 
@@ -82,7 +82,7 @@ export const SlideList: React.FC<SlideListProps> = ({
 
       <button
         onClick={onAddSlide}
-        className="shrink-0 w-24 h-[8.5rem] border-2 border-dashed border-gray-400 rounded-lg flex flex-col items-center justify-center text-gray-500 hover:text-gray-700 hover:border-gray-600 hover:bg-gray-100 transition-colors"
+        className="shrink-0 w-24 h-[8.5rem] border-2 border-dashed border-gray-400 flex flex-col items-center justify-center text-gray-500 hover:text-gray-700 hover:border-gray-600 hover:bg-gray-100 transition-colors"
       >
         <span className="text-2xl font-bold">+</span>
         <span className="text-xs">Add Slide</span>

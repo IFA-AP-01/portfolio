@@ -4,15 +4,31 @@ import React, { useState, useRef, useCallback } from "react";
 import { CanvasPreview } from "./CanvasPreview";
 import { ControlPanel } from "./ControlPanel";
 import { SlideList } from "./SlideList";
+import { FontLoader } from "./FontLoader";
 import { TEMPLATES } from "../data/templates";
 import { ScreenshotData, Platform } from "../types";
 import * as htmlToImage from "html-to-image";
 import { saveAs } from "file-saver";
 
 const INITIAL_DATA: ScreenshotData = {
-  title: "Keep track of your chats",
-  subtitle: "Connect with friends and family instantly.",
+  title: "Your title here",
+  subtitle: "Place your subtitle here",
   fontFamily: "Inter, sans-serif",
+  titleFontSize: 88,
+  titleFontWeight: "bold",
+  titleFontStyle: "normal",
+  titleTextDecoration: "none",
+  titleLetterSpacing: 0,
+  titleLineHeight: 1.2,
+  titleTextShadow: false,
+  subtitleFontSize: 56,
+  subtitleFontWeight: "normal",
+  subtitleFontStyle: "normal",
+  subtitleTextDecoration: "none",
+  subtitleLetterSpacing: 0,
+  subtitleLineHeight: 1.4,
+  subtitleTextShadow: false,
+  textAlign: "center",
   titleColor: "#ffffff",
   subtitleColor: "#e0e0e0",
   backgroundColor: "#1a1a1a",
@@ -25,7 +41,6 @@ export const ScreenshotEditor: React.FC = () => {
   const canvasRef = useRef<HTMLDivElement>(null);
   const [isExporting, setIsExporting] = useState(false);
 
-  // Ensure currentSlideIndex is valid
   const activeIndex = Math.min(
     Math.max(currentSlideIndex, 0),
     slides.length - 1
@@ -54,7 +69,7 @@ export const ScreenshotEditor: React.FC = () => {
     setSlides((prev) => [
       ...prev,
       { ...INITIAL_DATA, templateId: prev[prev.length - 1].templateId },
-    ]); // Copy last template for convenience
+    ]);
     setCurrentSlideIndex((prev) => prev + 1);
   };
 
@@ -71,12 +86,6 @@ export const ScreenshotEditor: React.FC = () => {
 
     setIsExporting(true);
     try {
-      // Ideally we would loop through all slides and export them.
-      // For now, let's export the CURRENT slide.
-      // TODO: Implement batch export (future task) or just alert user.
-      // Given the complexity of rendering all slides invisibly,
-      // we will stick to single slide export for this iteration or maybe just the current one.
-
       const blob = await htmlToImage.toBlob(canvasRef.current, {
         canvasWidth: currentTemplate.defaultDimensions.width,
         canvasHeight: currentTemplate.defaultDimensions.height,
@@ -94,14 +103,14 @@ export const ScreenshotEditor: React.FC = () => {
     }
   }, [currentTemplate, activeIndex]);
 
-  // Handle scaling for the preview
   const previewScale = 0.25;
 
   return (
     <div className="flex h-full bg-[#faf8f1] dark:bg-[#191C1E] flex-col md:flex-row overflow-hidden">
+      <FontLoader />
       {/* Sidebar Controls */}
       <div className="w-full md:w-[26rem] border-r-2 border-black dark:border-gray-600 h-full overflow-hidden shrink-0 z-20 flex flex-col bg-white dark:bg-[#252526]">
-        <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
+        <div className="flex-1 overflow-y-auto p-4 overflow-y-auto [&::-webkit-scrollbar]:hidden [scrollbar-width:none]">
           <ControlPanel
             data={currentSlide}
             onChange={handleDataChange}
@@ -114,7 +123,7 @@ export const ScreenshotEditor: React.FC = () => {
           <button
             onClick={handleExport}
             disabled={isExporting}
-            className="w-full py-4 bg-[#E9945B] hover:bg-[#d8844b] text-black font-black uppercase text-sm border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.2)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full py-4 bg-[#E9945B] hover:bg-[#d8844b] text-black font-black uppercase text-sm border-2 border-black neo-shadow active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isExporting ? "Exporting..." : "Export Current Slide"}
           </button>
@@ -157,7 +166,6 @@ export const ScreenshotEditor: React.FC = () => {
           </div>
         </div>
 
-        {/* Slides Strip */}
         {/* Slides Strip */}
         <SlideList
           slides={slides}

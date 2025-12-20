@@ -9,7 +9,7 @@ export interface Template {
   id: string;
   name: string;
   platform: Platform;
-  layout: 'text-top' | 'text-bottom' | 'text-overlay' | 'phone-left' | 'phone-right' | 'text-left' | 'text-right';
+  layout: 'text-top' | 'text-bottom' | 'text-overlay' | 'phone-left' | 'phone-right';
   deviceFrame: string; // path to svg
   screenRegion: {
     top: string;
@@ -25,6 +25,21 @@ export interface ScreenshotData {
   title: string;
   subtitle: string;
   fontFamily: string;
+  titleFontSize: number;
+  titleFontWeight: string;
+  titleFontStyle: string;
+  titleTextDecoration: string;
+  titleLetterSpacing: number;
+  titleLineHeight: number;
+  titleTextShadow: boolean;
+  subtitleFontSize: number;
+  subtitleFontWeight: string;
+  subtitleFontStyle: string;
+  subtitleTextDecoration: string;
+  subtitleLetterSpacing: number;
+  subtitleLineHeight: number;
+  subtitleTextShadow: boolean;
+  textAlign: 'left' | 'center' | 'right';
   titleColor: string;
   subtitleColor: string;
   backgroundColor: string;
