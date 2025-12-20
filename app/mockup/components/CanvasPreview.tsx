@@ -20,7 +20,7 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
 
     return (
       <div
-        className="relative shadow-2xl overflow-hidden bg-white"
+        className="relative overflow-hidden bg-white"
         style={{
           width: width,
           height: height,
@@ -86,7 +86,7 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
                 ${template.layout === "phone-right" ? "translate-x-[25%]" : ""}
               `}
             >
-              <div className="relative w-[80%] h-auto aspect-[1/2.16] shadow-2xl rounded-[3rem]">
+              <div className="relative w-[85%] h-auto aspect-[1/2.16]">
                 {/* Frame Image */}
                 <div className="absolute inset-0 pointer-events-none z-20">
                   <Image
@@ -100,7 +100,7 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
 
                 {/* Screenshot Content inside the frame */}
                 <div
-                  className="absolute z-10 overflow-hidden bg-gray-900 flex items-center justify-center"
+                  className="absolute z-10 overflow-hidden flex items-center justify-center"
                   style={{
                     top: template.screenRegion.top,
                     left: template.screenRegion.left,
