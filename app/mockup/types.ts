@@ -51,8 +51,13 @@ export interface ScreenshotData {
   backgroundImage?: string;
   screenshotImage?: string; // data url or path
   templateId: string;
-  layout: 'text-top' | 'text-bottom' | 'phone-left' | 'phone-right';
   showNotch: boolean;
+  textTranslateX: number;
+  textTranslateY: number;
+  deviceTranslateX: number;
+  deviceTranslateY: number;
+  deviceRotate: number;
+  deviceScale: number;
 }
 
 export const IOS_DIMENSIONS: Dimensions = { width: 1242, height: 2688 };

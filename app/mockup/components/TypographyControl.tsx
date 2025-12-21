@@ -16,7 +16,7 @@ export const TypographyControl: React.FC<TypographyControlProps> = ({
   onChange,
 }) => {
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 pb-12">
       <h3 className="font-bold border-b-2 border-black dark:border-gray-600 pb-1 uppercase text-sm">
         Content
       </h3>

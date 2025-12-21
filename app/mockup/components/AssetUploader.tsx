@@ -65,7 +65,7 @@ export const AssetUploader: React.FC<AssetUploaderProps> = ({
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
           className={`
-           w-full h-32 border-2 text-black dark:text-white border-dashed rounded-none flex flex-col items-center justify-center cursor-pointer transition-all
+           w-full h-24 border-2 text-black dark:text-white border-dashed rounded-none flex flex-col items-center justify-center cursor-pointer transition-all
            ${
              isDragging
                ? "border-[#E9945B] bg-[#E9945B]/10"

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { ScreenshotData } from "../types";
-import { LAYOUT_OPTIONS } from "../constants";
+import { NeoBrutalSlider } from "@/components/common/slider";
 
 interface LayoutControlProps {
   data: ScreenshotData;
@@ -14,24 +14,143 @@ export const LayoutControl: React.FC<LayoutControlProps> = ({
   onChange,
 }) => {
   return (
-    <div className="space-y-4">
-      <h3 className="font-bold border-b-2 border-black dark:border-gray-600 pb-1 uppercase text-sm">
-        Layout
-      </h3>
-      <div className="grid grid-cols-2 gap-2">
-        {LAYOUT_OPTIONS.map((layout) => (
-          <button
-            key={layout.id}
-            onClick={() => onChange({ layout: layout.id as any })}
-            className={`p-2 text-xs neo-shadow font-bold border-2 border-black transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none uppercase ${
-              data.layout === layout.id
-                ? "bg-[#E9945B]"
-                : "bg-white dark:bg-[#333] hover:bg-gray-50"
-            }`}
-          >
-            {layout.label}
-          </button>
-        ))}
+    <div className="space-y-2">
+      <div className="flex items-end justify-between border-b-2 border-black pb-1 dark:border-gray-600">
+        <h3 className="font-bold uppercase text-sm">Position</h3>
+        <button
+          className="w-24 border-2 border-black bg-[#E9945B] neo-shadow px-2 py-1 text-xs uppercase font-bold"
+          onClick={() =>
+            onChange({
+              textTranslateX: 0,
+              textTranslateY: 0,
+              deviceTranslateX: 0,
+              deviceTranslateY: 0,
+              deviceRotate: 0,
+              deviceScale: 1,
+            })
+          }
+        >
+          Reset
+        </button>
+      </div>
+
+      {/* Text Position*/}
+      <div className="flex items-end gap-4 pt-2 justify-between">
+        {/* Text Offset X */}
+        <div className="space-y-1 w-full">
+          <label className="text-[10px] font-bold uppercase text-gray-500">
+            Text X
+          </label>
+          <input
+            type="number"
+            min={-200}
+            max={200}
+            step={1}
+            value={data.textTranslateX}
+            onChange={(e) =>
+              onChange({ textTranslateX: Number(e.target.value) })
+            }
+            className="w-full border-2 border-black neo-shadow px-2 py-1 text-sm"
+          />
+        </div>
+
+        {/* Text Offset Y */}
+        <div className="space-y-1 w-full">
+          <label className="text-[10px] font-bold uppercase text-gray-500">
+            Text Y
+          </label>
+          <input
+            type="number"
+            min={-200}
+            max={200}
+            step={1}
+            value={data.textTranslateY}
+            onChange={(e) =>
+              onChange({ textTranslateY: Number(e.target.value) })
+            }
+            className="w-full border-2 border-black neo-shadow px-2 py-1 text-sm"
+          />
+        </div>
+      </div>
+
+      {/* Device Position*/}
+      <div className="flex items-end gap-4 pt-2">
+        {/* Offset X */}
+        <div className="space-y-1 w-full">
+          <label className="text-[10px] font-bold uppercase text-gray-500">
+            Image X
+          </label>
+          <input
+            type="number"
+            min={-200}
+            max={200}
+            step={1}
+            value={data.deviceTranslateX}
+            onChange={(e) =>
+              onChange({ deviceTranslateX: Number(e.target.value) })
+            }
+            className="w-full border-2 border-black neo-shadow px-2 py-1 text-sm"
+          />
+        </div>
+
+        {/* Offset Y */}
+        <div className="space-y-1 w-full">
+          <label className="text-[10px] font-bold uppercase text-gray-500">
+            Image Y
+          </label>
+          <input
+            type="number"
+            min={-200}
+            max={200}
+            step={1}
+            value={data.deviceTranslateY}
+            onChange={(e) =>
+              onChange({ deviceTranslateY: Number(e.target.value) })
+            }
+            className="w-full border-2 border-black neo-shadow px-2 py-1 text-sm"
+          />
+        </div>
+      </div>
+
+      {/* Device Transform */}
+      <div className="flex gap-4">
+        {/* Rotation */}
+        <div className="w-full">
+          <label className="text-[10px] font-bold uppercase text-gray-500">
+            Rotation
+          </label>
+          <div className="flex items-center gap-3 py-1">
+            <NeoBrutalSlider
+              min={-60}
+              max={60}
+              step={1}
+              value={data.deviceRotate}
+              onChange={(value) => onChange({ deviceRotate: value })}
+            />
+            <span className="w-12 text-start text-[10px] font-bold">
+              {data.deviceRotate}°
+            </span>
+          </div>
+        </div>
+
+        {/* Scale */}
+        <div className="w-full">
+          <label className="text-[10px] font-bold uppercase text-gray-500">
+            Scale
+          </label>
+          <div className="flex items-center gap-3 py-1">
+            <NeoBrutalSlider
+              min={1}
+              max={2}
+              step={0.005}
+              value={data.deviceScale}
+              onChange={(value) => onChange({ deviceScale: value })}
+            />
+            <span className="w-12 text-start text-[10px] font-bold">
+              {data.deviceScale}
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   );

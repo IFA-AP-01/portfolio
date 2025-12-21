@@ -58,6 +58,11 @@ export const useScreenshotExport = () => {
         return false;
       }
     }
+
+    // Skip elements explicitly marked for exclusion (controls, handles)
+    if (node instanceof HTMLElement && node.classList.contains("export-exclude")) {
+      return false;
+    }
     
     return true;
   }, []);

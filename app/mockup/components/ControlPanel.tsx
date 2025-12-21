@@ -32,14 +32,10 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
         onSelectTemplate={onSelectTemplate}
         selectedTemplateId={selectedTemplateId}
       />
-
       <LayoutControl data={data} onChange={onChange} />
-
-      <TypographyControl data={data} onChange={onChange} />
-
-      <BackgroundControl data={data} onChange={onChange} />
-
       <AssetsControl data={data} onChange={onChange} />
+      <BackgroundControl data={data} onChange={onChange} />
+      <TypographyControl data={data} onChange={onChange} />
     </div>
   );
 };

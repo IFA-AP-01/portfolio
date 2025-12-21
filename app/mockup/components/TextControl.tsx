@@ -1,6 +1,7 @@
 "use client";
 
 import Checkbox from "@/components/common/check-box";
+import { NeoBrutalSlider } from "@/components/common/slider";
 import React from "react";
 
 export interface TextControlProps {
@@ -124,16 +125,12 @@ export const TextControl: React.FC<TextControlProps> = ({
             <span>Letter Spacing</span>
             <span>{letterSpacing}</span>
           </label>
-          <input
-            type="range"
-            min="-0.1"
-            max="0.5"
-            step="0.01"
-            className="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#E9945B]"
+          <NeoBrutalSlider
+            min={-0.1}
+            max={0.5}
+            step={0.01}
             value={letterSpacing}
-            onChange={(e) =>
-              onChange({ letterSpacing: Number(e.target.value) })
-            }
+            onChange={(value) => onChange({ letterSpacing: value })}
           />
         </div>
         <div>
@@ -141,14 +138,12 @@ export const TextControl: React.FC<TextControlProps> = ({
             <span>Line Height</span>
             <span>{lineHeight}</span>
           </label>
-          <input
-            type="range"
-            min="0.8"
-            max="2.5"
-            step="0.1"
-            className="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#E9945B]"
+          <NeoBrutalSlider
+            min={0.8}
+            max={2.5}
+            step={0.1}
             value={lineHeight}
-            onChange={(e) => onChange({ lineHeight: Number(e.target.value) })}
+            onChange={(value) => onChange({ lineHeight: value })}
           />
         </div>
       </div>

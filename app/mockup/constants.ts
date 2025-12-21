@@ -44,11 +44,6 @@ export const GRADIENT_PRESETS = [
   { from: "#78350f", to: "#fbbf24" },
 ];
 
-export const LAYOUT_OPTIONS = [
-  { id: "text-top", label: "Text Top" },
-  { id: "text-bottom", label: "Text Bottom" },
-  { id: "phone-left", label: "Phone Left" },
-  { id: "phone-right", label: "Phone Right" },
-] as const;
+
 
 export const GRADIENT_ANGLES = [135, 180, 225, 270];

@@ -3,6 +3,7 @@
 import React from "react";
 import { ScreenshotData } from "../types";
 import { SOLID_PRESETS, GRADIENT_PRESETS, GRADIENT_ANGLES } from "../constants";
+import { NeoBrutalSlider } from "@/components/common/slider";
 
 interface BackgroundControlProps {
   data: ScreenshotData;
@@ -15,12 +16,12 @@ export const BackgroundControl: React.FC<BackgroundControlProps> = ({
 }) => {
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between border-b-2 border-black dark:border-gray-600 pb-1">
+      <div className="flex items-end justify-between border-b-2 border-black dark:border-gray-600 pb-1">
         <h3 className="font-bold uppercase text-sm">Background</h3>
-        <div className="flex border-2 rounded-full border-black neo-shadow overflow-hidden">
+        <div className="flex border-2 border-black neo-shadow overflow-hidden">
           <button
             onClick={() => onChange({ backgroundType: "solid" })}
-            className={`px-4 py-1 text-[10px] font-bold transition-colors uppercase
+            className={`px-4 py-1 text-xs font-bold transition-colors uppercase
             ${
               data.backgroundType === "solid"
                 ? "bg-[#E9945B] text-black"
@@ -31,7 +32,7 @@ export const BackgroundControl: React.FC<BackgroundControlProps> = ({
           </button>
           <button
             onClick={() => onChange({ backgroundType: "gradient" })}
-            className={`px-4 py-1 text-[10px] font-bold transition-colors border-l-2 border-black uppercase
+            className={`px-4 py-1 text-xs font-bold transition-colors border-l-2 border-black uppercase
             ${
               data.backgroundType === "gradient"
                 ? "bg-[#E9945B] text-black"
@@ -192,16 +193,12 @@ export const BackgroundControl: React.FC<BackgroundControlProps> = ({
                 {data.gradientAngle}°
               </span>
             </div>
-            <input
-              type="range"
-              min="0"
-              max="360"
-              step="1"
-              className="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#E9945B]"
+            <NeoBrutalSlider
+              min={0}
+              max={360}
+              step={1}
               value={data.gradientAngle}
-              onChange={(e) =>
-                onChange({ gradientAngle: Number(e.target.value) })
-              }
+              onChange={(value) => onChange({ gradientAngle: value })}
             />
           </div>
         </div>

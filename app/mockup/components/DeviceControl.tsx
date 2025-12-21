@@ -25,9 +25,9 @@ export const DeviceControl: React.FC<DeviceControlProps> = ({
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between border-b-2 border-black dark:border-gray-600 pb-1">
+      <div className="flex items-end justify-between border-b-2 border-black dark:border-gray-600 pb-1">
         <h3 className="font-bold uppercase text-sm">Device</h3>
-        <div className="flex border-2 rounded-full border-black neo-shadow overflow-hidden">
+        <div className="flex border-2 border-black neo-shadow overflow-hidden">
           <button
             onClick={() => setPlatform("ios")}
             className={`flex flex-row items-center px-4 py-1 text-xs font-bold transition-colors uppercase ${

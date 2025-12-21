@@ -39,8 +39,13 @@ const INITIAL_DATA: ScreenshotData = {
   gradientColorTo: "#ec4899",
   gradientAngle: 135,
   templateId: TEMPLATES[0].id,
-  layout: "text-top",
-  showNotch: true,
+  showNotch: false,
+  textTranslateX: 0,
+  textTranslateY: 0,
+  deviceTranslateX: 0,
+  deviceTranslateY: 0,
+  deviceRotate: 0,
+  deviceScale: 1,
 };
 
 export const ScreenshotEditor: React.FC = () => {
@@ -244,6 +249,8 @@ export const ScreenshotEditor: React.FC = () => {
                 data={currentSlide}
                 template={currentTemplate}
                 scale={1}
+                onChange={handleDataChange}
+                interactionScale={previewScale}
               />
             </div>
           </div>
