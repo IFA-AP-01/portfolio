@@ -37,7 +37,12 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
         <div
           ref={ref}
           className="w-full h-full relative flex flex-col"
-          style={{ backgroundColor: data.backgroundColor }}
+          style={{
+            background:
+              data.backgroundType === "gradient"
+                ? `linear-gradient(${data.gradientAngle}deg, ${data.gradientColorFrom}, ${data.gradientColorTo})`
+                : data.backgroundColor,
+          }}
         >
           {/* Background Image if present */}
           {data.backgroundImage && (

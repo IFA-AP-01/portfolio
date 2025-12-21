@@ -44,6 +44,10 @@ export interface ScreenshotData {
   titleColor: string;
   subtitleColor: string;
   backgroundColor: string;
+  backgroundType: 'solid' | 'gradient';
+  gradientColorFrom: string;
+  gradientColorTo: string;
+  gradientAngle: number;
   backgroundImage?: string;
   screenshotImage?: string; // data url or path
   templateId: string;
