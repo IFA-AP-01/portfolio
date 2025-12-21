@@ -1,3 +1,6 @@
+import { TEMPLATES } from "./data/templates";
+import { ScreenshotData } from "./types";
+
 export const FONTS = [
   { name: "Inter", value: "Inter, sans-serif" },
   { name: "Roboto", value: "'Roboto', sans-serif" },
@@ -44,6 +47,44 @@ export const GRADIENT_PRESETS = [
   { from: "#78350f", to: "#fbbf24" },
 ];
 
-
-
 export const GRADIENT_ANGLES = [135, 180, 225, 270];
+
+export const INITIAL_DATA: ScreenshotData = {
+  title: "Your title here",
+  subtitle: "Place your subtitle here",
+  titleFontFamily: "Montserrat, sans-serif",
+  subtitleFontFamily: "Montserrat, sans-serif",
+  titleTextAlign: "center",
+  subtitleTextAlign: "center",
+  titleFontSize: 100,
+  titleFontWeight: "bold",
+  titleFontStyle: "normal",
+  titleTextDecoration: "none",
+  titleLetterSpacing: 0,
+  titleLineHeight: 1.2,
+  titleTextShadow: false,
+  screenshotImage: "https://cdn.ifateam.dev/placeholder-screenshot.png",
+  subtitleFontSize: 56,
+  subtitleFontWeight: "normal",
+  subtitleFontStyle: "normal",
+  subtitleTextDecoration: "none",
+  subtitleLetterSpacing: 0,
+  subtitleLineHeight: 1.4,
+  subtitleTextShadow: false,
+  titleColor: "#ffffff",
+  subtitleColor: "#e0e0e0",
+  backgroundColor: "#1a1a1a",
+  backgroundType: "gradient",
+  gradientColorFrom: "#4094b0",
+  gradientColorTo: "#0f172a",
+  gradientAngle: 0,
+  templateId: TEMPLATES[1].id,
+  showNotch: true,
+  textTranslateX: 0,
+  textTranslateY: 0,
+  deviceTranslateX: 0,
+  deviceTranslateY: 0,
+  deviceRotate: 0,
+  deviceScale: 1,
+};
+

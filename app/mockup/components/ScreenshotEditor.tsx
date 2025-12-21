@@ -9,44 +9,7 @@ import { ExportDialog } from "./ExportDialog";
 import { TEMPLATES } from "../data/templates";
 import { ScreenshotData } from "../types";
 import { useScreenshotExport } from "../hooks/useScreenshotExport";
-
-const INITIAL_DATA: ScreenshotData = {
-  title: "Your title here",
-  subtitle: "Place your subtitle here",
-  titleFontFamily: "Inter, sans-serif",
-  subtitleFontFamily: "Inter, sans-serif",
-  titleTextAlign: "center",
-  subtitleTextAlign: "center",
-  titleFontSize: 88,
-  titleFontWeight: "bold",
-  titleFontStyle: "normal",
-  titleTextDecoration: "none",
-  titleLetterSpacing: 0,
-  titleLineHeight: 1.2,
-  titleTextShadow: false,
-  subtitleFontSize: 56,
-  subtitleFontWeight: "normal",
-  subtitleFontStyle: "normal",
-  subtitleTextDecoration: "none",
-  subtitleLetterSpacing: 0,
-  subtitleLineHeight: 1.4,
-  subtitleTextShadow: false,
-  titleColor: "#ffffff",
-  subtitleColor: "#e0e0e0",
-  backgroundColor: "#1a1a1a",
-  backgroundType: "solid",
-  gradientColorFrom: "#6366f1",
-  gradientColorTo: "#ec4899",
-  gradientAngle: 135,
-  templateId: TEMPLATES[0].id,
-  showNotch: false,
-  textTranslateX: 0,
-  textTranslateY: 0,
-  deviceTranslateX: 0,
-  deviceTranslateY: 0,
-  deviceRotate: 0,
-  deviceScale: 1,
-};
+import { INITIAL_DATA } from "../constants";
 
 export const ScreenshotEditor: React.FC = () => {
   const [slides, setSlides] = useState<ScreenshotData[]>([INITIAL_DATA]);

@@ -14,7 +14,7 @@ export const LayoutControl: React.FC<LayoutControlProps> = ({
   onChange,
 }) => {
   return (
-    <div className="space-y-2">
+    <div className="space-y-1">
       <div className="flex items-end justify-between border-b-2 border-black pb-1 dark:border-gray-600">
         <h3 className="font-bold uppercase text-sm">Position</h3>
         <button
@@ -35,9 +35,9 @@ export const LayoutControl: React.FC<LayoutControlProps> = ({
       </div>
 
       {/* Text Position*/}
-      <div className="flex items-end gap-4 pt-2 justify-between">
+      <div className="flex items-end gap-4 justify-between">
         {/* Text Offset X */}
-        <div className="space-y-1 w-full">
+        <div className="w-full">
           <label className="text-[10px] font-bold uppercase text-gray-500">
             Text X
           </label>
@@ -55,7 +55,7 @@ export const LayoutControl: React.FC<LayoutControlProps> = ({
         </div>
 
         {/* Text Offset Y */}
-        <div className="space-y-1 w-full">
+        <div className="w-full">
           <label className="text-[10px] font-bold uppercase text-gray-500">
             Text Y
           </label>
@@ -74,9 +74,9 @@ export const LayoutControl: React.FC<LayoutControlProps> = ({
       </div>
 
       {/* Device Position*/}
-      <div className="flex items-end gap-4 pt-2">
+      <div className="flex items-end gap-4">
         {/* Offset X */}
-        <div className="space-y-1 w-full">
+        <div className="w-full">
           <label className="text-[10px] font-bold uppercase text-gray-500">
             Image X
           </label>
@@ -94,7 +94,7 @@ export const LayoutControl: React.FC<LayoutControlProps> = ({
         </div>
 
         {/* Offset Y */}
-        <div className="space-y-1 w-full">
+        <div className="w-full">
           <label className="text-[10px] font-bold uppercase text-gray-500">
             Image Y
           </label>
@@ -127,7 +127,7 @@ export const LayoutControl: React.FC<LayoutControlProps> = ({
               value={data.deviceRotate}
               onChange={(value) => onChange({ deviceRotate: value })}
             />
-            <span className="w-12 text-start text-[10px] font-bold">
+            <span className="w-8 text-end text-[10px] font-bold">
               {data.deviceRotate}°
             </span>
           </div>
@@ -146,8 +146,8 @@ export const LayoutControl: React.FC<LayoutControlProps> = ({
               value={data.deviceScale}
               onChange={(value) => onChange({ deviceScale: value })}
             />
-            <span className="w-12 text-start text-[10px] font-bold">
-              {data.deviceScale}
+            <span className="w-8 text-end text-[10px] font-bold">
+              {data.deviceScale.toFixed(2)}
             </span>
           </div>
         </div>

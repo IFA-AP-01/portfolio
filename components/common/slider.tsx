@@ -15,25 +15,25 @@ export const NeoBrutalSlider: React.FC<NeoBrutalSliderProps> = ({
   step = 1,
   onChange,
 }) => {
-  const percent = ((value - min) / (max - min)) * 100;
+  const ratio = (value - min) / (max - min);
+  const thumbWidth = 16;
 
   return (
     <div className="relative w-full flex items-center h-6">
       <div className="relative w-full h-3 bg-white border-2 border-black">
-        {/* Filled track */}
         <div
           className="absolute top-0 left-0 h-full bg-[#E9945B]"
-          style={{ width: `${percent}%` }}
+          style={{ width: `${ratio * 100}%` }}
         />
 
-        {/* Thumb */}
         <div
-          className="absolute top-1/2 w-4 h-4 bg-white border-2 border-black shadow-[3px_3px_0_0_#000] -translate-y-1/2"
-          style={{ left: `calc(${percent}% - 10px)` }}
+          className="absolute top-1/2 w-4 h-4 bg-white border-2 border-black -translate-y-1/2"
+          style={{
+            left: `calc((100% - ${thumbWidth}px) * ${ratio})`,
+          }}
         />
       </div>
 
-      {/* Native input (invisible, for interaction) */}
       <input
         type="range"
         min={min}

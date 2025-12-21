@@ -7,12 +7,22 @@ import Link from "next/link";
 import { useTheme } from "@/context/theme-context";
 import teamImage from "@/public/logo.webp";
 import { BsMoon, BsSun } from "react-icons/bs";
-import { faLink, faExchange, faBlog } from "@fortawesome/free-solid-svg-icons";
+import {
+  faLink,
+  faExchange,
+  faBlog,
+  faMobileAndroid,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
 
 const menuItems = [
+  {
+    name: "Screenshot maker",
+    href: "/mockup",
+    icon: faMobileAndroid,
+  },
   {
     name: "Converter",
     href: "/toonify",
@@ -79,7 +89,7 @@ export default function Header() {
                     activeSection === item.href ? "" : "dark:text-white"
                   }`}
                 >
-                  <FontAwesomeIcon icon={item.icon} />
+                  <FontAwesomeIcon icon={item.icon} className="w-4 h-4" />
                 </span>
 
                 <span
@@ -87,7 +97,7 @@ export default function Header() {
                     activeSection === item.href ? "" : "dark:text-white"
                   }`}
                 >
-                  <FontAwesomeIcon icon={item.icon} />
+                  <FontAwesomeIcon icon={item.icon} className="w-4 h-4" />
                   {item.name}
                 </span>
 

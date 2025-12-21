@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "@/public/logo.webp";
-import { FaGithub, FaTwitter, FaArrowRight } from "react-icons/fa";
+import { FaGithub, FaArrowRight } from "react-icons/fa";
 import { BsDiscord } from "react-icons/bs";
 
 export default function Footer() {
@@ -116,20 +116,19 @@ export default function Footer() {
 
           {/* CTA Section */}
           <div className="flex flex-col">
-            <div className="neo-card p-6 bg-[#faf8f1] dark:bg-[#252526] relative overflow-hidden group">
+            <div className="neo-card p-4 bg-[#faf8f1] dark:bg-[#252526] relative overflow-hidden group">
               <div className="relative z-10">
                 <div className="flex items-center gap-2 mb-2 text-[#E9945B] font-bold text-xs uppercase tracking-wide">
-                  <span>✨ Shorten your link</span>
+                  <span>App screenshot generator</span>
                 </div>
                 <h3 className="text-lg font-bold text-black dark:text-white mb-2">
                   Free & easy to use
                 </h3>
                 <p className="text-xs text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-                  Monitor your links statistics with our free & easy to use
-                  service.
+                  Generate app screenshots with our free & easy to use service.
                 </p>
                 <Link
-                  href="/shorten-link"
+                  href="/mockup"
                   className="neo-button bg-[#E9945B] text-black text-xs inline-flex items-center gap-2 w-full justify-center"
                 >
                   Try it now <FaArrowRight className="text-[10px]" />
