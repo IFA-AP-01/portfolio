@@ -55,7 +55,7 @@ export const AssetUploader: React.FC<AssetUploaderProps> = ({
   };
 
   return (
-    <div>
+    <div className="w-full flex flex-col">
       <label className="block text-xs font-bold mb-1 uppercase">{label}</label>
 
       {!imageSrc ? (

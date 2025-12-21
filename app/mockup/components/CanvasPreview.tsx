@@ -10,13 +10,18 @@ interface CanvasPreviewProps {
   scale: number;
 }
 
+const DEFAULT_IOS_SCALE = 0.85;
+const DEFAULT_ANDROID_SCALE = 0.7;
+
 export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
   ({ data, template, scale }, ref) => {
     const { width, height } = template.defaultDimensions;
 
-    // Calculate layout styles based on template
-    const isTextTop = template.layout === "text-top";
-    const isTextBottom = template.layout === "text-bottom";
+    const isTextTop = data.layout === "text-top";
+    const isTextBottom = data.layout === "text-bottom";
+
+    const screenScale =
+      template.platform === "ios" ? DEFAULT_IOS_SCALE : DEFAULT_ANDROID_SCALE;
 
     return (
       <div
@@ -52,9 +57,8 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
           >
             {/* Text Section - Order depends on layout */}
             {(isTextTop ||
-              template.layout === "text-overlay" ||
-              template.layout === "phone-left" ||
-              template.layout === "phone-right") && (
+              data.layout === "phone-left" ||
+              data.layout === "phone-right") && (
               <div
                 className="mb-8 pt-20 px-8"
                 style={{ textAlign: data.textAlign }}
@@ -100,15 +104,22 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
             {/* Device Frame Section */}
             <div
               className={`flex-1 relative flex justify-center items-center overflow-hidden transition-all duration-500
-                ${template.layout === "phone-left" ? "-translate-x-[25%]" : ""}
-                ${template.layout === "phone-right" ? "translate-x-[25%]" : ""}
+                ${data.layout === "phone-left" ? "-translate-x-[20%]" : ""}
+                ${data.layout === "phone-right" ? "translate-x-[20%]" : ""}
               `}
             >
-              <div className="relative w-[85%] h-auto aspect-[1/2.16]">
+              <div
+                className={`relative w-full h-auto aspect-[1/2.16]`}
+                style={{ transform: `scale(${screenScale})` }}
+              >
                 {/* Frame Image */}
                 <div className="absolute inset-0 pointer-events-none z-20">
                   <Image
-                    src={template.deviceFrame}
+                    src={
+                      data.showNotch
+                        ? `/frame/${template.deviceFrame}.svg`
+                        : `/frame/${template.deviceFrame}-frame-only.svg`
+                    }
                     alt="Device Frame"
                     width={template.defaultDimensions.width}
                     height={template.defaultDimensions.height}
@@ -133,7 +144,7 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
                       alt="App Screenshot"
                       width={template.defaultDimensions.width}
                       height={template.defaultDimensions.height}
-                      className="w-full h-full object-contain rounded-[6rem]"
+                      className="w-full h-full object-fill rounded-[9rem]"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-gray-500 bg-gray-100 text-3xl font-bold rounded-[10rem]">

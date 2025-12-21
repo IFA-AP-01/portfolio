@@ -33,6 +33,8 @@ const INITIAL_DATA: ScreenshotData = {
   subtitleColor: "#e0e0e0",
   backgroundColor: "#1a1a1a",
   templateId: TEMPLATES[0].id,
+  layout: "text-top",
+  showNotch: true,
 };
 
 export const ScreenshotEditor: React.FC = () => {

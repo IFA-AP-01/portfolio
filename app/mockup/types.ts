@@ -9,7 +9,6 @@ export interface Template {
   id: string;
   name: string;
   platform: Platform;
-  layout: 'text-top' | 'text-bottom' | 'text-overlay' | 'phone-left' | 'phone-right';
   deviceFrame: string; // path to svg
   screenRegion: {
     top: string;
@@ -46,6 +45,8 @@ export interface ScreenshotData {
   backgroundImage?: string;
   screenshotImage?: string; // data url or path
   templateId: string;
+  layout: 'text-top' | 'text-bottom' | 'phone-left' | 'phone-right';
+  showNotch: boolean;
 }
 
 export const IOS_DIMENSIONS: Dimensions = { width: 1242, height: 2688 };

@@ -1,10 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { ScreenshotData, Template } from "../types";
 import { AssetUploader } from "./AssetUploader";
 import { TextControl } from "./TextControl";
 import { FontSelector } from "./FontSelector";
+import Checkbox from "@/components/common/check-box";
+import { BsAndroid2, BsApple } from "react-icons/bs";
 
 interface ControlPanelProps {
   data: ScreenshotData;
@@ -45,24 +47,88 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
     { name: "Inconsolata", value: "'Inconsolata', monospace" },
   ];
 
+  const [activeTab, setActiveTab] = useState<"ios" | "android">("ios");
+
+  const filteredTemplates = templates.filter((t) => t.platform === activeTab);
+
   return (
     <div className="flex flex-col gap-6 h-full mb-6">
       <div className="space-y-4">
-        <h3 className="font-bold border-b-2 border-black dark:border-gray-600 pb-1 uppercase text-sm">
-          Template
-        </h3>
-        <div className="grid grid-cols-2 gap-3">
-          {templates.map((t) => (
+        <div className="flex items-center justify-between border-b-2 border-black dark:border-gray-600 pb-1">
+          <h3 className="font-bold uppercase text-sm">Template</h3>
+          <div className="flex border-2 rounded-full border-black neo-shadow overflow-hidden">
             <button
-              key={t.id}
-              onClick={() => onSelectTemplate(t.id)}
-              className={`p-2 text-xs font-bold border-2 border-black transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none ${
-                selectedTemplateId === t.id
+              onClick={() => setActiveTab("ios")}
+              className={`flex flex-row items-center px-4 py-1 text-xs font-bold transition-colors
+              ${
+                activeTab === "ios"
+                  ? "bg-[#E9945B] text-black"
+                  : "bg-transparent text-gray-400"
+              }`}
+            >
+              <BsApple /> <span className="ml-2">iOS</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab("android")}
+              className={`flex flex-row items-center px-4 py-1 text-xs font-bold transition-colors border-l-2 border-black
+              ${
+                activeTab === "android"
+                  ? "bg-[#E9945B] text-black"
+                  : "bg-transparent text-gray-400"
+              }`}
+            >
+              <BsAndroid2 /> <span className="ml-2">Android</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-3">
+        {filteredTemplates.map((t) => (
+          <button
+            key={t.id}
+            onClick={() => onSelectTemplate(t.id)}
+            className={`p-2 text-xs font-bold border-2 border-black transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none ${
+              selectedTemplateId === t.id
+                ? "bg-[#E9945B] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.5)]"
+                : "bg-white dark:bg-[#333] hover:bg-gray-50 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.2)]"
+            }`}
+          >
+            {t.name}
+          </button>
+        ))}
+      </div>
+
+      <div className="flex gap-2 text-xs items-center">
+        <Checkbox
+          checked={data.showNotch}
+          onChange={(checked) => onChange({ showNotch: checked })}
+        />
+        <span>Show Notch</span>
+      </div>
+
+      <div className="space-y-4">
+        <h3 className="font-bold border-b-2 border-black dark:border-gray-600 pb-1 uppercase text-sm">
+          Layout
+        </h3>
+        <div className="grid grid-cols-2 gap-2">
+          {[
+            { id: "text-top", label: "Text Top" },
+            { id: "text-bottom", label: "Text Bottom" },
+            { id: "phone-left", label: "Phone Left" },
+            { id: "phone-right", label: "Phone Right" },
+          ].map((layout) => (
+            <button
+              key={layout.id}
+              onClick={() => onChange({ layout: layout.id as any })}
+              className={`p-2 text-xs font-bold border-2 border-black transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none uppercase ${
+                data.layout === layout.id
                   ? "bg-[#E9945B] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.5)]"
                   : "bg-white dark:bg-[#333] hover:bg-gray-50 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.2)]"
               }`}
             >
-              {t.name}
+              {layout.label}
             </button>
           ))}
         </div>
@@ -77,7 +143,7 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
             Title
           </label>
           <textarea
-            className="w-full p-2 border-2 border-black dark:border-gray-600 rounded-none bg-transparent focus:outline-none focus:bg-gray-50 dark:focus:bg-[#333]"
+            className="w-full p-2 border-2 border-black resize-none dark:border-gray-600 rounded-none bg-transparent focus:outline-none focus:bg-gray-50 dark:focus:bg-[#333]"
             rows={2}
             value={data.title}
             onChange={(e) => onChange({ title: e.target.value })}
@@ -88,7 +154,7 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
             Subtitle
           </label>
           <textarea
-            className="w-full p-2 border-2 border-black dark:border-gray-600 rounded-none bg-transparent focus:outline-none focus:bg-gray-50 dark:focus:bg-[#333]"
+            className="w-full p-2 border-2 border-black resize-none dark:border-gray-600 rounded-none bg-transparent focus:outline-none focus:bg-gray-50 dark:focus:bg-[#333]"
             rows={2}
             value={data.subtitle}
             onChange={(e) => onChange({ subtitle: e.target.value })}
@@ -260,18 +326,20 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
         <h3 className="font-bold border-b-2 border-black dark:border-gray-600 pb-1 uppercase text-sm">
           Assets
         </h3>
-        <AssetUploader
-          label="App Screenshot"
-          imageSrc={data.screenshotImage}
-          onImageChange={(img) => onChange({ screenshotImage: img })}
-          onRemove={() => onChange({ screenshotImage: undefined })}
-        />
-        <AssetUploader
-          label="Background Image"
-          imageSrc={data.backgroundImage}
-          onImageChange={(img) => onChange({ backgroundImage: img })}
-          onRemove={() => onChange({ backgroundImage: undefined })}
-        />
+        <div className="flex gap-4 w-full flex-col md:flex-row">
+          <AssetUploader
+            label="App Screenshot"
+            imageSrc={data.screenshotImage}
+            onImageChange={(img) => onChange({ screenshotImage: img })}
+            onRemove={() => onChange({ screenshotImage: undefined })}
+          />
+          <AssetUploader
+            label="Background Image"
+            imageSrc={data.backgroundImage}
+            onImageChange={(img) => onChange({ backgroundImage: img })}
+            onRemove={() => onChange({ backgroundImage: undefined })}
+          />
+        </div>
       </div>
     </div>
   );
