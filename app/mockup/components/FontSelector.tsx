@@ -43,15 +43,12 @@ export const FontSelector: React.FC<FontSelectorProps> = ({
 
   return (
     <div className="relative" ref={dropdownRef}>
-      <label className="block text-xs font-bold mb-1 uppercase">
-        Font Family
-      </label>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full p-2 border-2 border-black dark:border-gray-600 bg-white dark:bg-[#333] text-left flex justify-between items-center focus:outline-none"
+        className="w-full p-2 neo-shadow border-2 border-black text-left flex justify-between items-center focus:outline-none"
         style={{ fontFamily: selectedFont }}
       >
-        <span>{selectedFontName}</span>
+        <span className="text-xs">{selectedFontName}</span>
         <span className="text-xs">▼</span>
       </button>
 

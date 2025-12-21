@@ -62,14 +62,11 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
             {(isTextTop ||
               data.layout === "phone-left" ||
               data.layout === "phone-right") && (
-              <div
-                className="mb-8 pt-20 px-8"
-                style={{ textAlign: data.textAlign }}
-              >
+              <div className="mb-8 pt-20 px-8">
                 <h1
                   style={{
                     color: data.titleColor,
-                    fontFamily: data.fontFamily,
+                    fontFamily: data.titleFontFamily,
                     fontSize: `${data.titleFontSize}px`,
                     fontWeight: data.titleFontWeight,
                     fontStyle: data.titleFontStyle,
@@ -80,6 +77,7 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
                       ? "2px 2px 4px rgba(0,0,0,0.5)"
                       : "none",
                     marginBottom: "1rem",
+                    textAlign: data.titleTextAlign,
                   }}
                 >
                   {data.title}
@@ -87,7 +85,7 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
                 <h2
                   style={{
                     color: data.subtitleColor,
-                    fontFamily: data.fontFamily,
+                    fontFamily: data.subtitleFontFamily,
                     fontSize: `${data.subtitleFontSize}px`,
                     fontWeight: data.subtitleFontWeight,
                     fontStyle: data.subtitleFontStyle,
@@ -97,6 +95,7 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
                     textShadow: data.subtitleTextShadow
                       ? "2px 2px 4px rgba(0,0,0,0.5)"
                       : "none",
+                    textAlign: data.subtitleTextAlign,
                   }}
                 >
                   {data.subtitle}
@@ -164,14 +163,11 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
 
             {/* Text Bottom Section */}
             {isTextBottom && (
-              <div
-                className="mt-8 pb-20 px-8"
-                style={{ textAlign: data.textAlign }}
-              >
+              <div className="mt-8 pb-20 px-8">
                 <h1
                   style={{
                     color: data.titleColor,
-                    fontFamily: data.fontFamily,
+                    fontFamily: data.titleFontFamily,
                     fontSize: `${data.titleFontSize}px`,
                     fontWeight: data.titleFontWeight,
                     fontStyle: data.titleFontStyle,
@@ -182,6 +178,7 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
                       ? "2px 2px 4px rgba(0,0,0,0.5)"
                       : "none",
                     marginBottom: "1rem",
+                    textAlign: data.titleTextAlign,
                   }}
                 >
                   {data.title}
@@ -189,7 +186,7 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
                 <h2
                   style={{
                     color: data.subtitleColor,
-                    fontFamily: data.fontFamily,
+                    fontFamily: data.subtitleFontFamily,
                     fontSize: `${data.subtitleFontSize}px`,
                     fontWeight: data.subtitleFontWeight,
                     fontStyle: data.subtitleFontStyle,
@@ -199,6 +196,7 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
                     textShadow: data.subtitleTextShadow
                       ? "2px 2px 4px rgba(0,0,0,0.5)"
                       : "none",
+                    textAlign: data.subtitleTextAlign,
                   }}
                 >
                   {data.subtitle}

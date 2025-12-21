@@ -23,7 +23,10 @@ export interface Template {
 export interface ScreenshotData {
   title: string;
   subtitle: string;
-  fontFamily: string;
+  titleFontFamily: string;
+  subtitleFontFamily: string;
+  titleTextAlign: 'left' | 'center' | 'right';
+  subtitleTextAlign: 'left' | 'center' | 'right';
   titleFontSize: number;
   titleFontWeight: string;
   titleFontStyle: string;
@@ -38,7 +41,6 @@ export interface ScreenshotData {
   subtitleLetterSpacing: number;
   subtitleLineHeight: number;
   subtitleTextShadow: boolean;
-  textAlign: 'left' | 'center' | 'right';
   titleColor: string;
   subtitleColor: string;
   backgroundColor: string;
