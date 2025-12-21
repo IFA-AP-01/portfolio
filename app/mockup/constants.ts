@@ -52,8 +52,8 @@ export const GRADIENT_ANGLES = [135, 180, 225, 270];
 export const INITIAL_DATA: ScreenshotData = {
   title: "Your title here",
   subtitle: "Place your subtitle here",
-  titleFontFamily: "Montserrat, sans-serif",
-  subtitleFontFamily: "Montserrat, sans-serif",
+  titleFontFamily: "Montserrat",
+  subtitleFontFamily: "Montserrat",
   titleTextAlign: "center",
   subtitleTextAlign: "center",
   titleFontSize: 100,

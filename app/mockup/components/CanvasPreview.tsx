@@ -13,7 +13,7 @@ interface CanvasPreviewProps {
   interactionScale?: number;
 }
 
-const DEFAULT_IOS_SCALE = 0.8;
+const DEFAULT_IOS_SCALE = 0.75;
 const DEFAULT_ANDROID_SCALE = 0.65;
 
 export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
@@ -126,7 +126,7 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
           <div className="relative z-10 w-full h-full">
             {/* Text Section */}
             <div
-              className="absolute left-1/2 top-[10%] z-30 flex flex-col items-center justify-center p-8 w-full pointer-events-auto"
+              className="absolute left-1/2 top-[10%] z-30 flex flex-col justify-center p-8 w-full pointer-events-auto"
               style={{
                 transform: `translate(-50%, -50%) translate(${data.textTranslateX}px, ${data.textTranslateY}px)`,
                 cursor: onChange ? "move" : "default",

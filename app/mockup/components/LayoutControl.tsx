@@ -119,7 +119,7 @@ export const LayoutControl: React.FC<LayoutControlProps> = ({
           <label className="text-[10px] font-bold uppercase text-gray-500">
             Rotation
           </label>
-          <div className="flex items-center gap-3 py-1">
+          <div className="flex items-center gap-1 py-1">
             <NeoBrutalSlider
               min={-60}
               max={60}
@@ -138,7 +138,7 @@ export const LayoutControl: React.FC<LayoutControlProps> = ({
           <label className="text-[10px] font-bold uppercase text-gray-500">
             Scale
           </label>
-          <div className="flex items-center gap-3 py-1">
+          <div className="flex items-center gap-1 py-1">
             <NeoBrutalSlider
               min={1}
               max={2}

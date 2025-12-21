@@ -29,18 +29,23 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
   const currentYear = new Date().getFullYear();
   return (
     <div className="flex flex-col gap-6 h-full mb-6">
-      <Link href="/" className="flex items-center">
-        <div className="neo-shadow border-black border-2 w-10 h-10 flex items-center justify-center bg-[#E9945B]">
-          <Image
-            src={teamImage}
-            alt="IFA"
-            width={50}
-            height={50}
-            priority
-            className="w-10 object-contain flex"
-          />
-        </div>
-      </Link>
+      <div className="flex items-center gap-4">
+        <Link href="/" className="flex items-center">
+          <div className="neo-shadow border-black border-2 w-10 flex items-center justify-center bg-[#E9945B]">
+            <Image
+              src={teamImage}
+              alt="IFA"
+              width={50}
+              height={50}
+              priority
+              className="w-10 object-contain flex"
+            />
+          </div>
+        </Link>
+        <span className="text-md uppercase font-bold">
+          Screenshot Generator Demo
+        </span>
+      </div>
       <DeviceControl
         data={data}
         onChange={onChange}
