@@ -8,13 +8,14 @@ interface CanvasPreviewProps {
   data: ScreenshotData;
   template: Template;
   scale: number;
+  priority?: boolean;
 }
 
 const DEFAULT_IOS_SCALE = 0.85;
 const DEFAULT_ANDROID_SCALE = 0.7;
 
 export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
-  ({ data, template, scale }, ref) => {
+  ({ data, template, scale, priority = false }, ref) => {
     const { width, height } = template.defaultDimensions;
 
     const isTextTop = data.layout === "text-top";
@@ -47,6 +48,8 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
                 width={width}
                 height={height}
                 className="w-full h-full object-cover"
+                priority={priority}
+                unoptimized
               />
             </div>
           )}
@@ -124,6 +127,8 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
                     width={template.defaultDimensions.width}
                     height={template.defaultDimensions.height}
                     className="w-full h-full object-contain"
+                    priority={priority}
+                    unoptimized
                   />
                 </div>
 
@@ -145,6 +150,8 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
                       width={template.defaultDimensions.width}
                       height={template.defaultDimensions.height}
                       className="w-full h-full object-fill rounded-[9rem]"
+                      priority={priority}
+                      unoptimized
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-gray-500 bg-gray-100 text-3xl font-bold rounded-[10rem]">

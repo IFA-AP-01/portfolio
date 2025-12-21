@@ -55,7 +55,7 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
     <div className="flex flex-col gap-6 h-full mb-6">
       <div className="space-y-4">
         <div className="flex items-center justify-between border-b-2 border-black dark:border-gray-600 pb-1">
-          <h3 className="font-bold uppercase text-sm">Template</h3>
+          <h3 className="font-bold uppercase text-sm">Device</h3>
           <div className="flex border-2 rounded-full border-black neo-shadow overflow-hidden">
             <button
               onClick={() => setActiveTab("ios")}
@@ -83,7 +83,13 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
           </div>
         </div>
       </div>
-
+      <div className="flex gap-2 text-xs items-center">
+        <Checkbox
+          checked={data.showNotch}
+          onChange={(checked) => onChange({ showNotch: checked })}
+        />
+        <span>Show {activeTab === "ios" ? "Dynamic Island" : "Camera"}</span>
+      </div>
       <div className="grid grid-cols-2 gap-3">
         {filteredTemplates.map((t) => (
           <button
@@ -98,14 +104,6 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
             {t.name}
           </button>
         ))}
-      </div>
-
-      <div className="flex gap-2 text-xs items-center">
-        <Checkbox
-          checked={data.showNotch}
-          onChange={(checked) => onChange({ showNotch: checked })}
-        />
-        <span>Show Notch</span>
       </div>
 
       <div className="space-y-4">

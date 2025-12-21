@@ -7,10 +7,10 @@ export const TEMPLATES: Template[] = [
     platform: 'ios',
     deviceFrame: 'iPhone16',
     screenRegion: {
-        top: '3.0%',
-        left: '5.2%',
-        width: '89.6%',
-        height: '94%',
+        top: '4.0%',
+        left: '4.8%',
+        width: '90%',
+        height: '91%',
         borderRadius: '3.5rem'
     },
     defaultDimensions: IOS_DIMENSIONS,
@@ -21,10 +21,10 @@ export const TEMPLATES: Template[] = [
     platform: 'ios',
     deviceFrame: 'iPhone16Pro',
     screenRegion: {
-        top: '3.0%',
+        top: '3.2%',
         left: '3.0%',
         width: '94%',
-        height: '94%',
+        height: '93%',
         borderRadius: '3.5rem'
     },
     defaultDimensions: IOS_DIMENSIONS,
