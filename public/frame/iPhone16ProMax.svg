@@ -109,27 +109,27 @@
 <rect x="8" width="1408" height="2956" rx="230" fill="black"/>
 </mask>
 <g mask="url(#mask2_1203_2)">
-<foreignObject x="1123" y="-3" width="25" height="22"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(1.5px);clip-path:url(#bgblur_4_1203_2_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="3">
+<g data-figma-bg-blur-radius="3">
 <path d="M1145 0L1145 16L1126 16L1126 -6.55671e-07L1145 0Z" fill="white" fill-opacity="0.2"/>
 <path d="M1144.5 15.5L1126.5 15.5L1126.5 0.499999L1144.5 0.5L1144.5 15.5Z" stroke="black" stroke-opacity="0.1"/>
 </g>
-<foreignObject x="4" y="277" width="23" height="25"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(1.5px);clip-path:url(#bgblur_5_1203_2_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="3">
+<g data-figma-bg-blur-radius="3">
 <path d="M24 299L7 299L7 280L24 280L24 299Z" fill="white" fill-opacity="0.2"/>
 <path d="M7.5 298.5L7.5 280.5L23.5 280.5L23.5 298.5L7.5 298.5Z" stroke="black" stroke-opacity="0.1"/>
 </g>
-<foreignObject x="1397" y="277" width="23" height="25"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(1.5px);clip-path:url(#bgblur_6_1203_2_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="3">
+<g data-figma-bg-blur-radius="3">
 <path d="M1417 299L1400 299L1400 280L1417 280L1417 299Z" fill="white" fill-opacity="0.2"/>
 <path d="M1400.5 298.5L1400.5 280.5L1416.5 280.5L1416.5 298.5L1400.5 298.5Z" stroke="black" stroke-opacity="0.1"/>
 </g>
-<foreignObject x="4" y="2655" width="23" height="25"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(1.5px);clip-path:url(#bgblur_7_1203_2_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="3">
+<g data-figma-bg-blur-radius="3">
 <path d="M24 2677L7 2677L7 2658L24 2658L24 2677Z" fill="white" fill-opacity="0.2"/>
 <path d="M7.5 2676.5L7.5 2658.5L23.5 2658.5L23.5 2676.5L7.5 2676.5Z" stroke="black" stroke-opacity="0.1"/>
 </g>
-<foreignObject x="1398" y="2409" width="22" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(1.5px);clip-path:url(#bgblur_8_1203_2_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="3">
+<g data-figma-bg-blur-radius="3">
 <path d="M1417 2430L1401 2430L1401 2412L1417 2412L1417 2430Z" fill="white" fill-opacity="0.2"/>
 <path d="M1401.5 2429.5L1401.5 2412.5L1416.5 2412.5L1416.5 2429.5L1401.5 2429.5Z" stroke="black" stroke-opacity="0.1"/>
 </g>
-<foreignObject x="276" y="2937" width="25" height="23"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(1.5px);clip-path:url(#bgblur_9_1203_2_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="3">
+<g data-figma-bg-blur-radius="3">
 <path d="M298 2940L298 2957L279 2957L279 2940L298 2940Z" fill="white" fill-opacity="0.2"/>
 <path d="M297.5 2956.5L279.5 2956.5L279.5 2940.5L297.5 2940.5L297.5 2956.5Z" stroke="black" stroke-opacity="0.1"/>
 </g>

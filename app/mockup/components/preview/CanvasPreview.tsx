@@ -1,6 +1,6 @@
 "use client";
 
-import React, { forwardRef, useMemo, memo } from "react";
+import React, { forwardRef, useMemo, memo, useRef } from "react";
 import { ScreenshotData, Template } from "@/lib/types";
 import Image from "next/image";
 import { DEFAULT_ANDROID_SCALE, DEFAULT_IOS_SCALE } from "@/lib/constants";
@@ -20,6 +20,11 @@ const CanvasPreviewComponent = forwardRef<HTMLDivElement, CanvasPreviewProps>(
     ref
   ) => {
     const { width, height } = data.dimensions || template.defaultDimensions;
+
+    // Refs for direct DOM manipulation during drag
+    const textRef = useRef<HTMLDivElement>(null);
+    const deviceWrapperRef = useRef<HTMLDivElement>(null);
+    const deviceInnerRef = useRef<HTMLDivElement>(null);
 
     const [dragState, setDragState] = React.useState<{
       type: "text" | "device" | "rotate";
@@ -42,6 +47,27 @@ const CanvasPreviewComponent = forwardRef<HTMLDivElement, CanvasPreviewProps>(
         startData: { ...data },
       });
     };
+    const [isSafari, setIsSafari] = React.useState(false);
+
+    React.useEffect(() => {
+      const isSafariCheck =
+        typeof navigator !== "undefined" &&
+        /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+      setIsSafari(isSafariCheck);
+    }, []);
+
+    const screenScale = useMemo(
+      () =>
+        template.platform === "ios" ? DEFAULT_IOS_SCALE : DEFAULT_ANDROID_SCALE,
+      [template.platform]
+    );
+
+    const frameSrc = useMemo(() => {
+      const ext = isSafari ? "png" : "svg";
+      return template.hasNotch && !data.showNotch
+        ? `/frame/${template.deviceFrame}-frame-only.${ext}`
+        : `/frame/${template.deviceFrame}.${ext}`;
+    }, [template.hasNotch, template.deviceFrame, data.showNotch, isSafari]);
 
     React.useEffect(() => {
       if (!dragState || !onChange) return;
@@ -65,35 +91,57 @@ const CanvasPreviewComponent = forwardRef<HTMLDivElement, CanvasPreviewProps>(
               (latestMouseEvent.clientY - dragState.startY) /
               (scale * interactionScale);
 
-            if (dragState.type === "text") {
-              onChange({
-                textTranslateX: dragState.startData.textTranslateX + deltaX,
-                textTranslateY: dragState.startData.textTranslateY + deltaY,
-              });
-            } else if (dragState.type === "device") {
-              onChange({
-                deviceTranslateX: dragState.startData.deviceTranslateX + deltaX,
-                deviceTranslateY: dragState.startData.deviceTranslateY + deltaY,
-              });
-            } else if (dragState.type === "rotate") {
-              onChange({
-                deviceRotate: dragState.startData.deviceRotate + deltaX * 0.5,
-              });
+            if (dragState.type === "text" && textRef.current) {
+              const newX = dragState.startData.textTranslateX + deltaX;
+              const newY = dragState.startData.textTranslateY + deltaY;
+              textRef.current.style.transform = `translate(-50%, -50%) translate(${newX}px, ${newY}px)`;
+            } else if (
+              dragState.type === "device" &&
+              deviceWrapperRef.current
+            ) {
+              const newX = dragState.startData.deviceTranslateX + deltaX;
+              const newY = dragState.startData.deviceTranslateY + deltaY;
+              deviceWrapperRef.current.style.transform = `translate(-50%, -50%) translate(${newX}px, ${newY}px)`;
+            } else if (dragState.type === "rotate" && deviceInnerRef.current) {
+              const newRotate = dragState.startData.deviceRotate + deltaX * 0.5;
+              const currentScale =
+                screenScale * dragState.startData.deviceScale;
+              deviceInnerRef.current.style.transform = `scale(${currentScale}) rotate(${newRotate}deg) translateZ(0px)`;
             }
 
-            // Reset RAF ID to allow next frame
             rafId = null;
             latestMouseEvent = null;
           });
         }
       };
 
-      const handleMouseUp = () => {
-        // Cancel any pending RAF when drag ends
+      const handleMouseUp = (e: MouseEvent) => {
         if (rafId !== null) {
           cancelAnimationFrame(rafId);
           rafId = null;
         }
+
+        const deltaX =
+          (e.clientX - dragState.startX) / (scale * interactionScale);
+        const deltaY =
+          (e.clientY - dragState.startY) / (scale * interactionScale);
+
+        if (dragState.type === "text") {
+          onChange({
+            textTranslateX: dragState.startData.textTranslateX + deltaX,
+            textTranslateY: dragState.startData.textTranslateY + deltaY,
+          });
+        } else if (dragState.type === "device") {
+          onChange({
+            deviceTranslateX: dragState.startData.deviceTranslateX + deltaX,
+            deviceTranslateY: dragState.startData.deviceTranslateY + deltaY,
+          });
+        } else if (dragState.type === "rotate") {
+          onChange({
+            deviceRotate: dragState.startData.deviceRotate + deltaX * 0.5,
+          });
+        }
+
         setDragState(null);
       };
 
@@ -107,22 +155,7 @@ const CanvasPreviewComponent = forwardRef<HTMLDivElement, CanvasPreviewProps>(
         window.removeEventListener("mousemove", handleMouseMove);
         window.removeEventListener("mouseup", handleMouseUp);
       };
-    }, [dragState, onChange, scale, interactionScale]);
-
-    // Memoize expensive calculations to prevent recalculation on every render
-    const screenScale = useMemo(
-      () =>
-        template.platform === "ios" ? DEFAULT_IOS_SCALE : DEFAULT_ANDROID_SCALE,
-      [template.platform]
-    );
-
-    const frameSrc = useMemo(
-      () =>
-        template.hasNotch && !data.showNotch
-          ? `/frame/${template.deviceFrame}-frame-only.svg`
-          : `/frame/${template.deviceFrame}.svg`,
-      [template.hasNotch, template.deviceFrame, data.showNotch]
-    );
+    }, [dragState, onChange, scale, interactionScale, screenScale]);
 
     return (
       <div
@@ -161,6 +194,7 @@ const CanvasPreviewComponent = forwardRef<HTMLDivElement, CanvasPreviewProps>(
           <div className="relative z-10 w-full h-full">
             {/* Text Section */}
             <div
+              ref={textRef}
               className="absolute left-1/2 top-[10%] z-30 flex flex-col justify-center p-8 w-full pointer-events-auto will-change-transform"
               style={{
                 transform: `translate(-50%, -50%) translate(${data.textTranslateX}px, ${data.textTranslateY}px)`,
@@ -209,6 +243,7 @@ const CanvasPreviewComponent = forwardRef<HTMLDivElement, CanvasPreviewProps>(
 
             {/* Device Frame Section */}
             <div
+              ref={deviceWrapperRef}
               className="absolute left-1/2 top-[58%] pointer-events-auto will-change-transform"
               onMouseDown={(e) => handleMouseDown(e, "device")}
               style={{
@@ -217,6 +252,7 @@ const CanvasPreviewComponent = forwardRef<HTMLDivElement, CanvasPreviewProps>(
               }}
             >
               <div
+                ref={deviceInnerRef}
                 className={`relative w-full h-auto aspect-[1/2.16]`}
                 style={{
                   width: template.defaultDimensions.width,
@@ -240,7 +276,7 @@ const CanvasPreviewComponent = forwardRef<HTMLDivElement, CanvasPreviewProps>(
 
                 {/* Screenshot Content inside the frame */}
                 <div
-                  className="absolute z-10 overflow-hidden flex items-center justify-center top-0 left-0 rounded-[9rem]"
+                  className="absolute z-10 overflow-hidden flex items-center justify-center top-0 left-0"
                   style={{
                     top: template.screenRegion.top,
                     left: template.screenRegion.left,
@@ -255,12 +291,17 @@ const CanvasPreviewComponent = forwardRef<HTMLDivElement, CanvasPreviewProps>(
                       alt="App Screenshot"
                       width={template.defaultDimensions.width}
                       height={template.defaultDimensions.height}
-                      className={`w-full h-full object-fill rounded-[${template.screenRegion.borderRadius}]`}
+                      className="w-full h-full object-fill"
+                      style={{
+                        borderRadius: template.screenRegion.borderRadius,
+                      }}
                     />
                   ) : (
                     <div
-                      className={`w-full h-full flex items-center justify-center text-gray-500 text-6xl bg-gray-100 font-bold 
-                      rounded-[${template.screenRegion.borderRadius}]`}
+                      className="w-full h-full flex items-center justify-center text-gray-500 text-6xl bg-gray-100 font-bold"
+                      style={{
+                        borderRadius: template.screenRegion.borderRadius,
+                      }}
                     >
                       Empty Image
                     </div>
