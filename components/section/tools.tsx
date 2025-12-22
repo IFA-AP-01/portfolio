@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
+import Image from "next/image";
 
 export default function Tools() {
   const tools = [
@@ -38,32 +39,44 @@ export default function Tools() {
   );
 }
 
-function ToolCard({
+export function ToolCard({
   title,
   description,
   promotionText,
   video,
+  image,
   link,
 }: {
   title: string;
   description: string;
   promotionText: string;
-  video: string;
+  video?: string;
+  image?: string;
   link: string;
 }) {
   return (
     <div className="neo-card rounded-none bg-white dark:bg-[#252526]">
       {/* Video wrapper */}
       <div className="aspect-video w-full overflow-hidden relative">
-        <video
-          src={video}
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover"
-        />
-
+        {video && (
+          <video
+            src={video}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+          />
+        )}
+        {image && (
+          <Image
+            src={image}
+            alt={title}
+            width={0}
+            height={0}
+            className="w-full h-full object-cover"
+          />
+        )}
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-4">
           <h3 className="text-lg font-bold font-mono uppercase text-white">
@@ -80,9 +93,7 @@ function ToolCard({
         >
           Try Now <FaArrowRight className="w-3 h-3" />
         </Link>
-        <span className="text-sm text-[#E9945B] font-bold">
-          {promotionText}
-        </span>
+        <span className="text-sm font-bold">{promotionText}</span>
       </div>
     </div>
   );

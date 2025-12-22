@@ -7,31 +7,16 @@ import Link from "next/link";
 import { useTheme } from "@/context/theme-context";
 import teamImage from "@/public/logo.webp";
 import { BsMoon, BsSun } from "react-icons/bs";
-import {
-  faLink,
-  faExchange,
-  faBlog,
-  faMobileAndroid,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBlog, faTools } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
 
 const menuItems = [
   {
-    name: "Screenshot maker",
-    href: "/mockup",
-    icon: faMobileAndroid,
-  },
-  {
-    name: "Converter",
-    href: "/toonify",
-    icon: faExchange,
-  },
-  {
-    name: "Link shorter",
-    href: "/shorten-link",
-    icon: faLink,
+    name: "Productivity",
+    href: "/tools",
+    icon: faTools,
   },
   {
     name: "Blog",
