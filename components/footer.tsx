@@ -116,7 +116,7 @@ export default function Footer() {
 
           {/* CTA Section */}
           <div className="flex flex-col">
-            <div className="neo-card p-4 bg-[#faf8f1] dark:bg-[#252526] relative overflow-hidden group">
+            <div className="neo-card p-4 bg-[#faf8f1] dark:bg-[#252526] relative overflow-hidden group mb-4">
               <div className="relative z-10">
                 <div className="flex items-center gap-2 mb-2 text-[#E9945B] font-bold text-xs uppercase tracking-wide">
                   <span>App screenshot generator</span>
@@ -135,6 +135,17 @@ export default function Footer() {
                 </Link>
               </div>
             </div>
+            <Link
+              href="https://www.producthunt.com/products/tools-for-indie-developers/reviews/new?utm_source=badge-product_review&utm_medium=badge&utm_source=badge-tools&#0045;for&#0045;indie&#0045;developers"
+              target="_blank"
+            >
+              <Image
+                src="https://api.producthunt.com/widgets/embed-image/v1/product_review.svg?product_id=1140552&theme=light"
+                alt="Tools&#0032;for&#0032;Indie&#0032;Developers - Boost&#0032;Your&#0032;Productivity | Product Hunt"
+                width="250"
+                height="54"
+              />
+            </Link>
           </div>
         </div>
 

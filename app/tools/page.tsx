@@ -41,14 +41,15 @@ export const metadata = {
 export default function ToolsPage() {
   return (
     <div className="min-h-screen pt-28 w-full">
-      <div className="flex flex-col items-center max-w-6xl mx-auto px-4 sm:px-0">
-        <h1 className="max-w-4xl text-2xl sm:text-5xl font-bold mb-8 text-center text-gray-950 dark:text-gray-50">
+      <div className="flex flex-col items-center max-w-6xl mx-auto px-4 sm:px-0 gap-4">
+        <h1 className="max-w-4xl text-2xl sm:text-5xl font-bold text-center text-gray-950 dark:text-gray-50">
           Tools for <span className="text-[#e9945b]">Indie Developers</span>
         </h1>
         <p className="text-gray-500 dark:text-gray-400 text-center pb-8">
           <span className="font-bold text-[#e9945b]">Productivity tools</span>{" "}
           for indie developers to save time and increase efficiency.
         </p>
+
         <div className="w-full">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
             {tools.map((tool, index) => (

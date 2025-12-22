@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import {
   BsLightningCharge,
@@ -91,6 +93,20 @@ export default function Testimonials() {
           <p className="text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
             See what happens when you use tools built for efficiency.
           </p>
+          <div className="flex items-center justify-center">
+            <Link
+              className="neo-shadow rounded-xl"
+              href="https://www.producthunt.com/products/tools-for-indie-developers/reviews/new?utm_source=badge-product_review&utm_medium=badge&utm_source=badge-tools&#0045;for&#0045;indie&#0045;developers"
+              target="_blank"
+            >
+              <Image
+                src="https://api.producthunt.com/widgets/embed-image/v1/product_review.svg?product_id=1140552&theme=light"
+                alt="Tools&#0032;for&#0032;Indie&#0032;Developers - Boost&#0032;Your&#0032;Productivity | Product Hunt"
+                width="250"
+                height="54"
+              />
+            </Link>
+          </div>
         </div>
 
         {/* Grid */}
