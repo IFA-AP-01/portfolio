@@ -62,10 +62,10 @@ export const TEMPLATES: Template[] = [
     hasNotch: false
   },
   {
-    id: 'ipad-13-inch',
-    name: 'iPad 13-inch',
+    id: 'ipad-12.9-inch',
+    name: 'iPad 12.9-inch',
     platform: 'ios',
-    deviceFrame: 'iPad13inch',
+    deviceFrame: 'iPad129inch',
     screenRegion: {
         top: '22.0%',
         left: '4.0%',
