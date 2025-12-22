@@ -16,14 +16,14 @@ export default function Members() {
     <section
       ref={ref}
       id="members"
-      className="max-w-4xl scroll-mt-28 mb-28 flex flex-col items-center justify-center"
+      className="max-w-4xl scroll-mt-28 flex flex-col items-center justify-center"
     >
-      <SectionHeading>Members</SectionHeading>
+      <SectionHeading>About Us</SectionHeading>
       <p className="text-gray-900 mb-8 dark:text-white max-w-[36rem] text-center mx-auto text-xs sm:text-base uppercase tracking-wide">
         Meet our team of talented developers who are passionate about creating
         amazing products.
       </p>
-      <div className="space-y-4">
+      <div className="space-y-2">
         {memoizedMembers.map((member, index) => (
           <Member key={member.title} {...member} />
         ))}

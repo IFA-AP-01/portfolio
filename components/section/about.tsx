@@ -109,7 +109,6 @@ export default function About() {
       transition={{ delay: 0.175 }}
       id="about"
     >
-      <SectionHeading>About</SectionHeading>
       {/* Mobile-Optimized About Cards */}
       <div className="mt-6 sm:mt-8 w-full max-w-4xl">
         <div className="grid gap-6 sm:gap-8 md:gap-10">

@@ -1,4 +1,4 @@
-import { faHome, faBook, faUsers, faFolder, faTools, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faBook, faUsers, faFolder, faTools, faPhone, faRocket } from '@fortawesome/free-solid-svg-icons';
 import AndroidImg from "@/public/Android.webp";
 import AppleImg from "@/public/Apple.webp";
 import DevDungImg from "@/public/DevDung.webp";
@@ -41,6 +41,11 @@ export const links = [
     name: "Skills",
     hash: "#skills",
     icon: faTools,
+  },
+  {
+    name: "Tools",
+    hash: "#tools",
+    icon: faRocket,
   },
   {
     name: "Members",

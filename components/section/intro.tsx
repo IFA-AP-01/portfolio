@@ -21,7 +21,7 @@ export default function Intro() {
     <section
       ref={ref}
       id="home"
-      className="min-h-screen w-full flex items-center justify-center py-16 sm:py-12"
+      className="w-full flex items-center justify-center py-24"
     >
       <div className="w-full max-w-5xl mx-auto">
         <div className="w-full grid xl:grid-cols-2 gap-12 items-center">
@@ -74,11 +74,11 @@ export default function Intro() {
                 <BsArrowRight className="opacity-100 group-hover:translate-x-2 transition font-bold text-xl" />
               </Link>
             </div>
-            <p
+            {/* <p
               className={`${headlineFont.className} w-full mt-8 text-black dark:text-white md:flex sm:flex-row sm:justify-start justify-center flex items-center gap-2 text-xl font-black uppercase tracking-wide`}
             >
               <FaMapMarkerAlt className="text-red-500" /> Danang, Vietnam
-            </p>
+            </p> */}
 
             <div className="w-full flex flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 text-xl font-bold">
               <Link
