@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { ScreenshotData } from "../types";
+import { ScreenshotData } from "@/lib/types";
 import { CanvasPreview } from "./CanvasPreview";
-import { TEMPLATES as ALL_TEMPLATES } from "../data/templates";
+import { TEMPLATES as ALL_TEMPLATES } from "@/lib/templates";
 
 interface SlideListProps {
   slides: ScreenshotData[];

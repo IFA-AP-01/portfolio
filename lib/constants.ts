@@ -1,4 +1,4 @@
-import { TEMPLATES } from "./data/templates";
+import { TEMPLATES } from "./templates";
 import { ScreenshotData } from "./types";
 
 export const FONTS = [

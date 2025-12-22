@@ -1,140 +1,56 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
-import { CanvasPreview } from "./CanvasPreview";
-import { ControlPanel } from "./ControlPanel";
-import { SlideList } from "./SlideList";
+import React from "react";
+import { SlideList } from "./preview/SlideList";
 import { FontLoader } from "./FontLoader";
 import { ExportDialog } from "./ExportDialog";
-import { TEMPLATES } from "../data/templates";
-import { ScreenshotData } from "../types";
-import { useScreenshotExport } from "../hooks/useScreenshotExport";
-import { INITIAL_DATA } from "../constants";
-import { NeoBrutalSlider } from "../../../components/common/slider";
+import { TEMPLATES } from "@/lib/templates";
+import { useScreenshotEditor } from "../../../hooks/useScreenshotEditor";
+import { EditorSidebar } from "./EditorSidebar";
+import { PreviewArea } from "./preview/PreviewArea";
+import { HiddenExportPreviews } from "./preview/HiddenExportPreviews";
 
 export const ScreenshotEditor: React.FC = () => {
-  const [slides, setSlides] = useState<ScreenshotData[]>([INITIAL_DATA]);
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-  const canvasRef = useRef<HTMLDivElement>(null);
-  const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  const [showExportDialog, setShowExportDialog] = useState(false);
-  const [selectedIndices, setSelectedIndices] = useState<Set<number>>(
-    new Set()
-  );
-
   const {
+    slides,
+    currentSlideIndex,
+    setCurrentSlideIndex,
+    canvasRef,
+    slideRefs,
+    showExportDialog,
+    setShowExportDialog,
+    selectedIndices,
+    previewScale,
+    setPreviewScale,
     isExportingSingle,
     isExportingBulk,
-    handleExportSingle,
-    handleExportSelected,
-  } = useScreenshotExport();
-
-  useEffect(() => {
-    if (showExportDialog) {
-      setSelectedIndices(new Set(slides.map((_, i) => i)));
-    }
-  }, [showExportDialog, slides]);
-
-  const toggleSelection = (index: number) => {
-    const newSet = new Set(selectedIndices);
-    if (newSet.has(index)) {
-      newSet.delete(index);
-    } else {
-      newSet.add(index);
-    }
-    setSelectedIndices(newSet);
-  };
-
-  const handleSelectAll = () => {
-    if (selectedIndices.size === slides.length) {
-      setSelectedIndices(new Set());
-    } else {
-      setSelectedIndices(new Set(slides.map((_, i) => i)));
-    }
-  };
-
-  const activeIndex = Math.min(
-    Math.max(currentSlideIndex, 0),
-    slides.length - 1
-  );
-  const currentSlide = slides[activeIndex] || INITIAL_DATA;
-  const currentTemplate =
-    TEMPLATES.find((t) => t.id === currentSlide.templateId) || TEMPLATES[0];
-
-  const handleDataChange = (newData: Partial<ScreenshotData>) => {
-    setSlides((prev) => {
-      const newSlides = [...prev];
-      newSlides[activeIndex] = { ...newSlides[activeIndex], ...newData };
-      return newSlides;
-    });
-  };
-
-  const handleTemplateSelect = (templateId: string) => {
-    setSlides((prev) => {
-      const newSlides = [...prev];
-      newSlides[activeIndex] = { ...newSlides[activeIndex], templateId };
-      return newSlides;
-    });
-  };
-
-  const handleAddSlide = () => {
-    setSlides((prev) => [
-      ...prev,
-      { ...INITIAL_DATA, templateId: prev[prev.length - 1].templateId },
-    ]);
-    setCurrentSlideIndex((prev) => prev + 1);
-  };
-
-  const handleDeleteSlide = (index: number) => {
-    if (slides.length <= 1) return;
-    setSlides((prev) => prev.filter((_, i) => i !== index));
-    if (currentSlideIndex >= index && currentSlideIndex > 0) {
-      setCurrentSlideIndex((prev) => prev - 1);
-    }
-  };
-
-  const onExportSingle = () => {
-    handleExportSingle(canvasRef, currentTemplate, activeIndex).then(() => {
-      setShowExportDialog(false);
-    });
-  };
-
-  const onExportSelected = () => {
-    handleExportSelected(slides, selectedIndices, slideRefs).then((success) => {
-      if (success) setShowExportDialog(false);
-    });
-  };
-
-  const [previewScale, setPreviewScale] = useState(0.25);
-  const MIN_ZOOM = 0.1;
-  const MAX_ZOOM = 2.0;
-
-  const handleWheel = (e: React.WheelEvent) => {
-    if (e.ctrlKey || e.metaKey) {
-      e.preventDefault();
-      const delta = -e.deltaY * 0.001;
-      setPreviewScale((prev) =>
-        Math.min(Math.max(prev + delta, MIN_ZOOM), MAX_ZOOM)
-      );
-    }
-  };
+    activeIndex,
+    currentSlide,
+    currentTemplate,
+    handleDataChange,
+    handleTemplateSelect,
+    handleAddSlide,
+    handleDeleteSlide,
+    toggleSelection,
+    handleSelectAll,
+    onExportSingle,
+    onExportSelected,
+    handleWheel,
+    MIN_ZOOM,
+    MAX_ZOOM,
+  } = useScreenshotEditor();
 
   return (
     <div className="flex h-full bg-[#faf8f1] dark:bg-[#191C1E] flex-col md:flex-row overflow-hidden">
       <FontLoader />
+
       {/* Sidebar Controls */}
-      <div className="neo-shadow w-full md:w-[26rem] border-r-2 border-black dark:border-gray-600 h-full overflow-hidden shrink-0 z-20 flex flex-col bg-white dark:bg-[#252526]">
-        <div className="flex-1 overflow-y-auto p-4 [&::-webkit-scrollbar]:hidden [scrollbar-width:none]">
-          <ControlPanel
-            data={currentSlide}
-            onChange={handleDataChange}
-            templates={TEMPLATES}
-            onSelectTemplate={handleTemplateSelect}
-            selectedTemplateId={currentSlide.templateId}
-          />
-        </div>
-      </div>
+      <EditorSidebar
+        currentSlide={currentSlide}
+        templates={TEMPLATES}
+        onDataChange={handleDataChange}
+        onSelectTemplate={handleTemplateSelect}
+      />
 
       {/* Main Area */}
       <div className="flex-1 flex flex-col h-full overflow-hidden relative">
@@ -165,97 +81,20 @@ export const ScreenshotEditor: React.FC = () => {
         )}
 
         {/* Hidden Preview Area for Bulk Export */}
-        <div
-          style={{
-            position: "absolute",
-            left: "-9999px",
-            top: "-9999px",
-            opacity: 0,
-            pointerEvents: "none",
-            zIndex: -1,
-          }}
-        >
-          {slides.map((slide, index) => {
-            const t =
-              TEMPLATES.find((tp) => tp.id === slide.templateId) ||
-              TEMPLATES[0];
-            return (
-              <div
-                key={`hidden-slide-${index}`}
-                style={{
-                  width: t.defaultDimensions.width,
-                  height: t.defaultDimensions.height,
-                }}
-              >
-                <CanvasPreview
-                  ref={(el) => (slideRefs.current[index] = el)}
-                  data={slide}
-                  template={t}
-                  scale={1}
-                  priority={true}
-                />
-              </div>
-            );
-          })}
-        </div>
+        <HiddenExportPreviews slides={slides} slideRefs={slideRefs} />
 
         {/* Preview Area Wrapper */}
-        <div className="flex-1 relative bg-[#faf8f1] dark:bg-[#191C1E] overflow-hidden">
-          {/* Background Pattern - Fixed */}
-          <div
-            className="absolute inset-0 z-0 opacity-10 pointer-events-none"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle, #000 1px, transparent 1px)",
-              backgroundSize: "20px 20px",
-            }}
-          ></div>
-
-          {/* Scrollable Container */}
-          <div
-            className="absolute inset-0 overflow-auto flex p-10 custom-scrollbar"
-            onWheel={handleWheel}
-          >
-            {/* Scaled Content - Centered via m-auto */}
-            <div
-              style={{
-                width: currentTemplate.defaultDimensions.width * previewScale,
-                height: currentTemplate.defaultDimensions.height * previewScale,
-              }}
-              className="relative shadow-2xl transition-all duration-300 m-auto shrink-0"
-            >
-              <div
-                className="absolute top-0 left-0 origin-top-left transition-transform duration-300 ease-in-out"
-                style={{ transform: `scale(${previewScale})` }}
-              >
-                <CanvasPreview
-                  ref={canvasRef}
-                  data={currentSlide}
-                  template={currentTemplate}
-                  scale={1}
-                  onChange={handleDataChange}
-                  interactionScale={previewScale}
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Zoom Control - Fixed Overlay */}
-          <div className="absolute bottom-2 right-2 z-30 w-64">
-            <div className="flex items-center gap-4">
-              <NeoBrutalSlider
-                value={previewScale}
-                min={MIN_ZOOM}
-                max={MAX_ZOOM}
-                step={0.05}
-                onChange={setPreviewScale}
-              />
-              <span className="text-xs font-bold whitespace-nowrap">
-                {Math.round(previewScale * 100)}%
-              </span>
-            </div>
-          </div>
-        </div>
+        <PreviewArea
+          currentSlide={currentSlide}
+          currentTemplate={currentTemplate}
+          previewScale={previewScale}
+          minZoom={MIN_ZOOM}
+          maxZoom={MAX_ZOOM}
+          canvasRef={canvasRef}
+          onWheel={handleWheel}
+          onPreviewScaleChange={setPreviewScale}
+          onDataChange={handleDataChange}
+        />
 
         {/* Slides Strip */}
         <SlideList

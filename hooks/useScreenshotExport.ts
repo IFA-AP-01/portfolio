@@ -3,8 +3,8 @@
 import { useState, useCallback } from "react";
 import * as htmlToImage from "html-to-image";
 import { saveAs } from "file-saver";
-import { ScreenshotData, Template } from "../types";
-import { TEMPLATES } from "../data/templates";
+import { ScreenshotData, Template } from "@/lib/types";
+import { TEMPLATES } from "@/lib/templates";
 
 export const useScreenshotExport = () => {
   const [isExportingSingle, setIsExportingSingle] = useState(false);

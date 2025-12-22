@@ -1,7 +1,7 @@
 "use client";
 
 import React, { forwardRef } from "react";
-import { ScreenshotData, Template } from "../types";
+import { ScreenshotData, Template } from "@/lib/types";
 import Image from "next/image";
 
 interface CanvasPreviewProps {

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ScreenshotData } from "../types";
+import { ScreenshotData } from "@/lib/types";
 import { AssetUploader } from "./AssetUploader";
 
 interface AssetsControlProps {

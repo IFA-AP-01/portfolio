@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ScreenshotData, Template, Platform } from "../types";
+import { ScreenshotData, Template, Platform } from "@/lib/types";
 import { BsAndroid2, BsApple } from "react-icons/bs";
 import Checkbox from "@/components/common/check-box";
 

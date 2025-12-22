@@ -1,4 +1,4 @@
-import { Template, IOS_DIMENSIONS, ANDROID_DIMENSIONS } from '../types';
+import { Template, IOS_DIMENSIONS, ANDROID_DIMENSIONS } from './types';
 
 export const TEMPLATES: Template[] = [
   {

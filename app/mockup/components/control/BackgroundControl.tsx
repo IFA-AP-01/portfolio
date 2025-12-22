@@ -1,8 +1,12 @@
 "use client";
 
 import React from "react";
-import { ScreenshotData } from "../types";
-import { SOLID_PRESETS, GRADIENT_PRESETS, GRADIENT_ANGLES } from "../constants";
+import { ScreenshotData } from "@/lib/types";
+import {
+  SOLID_PRESETS,
+  GRADIENT_PRESETS,
+  GRADIENT_ANGLES,
+} from "@/lib/constants";
 import { NeoBrutalSlider } from "@/components/common/slider";
 
 interface BackgroundControlProps {

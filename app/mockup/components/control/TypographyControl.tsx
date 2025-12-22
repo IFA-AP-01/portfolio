@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import { ScreenshotData } from "../types";
+import { ScreenshotData } from "@/lib/types";
 import { FontSelector } from "./FontSelector";
 import { TextControl } from "./TextControl";
-import { FONTS } from "../constants";
+import { FONTS } from "@/lib/constants";
 
 interface TypographyControlProps {
   data: ScreenshotData;

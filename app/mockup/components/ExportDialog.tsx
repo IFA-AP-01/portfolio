@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ScreenshotData } from "../types";
+import { ScreenshotData } from "@/lib/types";
 
 interface ExportDialogProps {
   slides: ScreenshotData[];

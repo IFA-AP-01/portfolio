@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ScreenshotData, Template } from "../types";
+import { ScreenshotData, Template } from "@/lib/types";
 import { DeviceControl } from "./DeviceControl";
 import { LayoutControl } from "./LayoutControl";
 import { TypographyControl } from "./TypographyControl";
@@ -43,7 +43,7 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
           </div>
         </Link>
         <span className="text-md uppercase font-bold">
-          Screenshot Generator Demo
+          Screenshot Generator
         </span>
       </div>
       <DeviceControl
