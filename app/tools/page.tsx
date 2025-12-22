@@ -21,7 +21,7 @@ const tools = [
     description: "Convert JSON to TOON format.",
     promotionText: "Save LLM token usage with TOON",
     image: "https://cdn.ifateam.dev/json2toon.webp",
-    link: "/json2toon",
+    link: "/toonify",
   },
 ];
 
