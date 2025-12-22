@@ -31,6 +31,7 @@ export const ScreenshotEditor: React.FC = () => {
     handleTemplateSelect,
     handleAddSlide,
     handleDeleteSlide,
+    handleDuplicateSlide,
     toggleSelection,
     handleSelectAll,
     onExportSingle,
@@ -103,6 +104,7 @@ export const ScreenshotEditor: React.FC = () => {
           onSelectSlide={setCurrentSlideIndex}
           onAddSlide={handleAddSlide}
           onDeleteSlide={handleDeleteSlide}
+          onDuplicateSlide={handleDuplicateSlide}
         />
       </div>
     </div>

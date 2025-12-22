@@ -19,6 +19,26 @@ export const useScreenshotEditor = () => {
   const MIN_ZOOM = 0.1;
   const MAX_ZOOM = 2.0;
 
+  const STORAGE_KEY = "screenshot-editor-storage";
+
+  // Load from local storage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      try {
+        setSlides(JSON.parse(saved));
+      } catch (e) {
+        console.error("Failed to parse saved slides", e);
+      }
+    }
+  }, []);
+
+  // Save to local storage on change
+  useEffect(() => {
+    if (slides === undefined || slides.length === 0) return;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(slides));
+  }, [slides]);
+
   const {
     isExportingSingle,
     isExportingBulk,
@@ -103,6 +123,19 @@ export const useScreenshotEditor = () => {
     [slides.length, currentSlideIndex]
   );
 
+  const handleDuplicateSlide = useCallback(
+    (index: number) => {
+      setSlides((prev) => {
+        const newSlides = [...prev];
+        const slideToDuplicate = { ...newSlides[index] };
+        newSlides.splice(index + 1, 0, slideToDuplicate);
+        return newSlides;
+      });
+      setCurrentSlideIndex(index + 1);
+    },
+    []
+  );
+
   const onExportSingle = useCallback(() => {
     handleExportSingle(canvasRef, currentTemplate, activeIndex).then(() => {
       setShowExportDialog(false);
@@ -145,6 +178,7 @@ export const useScreenshotEditor = () => {
     handleTemplateSelect,
     handleAddSlide,
     handleDeleteSlide,
+    handleDuplicateSlide,
     toggleSelection,
     handleSelectAll,
     onExportSingle,

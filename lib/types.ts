@@ -28,6 +28,7 @@ export interface Template {
     borderRadius: string;
   };
   defaultDimensions: Dimensions;
+  hasNotch: boolean;
 }
 
 export interface ScreenshotData {
@@ -73,5 +74,5 @@ export interface ScreenshotData {
 
 export const IOS_DIMENSIONS: Dimensions = { width: 1242, height: 2688 };
 export const ANDROID_DIMENSIONS: Dimensions = { width: 1080, height: 1920 };
-export const TABLET_DIMENSIONS: Dimensions = { width: 2064, height: 2752 };
-export const ANDROID_LANDSCAPE_DIMENSIONS: Dimensions = { width: 1920, height: 1080 };
+export const IPAD_DIMENSIONS: Dimensions = { width: 2064, height: 2752 };
+export const ANDROID_TABLET_DIMENSIONS: Dimensions = { width: 3840, height: 2160 };

@@ -4,6 +4,7 @@ import React from "react";
 import { ScreenshotData } from "@/lib/types";
 import { CanvasPreview } from "./CanvasPreview";
 import { TEMPLATES as ALL_TEMPLATES } from "@/lib/templates";
+import { FaCopy } from "react-icons/fa";
 
 interface SlideListProps {
   slides: ScreenshotData[];
@@ -11,6 +12,7 @@ interface SlideListProps {
   onSelectSlide: (index: number) => void;
   onAddSlide: () => void;
   onDeleteSlide: (index: number) => void;
+  onDuplicateSlide: (index: number) => void;
 }
 
 export const SlideList: React.FC<SlideListProps> = ({
@@ -19,6 +21,7 @@ export const SlideList: React.FC<SlideListProps> = ({
   onSelectSlide,
   onAddSlide,
   onDeleteSlide,
+  onDuplicateSlide,
 }) => {
   return (
     <div className="w-full h-40 border-t border-gray-300 flex items-center gap-4 px-8 overflow-x-auto shrink-0 custom-scrollbar">
@@ -50,14 +53,14 @@ export const SlideList: React.FC<SlideListProps> = ({
             {/* Delete Button */}
             {slides.length > 1 && (
               <button
-                className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                className="absolute top-1 right-1 bg-red-500 border-2 border-black p-1 text-white opacity-0 group-hover:opacity-100 transition-opacity z-10"
                 onClick={(e) => {
                   e.stopPropagation();
                   onDeleteSlide(index);
                 }}
+                title="Delete Slide"
               >
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
                   width="12"
                   height="12"
                   viewBox="0 0 24 24"
@@ -72,6 +75,18 @@ export const SlideList: React.FC<SlideListProps> = ({
                 </svg>
               </button>
             )}
+
+            {/* Duplicate Button */}
+            <button
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#E9945B] border-2 border-black p-1.5 text-black opacity-0 group-hover:opacity-100 transition-opacity z-10 font-bold text-[10px]"
+              onClick={(e) => {
+                e.stopPropagation();
+                onDuplicateSlide(index);
+              }}
+              title="Duplicate Slide"
+            >
+              <FaCopy />
+            </button>
 
             <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-[10px] text-center py-0.5">
               {index + 1}

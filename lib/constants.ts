@@ -66,7 +66,6 @@ export const INITIAL_DATA: ScreenshotData = {
   titleLetterSpacing: 0,
   titleLineHeight: 1.2,
   titleTextShadow: false,
-  screenshotImage: "https://cdn.ifateam.dev/placeholder-screenshot.png",
   subtitleFontSize: 56,
   subtitleFontWeight: "normal",
   subtitleFontStyle: "normal",

@@ -85,6 +85,11 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
     const screenScale =
       template.platform === "ios" ? DEFAULT_IOS_SCALE : DEFAULT_ANDROID_SCALE;
 
+    const frameSrc =
+      template.hasNotch && !data.showNotch
+        ? `/frame/${template.deviceFrame}-frame-only.svg`
+        : `/frame/${template.deviceFrame}.svg`;
+
     return (
       <div
         className="relative overflow-hidden bg-white"
@@ -190,11 +195,7 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
                 {/* Frame Image */}
                 <div className="absolute inset-0 pointer-events-none z-20">
                   <Image
-                    src={
-                      data.showNotch
-                        ? `/frame/${template.deviceFrame}.svg`
-                        : `/frame/${template.deviceFrame}-frame-only.svg`
-                    }
+                    src={frameSrc}
                     alt="Device Frame"
                     width={template.defaultDimensions.width}
                     height={template.defaultDimensions.height}
@@ -221,12 +222,15 @@ export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
                       alt="App Screenshot"
                       width={template.defaultDimensions.width}
                       height={template.defaultDimensions.height}
-                      className="w-full h-full object-fill rounded-[9rem]"
+                      className={`w-full h-full object-fill rounded-[${template.screenRegion.borderRadius}]`}
                       priority={priority}
                       unoptimized
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-gray-500 text-6xl bg-gray-100 font-bold rounded-[9rem]">
+                    <div
+                      className={`w-full h-full flex items-center justify-center text-gray-500 text-6xl bg-gray-100 font-bold 
+                      rounded-[${template.screenRegion.borderRadius}]`}
+                    >
                       Empty Image
                     </div>
                   )}
