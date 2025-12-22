@@ -10,6 +10,7 @@ import { TEMPLATES } from "../data/templates";
 import { ScreenshotData } from "../types";
 import { useScreenshotExport } from "../hooks/useScreenshotExport";
 import { INITIAL_DATA } from "../constants";
+import { NeoBrutalSlider } from "../../../components/common/slider";
 
 export const ScreenshotEditor: React.FC = () => {
   const [slides, setSlides] = useState<ScreenshotData[]>([INITIAL_DATA]);
@@ -105,7 +106,19 @@ export const ScreenshotEditor: React.FC = () => {
     });
   };
 
-  const previewScale = 0.25;
+  const [previewScale, setPreviewScale] = useState(0.25);
+  const MIN_ZOOM = 0.1;
+  const MAX_ZOOM = 2.0;
+
+  const handleWheel = (e: React.WheelEvent) => {
+    if (e.ctrlKey || e.metaKey) {
+      e.preventDefault();
+      const delta = -e.deltaY * 0.001;
+      setPreviewScale((prev) =>
+        Math.min(Math.max(prev + delta, MIN_ZOOM), MAX_ZOOM)
+      );
+    }
+  };
 
   return (
     <div className="flex h-full bg-[#faf8f1] dark:bg-[#191C1E] flex-col md:flex-row overflow-hidden">
@@ -186,8 +199,9 @@ export const ScreenshotEditor: React.FC = () => {
           })}
         </div>
 
-        {/* Preview Area */}
-        <div className="flex-1 overflow-hidden p-10 flex items-center justify-center bg-[#faf8f1] dark:bg-[#191C1E] relative">
+        {/* Preview Area Wrapper */}
+        <div className="flex-1 relative bg-[#faf8f1] dark:bg-[#191C1E] overflow-hidden">
+          {/* Background Pattern - Fixed */}
           <div
             className="absolute inset-0 z-0 opacity-10 pointer-events-none"
             style={{
@@ -196,25 +210,49 @@ export const ScreenshotEditor: React.FC = () => {
               backgroundSize: "20px 20px",
             }}
           ></div>
+
+          {/* Scrollable Container */}
           <div
-            style={{
-              width: currentTemplate.defaultDimensions.width * previewScale,
-              height: currentTemplate.defaultDimensions.height * previewScale,
-            }}
-            className="relative shadow-2xl transition-all duration-300"
+            className="absolute inset-0 overflow-auto flex p-10 custom-scrollbar"
+            onWheel={handleWheel}
           >
+            {/* Scaled Content - Centered via m-auto */}
             <div
-              className="absolute top-0 left-0 origin-top-left transition-transform duration-300 ease-in-out"
-              style={{ transform: `scale(${previewScale})` }}
+              style={{
+                width: currentTemplate.defaultDimensions.width * previewScale,
+                height: currentTemplate.defaultDimensions.height * previewScale,
+              }}
+              className="relative shadow-2xl transition-all duration-300 m-auto shrink-0"
             >
-              <CanvasPreview
-                ref={canvasRef}
-                data={currentSlide}
-                template={currentTemplate}
-                scale={1}
-                onChange={handleDataChange}
-                interactionScale={previewScale}
+              <div
+                className="absolute top-0 left-0 origin-top-left transition-transform duration-300 ease-in-out"
+                style={{ transform: `scale(${previewScale})` }}
+              >
+                <CanvasPreview
+                  ref={canvasRef}
+                  data={currentSlide}
+                  template={currentTemplate}
+                  scale={1}
+                  onChange={handleDataChange}
+                  interactionScale={previewScale}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Zoom Control - Fixed Overlay */}
+          <div className="absolute bottom-2 right-2 z-30 w-64">
+            <div className="flex items-center gap-4">
+              <NeoBrutalSlider
+                value={previewScale}
+                min={MIN_ZOOM}
+                max={MAX_ZOOM}
+                step={0.05}
+                onChange={setPreviewScale}
               />
+              <span className="text-xs font-bold whitespace-nowrap">
+                {Math.round(previewScale * 100)}%
+              </span>
             </div>
           </div>
         </div>
