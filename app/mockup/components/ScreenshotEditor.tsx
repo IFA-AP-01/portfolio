@@ -81,8 +81,10 @@ export const ScreenshotEditor: React.FC = () => {
           />
         )}
 
-        {/* Hidden Preview Area for Bulk Export */}
-        <HiddenExportPreviews slides={slides} slideRefs={slideRefs} />
+        {/* Hidden Preview Area for Bulk Export - Only render when needed */}
+        {showExportDialog && (
+          <HiddenExportPreviews slides={slides} slideRefs={slideRefs} />
+        )}
 
         {/* Preview Area Wrapper */}
         <PreviewArea

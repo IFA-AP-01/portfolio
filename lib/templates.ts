@@ -9,7 +9,7 @@ export const TEMPLATES: Template[] = [
     screenRegion: {
         top: '4.0%',
         left: '4.8%',
-        width: '90%',
+        width: '90.2%',
         height: '91%',
         borderRadius: '9rem'
     },
@@ -25,7 +25,7 @@ export const TEMPLATES: Template[] = [
         top: '3.2%',
         left: '3.0%',
         width: '94%',
-        height: '93%',
+        height: '93.2%',
         borderRadius: '9rem'
     },
     defaultDimensions: IOS_DIMENSIONS,

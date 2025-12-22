@@ -21,7 +21,6 @@ export const useScreenshotEditor = () => {
 
   const STORAGE_KEY = "screenshot-editor-storage";
 
-  // Load from local storage on mount
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
@@ -33,10 +32,14 @@ export const useScreenshotEditor = () => {
     }
   }, []);
 
-  // Save to local storage on change
   useEffect(() => {
     if (slides === undefined || slides.length === 0) return;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(slides));
+    
+    const timeoutId = setTimeout(() => {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(slides));
+    }, 300);
+
+    return () => clearTimeout(timeoutId);
   }, [slides]);
 
   const {

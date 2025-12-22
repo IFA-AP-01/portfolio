@@ -46,7 +46,7 @@ export const LayoutControl: React.FC<LayoutControlProps> = ({
             min={-200}
             max={200}
             step={1}
-            value={data.textTranslateX}
+            value={data.textTranslateX.toFixed(0)}
             onChange={(e) =>
               onChange({ textTranslateX: Number(e.target.value) })
             }
@@ -64,7 +64,7 @@ export const LayoutControl: React.FC<LayoutControlProps> = ({
             min={-200}
             max={200}
             step={1}
-            value={data.textTranslateY}
+            value={data.textTranslateY.toFixed(0)}
             onChange={(e) =>
               onChange({ textTranslateY: Number(e.target.value) })
             }
@@ -85,7 +85,7 @@ export const LayoutControl: React.FC<LayoutControlProps> = ({
             min={-200}
             max={200}
             step={1}
-            value={data.deviceTranslateX}
+            value={data.deviceTranslateX.toFixed(0)}
             onChange={(e) =>
               onChange({ deviceTranslateX: Number(e.target.value) })
             }
@@ -103,7 +103,7 @@ export const LayoutControl: React.FC<LayoutControlProps> = ({
             min={-200}
             max={200}
             step={1}
-            value={data.deviceTranslateY}
+            value={data.deviceTranslateY.toFixed(0)}
             onChange={(e) =>
               onChange({ deviceTranslateY: Number(e.target.value) })
             }
@@ -140,7 +140,7 @@ export const LayoutControl: React.FC<LayoutControlProps> = ({
           </label>
           <div className="flex items-center gap-1 py-1">
             <NeoBrutalSlider
-              min={1}
+              min={0.5}
               max={2}
               step={0.005}
               value={data.deviceScale}
