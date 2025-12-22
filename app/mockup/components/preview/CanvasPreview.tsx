@@ -3,6 +3,7 @@
 import React, { forwardRef } from "react";
 import { ScreenshotData, Template } from "@/lib/types";
 import Image from "next/image";
+import { DEFAULT_ANDROID_SCALE, DEFAULT_IOS_SCALE } from "@/lib/constants";
 
 interface CanvasPreviewProps {
   data: ScreenshotData;
@@ -13,15 +14,12 @@ interface CanvasPreviewProps {
   interactionScale?: number;
 }
 
-const DEFAULT_IOS_SCALE = 0.75;
-const DEFAULT_ANDROID_SCALE = 0.65;
-
 export const CanvasPreview = forwardRef<HTMLDivElement, CanvasPreviewProps>(
   (
     { data, template, scale, priority = false, onChange, interactionScale = 1 },
     ref
   ) => {
-    const { width, height } = template.defaultDimensions;
+    const { width, height } = data.dimensions || template.defaultDimensions;
 
     const [dragState, setDragState] = React.useState<{
       type: "text" | "device" | "rotate";

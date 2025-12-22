@@ -49,6 +49,9 @@ export const GRADIENT_PRESETS = [
 
 export const GRADIENT_ANGLES = [135, 180, 225, 270];
 
+export const DEFAULT_IOS_SCALE = 0.75;
+export const DEFAULT_ANDROID_SCALE = 0.65;
+
 export const INITIAL_DATA: ScreenshotData = {
   title: "Your title here",
   subtitle: "Place your subtitle here",

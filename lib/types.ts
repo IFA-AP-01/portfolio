@@ -68,7 +68,10 @@ export interface ScreenshotData {
   deviceTranslateY: number;
   deviceRotate: number;
   deviceScale: number;
+  dimensions?: Dimensions;
 }
 
 export const IOS_DIMENSIONS: Dimensions = { width: 1242, height: 2688 };
 export const ANDROID_DIMENSIONS: Dimensions = { width: 1080, height: 1920 };
+export const TABLET_DIMENSIONS: Dimensions = { width: 2064, height: 2752 };
+export const ANDROID_LANDSCAPE_DIMENSIONS: Dimensions = { width: 1920, height: 1080 };

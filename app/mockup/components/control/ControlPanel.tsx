@@ -7,9 +7,7 @@ import { LayoutControl } from "./LayoutControl";
 import { TypographyControl } from "./TypographyControl";
 import { BackgroundControl } from "./BackgroundControl";
 import { AssetsControl } from "./AssetsControl";
-import Link from "next/link";
-import Image from "next/image";
-import teamImage from "@/public/logo.webp";
+import { Header } from "./Header";
 
 interface ControlPanelProps {
   data: ScreenshotData;
@@ -29,23 +27,7 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
   const currentYear = new Date().getFullYear();
   return (
     <div className="flex flex-col gap-6 h-full mb-6">
-      <div className="flex items-center gap-4">
-        <Link href="/" className="flex items-center">
-          <div className="neo-shadow border-black border-2 w-10 flex items-center justify-center bg-[#E9945B]">
-            <Image
-              src={teamImage}
-              alt="IFA"
-              width={50}
-              height={50}
-              priority
-              className="w-10 object-contain flex"
-            />
-          </div>
-        </Link>
-        <span className="text-md uppercase font-bold">
-          Screenshot Generator
-        </span>
-      </div>
+      <Header />
       <DeviceControl
         data={data}
         onChange={onChange}

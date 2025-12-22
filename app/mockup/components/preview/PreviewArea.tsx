@@ -48,7 +48,7 @@ export const PreviewArea: React.FC<PreviewAreaProps> = ({
             width: currentTemplate.defaultDimensions.width * previewScale,
             height: currentTemplate.defaultDimensions.height * previewScale,
           }}
-          className="relative shadow-2xl transition-all duration-300 m-auto shrink-0"
+          className="relative transition-all duration-300 m-auto shrink-0"
         >
           <div
             className="absolute top-0 left-0 origin-top-left transition-transform duration-300 ease-in-out"
