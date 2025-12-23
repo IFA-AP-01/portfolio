@@ -1,6 +1,8 @@
 import { ToolCard } from "@/components/section/tools";
 import Testimonials from "@/components/section/testimonials";
 import FAQ from "@/components/section/faq";
+import Snowfall from "react-snowfall";
+import AppSnowfall from "@/components/common/snowfall";
 
 const tools = [
   {
@@ -49,6 +51,7 @@ export const metadata = {
 export default function ToolsPage() {
   return (
     <div className="min-h-screen pt-28 sm:pt-32 w-full">
+      <AppSnowfall />
       <div className="flex flex-col items-center max-w-6xl mx-auto px-4 lg:px-0 md:px-4 gap-4">
         <h1 className="max-w-4xl text-2xl sm:text-5xl font-bold text-center text-gray-950 dark:text-gray-50">
           Tools for <span className="text-[#e9945b]">Developers</span>
