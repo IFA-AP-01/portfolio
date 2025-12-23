@@ -21,13 +21,6 @@ export default function Tools() {
       video: "https://cdn.ifateam.dev/link-shorter.mp4",
       link: "/shorten-link",
     },
-    {
-      title: "Diagram Maker",
-      description: "Create professional diagrams and flowcharts in seconds.",
-      promotionText: "Figma-like experience",
-      image: "https://cdn.ifateam.dev/diagram-maker.webp",
-      link: "/diagram",
-    },
   ];
 
   return (
