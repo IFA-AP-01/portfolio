@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useTheme } from "@/context/theme-context";
 import teamImage from "@/public/logo.webp";
 import { BsMoon, BsSun } from "react-icons/bs";
-import { faBlog, faTools } from "@fortawesome/free-solid-svg-icons";
+import { faBlog, faEarth, faTools } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
@@ -17,6 +17,11 @@ const menuItems = [
     name: "Productivity",
     href: "/tools",
     icon: faTools,
+  },
+  {
+    name: "Explore",
+    href: "/explore",
+    icon: faEarth,
   },
   {
     name: "Blog",
