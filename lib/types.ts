@@ -76,3 +76,40 @@ export const IOS_DIMENSIONS: Dimensions = { width: 1242, height: 2688 };
 export const ANDROID_DIMENSIONS: Dimensions = { width: 1080, height: 1920 };
 export const IPAD_DIMENSIONS: Dimensions = { width: 2064, height: 2752 };
 export const ANDROID_TABLET_DIMENSIONS: Dimensions = { width: 3840, height: 2160 };
+
+export type ElementType = 'rect' | 'ellipse' | 'diamond' | 'text' | 'connector' | 'triangle' | 'parallelogram' | 'cylinder' | 'document';
+
+export interface DiagramElement {
+  id: string;
+  type: ElementType;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  rotation: number;
+  text: string;
+  fill: string;
+  stroke: number;
+  strokeColor: string;
+  textColor: string;
+  fontSize: number;
+  fontWeight: string;
+  // For connectors
+  fromId?: string;
+  toId?: string;
+  points?: { x: number; y: number }[];
+  flipX?: boolean;
+  flipY?: boolean;
+  connectorType?: ConnectorType;
+}
+
+export type ConnectorType = 'straight' | 'elbow' | 'curve';
+
+export interface DiagramEditorState {
+  elements: DiagramElement[];
+  selectedIds: string[];
+  activeTool: ElementType | 'select' | 'hand';
+  activeConnectorType: ConnectorType;
+  zoom: number;
+  pan: { x: number; y: number };
+}

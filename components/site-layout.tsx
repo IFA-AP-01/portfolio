@@ -11,13 +11,13 @@ interface SiteLayoutProps {
 
 export default function SiteLayout({ children }: SiteLayoutProps) {
   const pathname = usePathname();
-  const isMockupPage = pathname === "/mockup";
+  const isFullPage = pathname === "/mockup" || pathname === "/diagram";
 
   return (
     <>
-      {!isMockupPage && <Header />}
+      {!isFullPage && <Header />}
       {children}
-      {!isMockupPage && <Footer />}
+      {!isFullPage && <Footer />}
     </>
   );
 }

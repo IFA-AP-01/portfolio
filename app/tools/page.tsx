@@ -11,6 +11,13 @@ const tools = [
     link: "/mockup",
   },
   {
+    title: "Diagram Maker",
+    description: "Simple and easy to use diagram maker.",
+    promotionText: "Quick and easy",
+    video: "https://cdn.ifateam.dev/diagram.mp4",
+    link: "/diagram",
+  },
+  {
     title: "Link Shorter",
     description: "Shorten your links and track their performance.",
     promotionText: "Turn into powerful links",
