@@ -15,6 +15,7 @@ interface ControlPanelProps {
   templates: Template[];
   onSelectTemplate: (templateId: string) => void;
   selectedTemplateId: string;
+  onClose?: () => void;
 }
 
 export const ControlPanel: React.FC<ControlPanelProps> = ({
@@ -23,11 +24,12 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
   templates,
   onSelectTemplate,
   selectedTemplateId,
+  onClose,
 }) => {
   const currentYear = new Date().getFullYear();
   return (
-    <div className="flex flex-col gap-6 h-full mb-6">
-      <Header />
+    <div className="flex flex-col gap-6 h-full mb-6 relative">
+      <Header onClose={onClose} />
       <DeviceControl
         data={data}
         onChange={onChange}

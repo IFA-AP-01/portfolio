@@ -20,7 +20,7 @@ const tools = [
   {
     title: "JSON to TOON Converter",
     description: "Convert JSON to TOON format.",
-    promotionText: "Save LLM token usage with TOON",
+    promotionText: "Save LLM token usage",
     image: "https://cdn.ifateam.dev/json2toon.webp",
     link: "/toonify",
   },

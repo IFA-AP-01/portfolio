@@ -83,14 +83,14 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <div className="w-full flex flex-col items-center justify-center pt-12 pb-24 bg-transparent mt-20">
+    <div className="w-full flex flex-col items-center justify-center pt-8 pb-24 px-4 lg:px-0 md:px-4 bg-transparent mt-20">
       <div className="max-w-6xl mx-auto w-full">
         {/* Header */}
         <div className="text-center mb-16 space-y-4">
-          <h2 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-gray-50 leading-tight">
+          <h2 className="text-2xl md:text-5xl font-black text-gray-900 dark:text-gray-50 leading-tight">
             Loved by <span className="text-[#e9945b]">Developers</span>
           </h2>
-          <p className="text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+          <p className="text-md text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
             See what happens when you use tools built for efficiency.
           </p>
           <div className="flex items-center justify-center">
