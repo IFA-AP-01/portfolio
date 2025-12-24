@@ -64,18 +64,26 @@ export default function Footer() {
             <ul className="space-y-3 text-sm text-gray-600 dark:text-gray-300">
               <li>
                 <Link
-                  href="/toonify"
-                  className="hover:text-black dark:hover:text-white transition-colors flex items-center gap-2"
+                  href="https://www.producthunt.com/products/tools-for-indie-developers?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-indietools"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  Toonify Converter
+                  <Image
+                    alt="IndieTools - Boost Productivity with Fast App Screenshots &amp; Diagrams | Product Hunt"
+                    width="250"
+                    height="54"
+                    src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1053286&amp;theme=light&amp;t=1766550922169"
+                  />
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/shorten-link"
-                  className="hover:text-black dark:hover:text-white transition-colors flex items-center gap-2"
-                >
-                  Link Shortener
+                <Link href="https://twelve.tools" target="_blank">
+                  <Image
+                    src="https://twelve.tools/badge0-light.svg"
+                    alt="Featured on Twelve Tools"
+                    width="200"
+                    height="54"
+                  />
                 </Link>
               </li>
             </ul>
@@ -109,6 +117,14 @@ export default function Footer() {
                   className="hover:text-black dark:hover:text-white transition-colors"
                 >
                   Contact
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/explore"
+                  className="hover:text-black dark:hover:text-white transition-colors"
+                >
+                  Explore
                 </Link>
               </li>
             </ul>

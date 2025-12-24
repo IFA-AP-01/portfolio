@@ -31,6 +31,14 @@ export default async function BlogPage({
   return (
     <main className="flex flex-col items-center px-4 py-28 min-h-screen">
       <div className="w-full max-w-5xl">
+        <div className="mb-12">
+          <h1 className="text-3xl md:text-4xl font-black mb-4 flex items-center gap-3">
+            Blog
+          </h1>
+          <p className="text-lg text-gray-600 max-w-2xl font-medium border-l-4 border-black pl-4">
+            Read our latest articles and updates.
+          </p>
+        </div>
         {tag && (
           <div className="mb-8 flex items-center gap-4">
             <h1 className="text-2xl font-bold">

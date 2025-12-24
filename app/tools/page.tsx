@@ -36,12 +36,12 @@ const tools = [
 ];
 
 export const metadata = {
-  title: "Tools for Developers",
-  description: "Tools for Developers",
-  keywords: ["Tools for Developers", "Developers Tools"],
+  title: "IndieSnap",
+  description: "Tools for Indie Developers",
+  keywords: ["Tools for Indie Developers", "Indie Developers Tools"],
   openGraph: {
-    title: "Tools for Developers",
-    description: "Tools for Developers",
+    title: "Tools for Indie Developers",
+    description: "Tools for Indie Developers",
     type: "website",
     locale: "en_US",
     siteName: "Tools for Indie Developers",
@@ -54,7 +54,7 @@ export default function ToolsPage() {
       <AppSnowfall />
       <div className="flex flex-col items-center max-w-6xl mx-auto px-4 lg:px-0 md:px-4 gap-4">
         <h1 className="max-w-4xl text-2xl sm:text-5xl font-bold text-center text-gray-950 dark:text-gray-50">
-          Tools for <span className="text-[#e9945b]">Developers</span>
+          <span className="text-[#e9945b]">IndieSnap</span> Tools
         </h1>
         <p className="text-gray-500 dark:text-gray-400 text-center pb-8">
           <span className="font-bold text-[#e9945b]">Productivity tools</span>{" "}

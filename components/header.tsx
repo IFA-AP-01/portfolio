@@ -14,7 +14,7 @@ import { usePathname } from "next/navigation";
 
 const menuItems = [
   {
-    name: "Productivity",
+    name: "Snap",
     href: "/tools",
     icon: faTools,
   },
