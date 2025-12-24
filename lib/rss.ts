@@ -1,7 +1,6 @@
 import { xml2js } from "xml-js";
 
 const SOURCES = [
-  { url: "https://www.freecodecamp.org/news/rss/", name: "FreeCodeCamp" },
   { url: "https://dev.to/feed", name: "Dev.to" },
   {
     url: "https://slack.engineering/feed/",
@@ -14,10 +13,6 @@ const SOURCES = [
   {
     url: "https://blog.bytebytego.com/feed",
     name: "ByteByteGo",
-  },
-  {
-    url: "https://blog.google/products/google-cloud/rss/",
-    name: "Google Cloud",
   },
   {
     url: "https://www.artificial-intelligence.blog/ai-news/category/news?format=rss",
@@ -149,11 +144,12 @@ export const aggregateFeeds = async (): Promise<FeedItem[]> => {
     .flat()
     .filter((item) => {
       if (seen.has(item.link)) return false;
+      if (!item.thumbnail) return false;
+      if (item.title.length < 20) return false;
       seen.add(item.link);
       return true;
     });
 
-  // Fisher–Yates shuffle
   for (let i = items.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [items[i], items[j]] = [items[j], items[i]];

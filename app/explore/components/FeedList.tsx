@@ -119,7 +119,7 @@ export default function FeedList() {
         )}
         {!hasMore && items.length > 0 && (
           <div className="text-center">
-               <p className="text-gray-400 font-medium">You've reached the end.</p>
+               <p className="text-gray-400 font-medium">Today is enough, please take a break.</p>
                <div className="w-16 h-1 bg-gray-200 mx-auto mt-4 rounded-full"></div>
           </div>
         )}

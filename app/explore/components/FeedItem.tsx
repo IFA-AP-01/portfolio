@@ -44,9 +44,9 @@ export default function FeedItem({ item, onClick }: FeedItemProps) {
             <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
                     {faviconUrl && (
-                        <Image src={faviconUrl} alt="" width={0} height={0} className="w-5 h-5 rounded-full border border-black" />
+                        <Image src={faviconUrl} alt="" width={0} height={0} className="w-6 h-6 border border-black neo-shadow" />
                     )}
-                    <span className="text-xs font-bold bg-white text-black">
+                    <span className="text-xs font-bold">
                         {item.source}
                     </span>
                 </div>
@@ -60,7 +60,7 @@ export default function FeedItem({ item, onClick }: FeedItemProps) {
             </h3>
 
             {!item.thumbnail && (
-                 <p className="text-sm text-gray-600 mb-4 line-clamp-3">
+                 <p className="text-sm text-gray-500 mb-4 line-clamp-3">
                     {item.contentSnippet}
                 </p>
             )}

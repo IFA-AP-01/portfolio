@@ -16,7 +16,9 @@ import { toString } from "mdast-util-to-string";
 
 function calculateReadingTime(content: string): string {
   const wordsPerMinute = 200;
-  const words = content.trim().split(/\s+/).length;
+  // Use a regex to count words without creating an array of strings
+  const match = content.match(/\w+/g);
+  const words = match ? match.length : 0;
   const minutes = Math.ceil(words / wordsPerMinute);
   return `${minutes} min read`;
 }
@@ -60,7 +62,7 @@ export interface PostData {
   description: string;
   tags: string[];
   readingTime: string;
-  toc: TOCItem[];
+  toc?: TOCItem[]; // Make optional since it's not present in list view
   contentHtml?: string;
 }
 
@@ -99,7 +101,7 @@ export function getSortedPostsData(): PostData[] {
         description: matterResult.data.description || "",
         tags: matterResult.data.tags || [],
         readingTime: calculateReadingTime(matterResult.content),
-        toc: extractTOC(matterResult.content),
+        // toc: extractTOC(matterResult.content), // Optimized: Don't parsing TOC for list view
         ...matterResult.data,
       };
     });

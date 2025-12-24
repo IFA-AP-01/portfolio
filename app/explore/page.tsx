@@ -12,7 +12,7 @@ export default function ExplorePage() {
         <h1 className="text-3xl md:text-4xl font-black mb-4 flex items-center gap-3">
           Explore
         </h1>
-        <p className="text-lg text-gray-600 max-w-2xl font-medium border-l-4 border-black pl-4">
+        <p className="text-lg text-gray-500 max-w-2xl font-medium border-l-4 pl-4">
           Curated technology news from top sources, aggregated in one place.
         </p>
       </div>
