@@ -3,9 +3,18 @@ import { ScreenshotData } from "@/lib/types";
 import { TEMPLATES } from "@/lib/templates";
 import { useScreenshotExport } from "./useScreenshotExport";
 import { INITIAL_DATA } from "@/lib/constants";
+import { useHistory } from "./useHistory";
 
 export const useScreenshotEditor = () => {
-  const [slides, setSlides] = useState<ScreenshotData[]>([INITIAL_DATA]);
+  const { 
+    state: slides, 
+    set: setSlides, 
+    undo, 
+    redo, 
+    resetHistory,
+    canUndo, 
+    canRedo 
+  } = useHistory<ScreenshotData[]>([INITIAL_DATA]);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const canvasRef = useRef<HTMLDivElement>(null);
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -25,12 +34,12 @@ export const useScreenshotEditor = () => {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
       try {
-        setSlides(JSON.parse(saved));
+        resetHistory(JSON.parse(saved));
       } catch (e) {
         console.error("Failed to parse saved slides", e);
       }
     }
-  }, []);
+  }, [resetHistory]);
 
   useEffect(() => {
     if (slides === undefined || slides.length === 0) return;
@@ -123,7 +132,7 @@ export const useScreenshotEditor = () => {
         setCurrentSlideIndex((prev) => prev - 1);
       }
     },
-    [slides.length, currentSlideIndex]
+    [slides.length, currentSlideIndex, setSlides]
   );
 
   const handleDuplicateSlide = useCallback(
@@ -136,7 +145,7 @@ export const useScreenshotEditor = () => {
       });
       setCurrentSlideIndex(index + 1);
     },
-    []
+    [setSlides]
   );
 
   const onExportSingle = useCallback(() => {
@@ -189,5 +198,9 @@ export const useScreenshotEditor = () => {
     handleWheel,
     MIN_ZOOM,
     MAX_ZOOM,
+    undo,
+    redo,
+    canUndo,
+    canRedo
   };
 };

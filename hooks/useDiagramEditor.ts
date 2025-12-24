@@ -1,5 +1,6 @@
 import { useState, useCallback, useMemo, useEffect } from 'react';
 import { DiagramElement, DiagramEditorState, ElementType, ConnectorType, SavedDiagram } from '@/lib/types';
+import { useHistory } from './useHistory';
 
 const generateId = () => {
   if (typeof window !== 'undefined' && window.crypto && window.crypto.randomUUID) {
@@ -18,7 +19,24 @@ const INITIAL_STATE: DiagramEditorState = {
 };
 
 export const useDiagramEditor = () => {
-  const [state, setState] = useState<DiagramEditorState>(INITIAL_STATE);
+  const { 
+    state: elements, 
+    set: setElements, 
+    undo, 
+    redo, 
+    canUndo, 
+    canRedo,
+    resetHistory
+  } = useHistory<DiagramElement[]>([]);
+
+  const [uiState, setUiState] = useState<Omit<DiagramEditorState, 'elements'>>({
+    selectedIds: [],
+    activeTool: 'select',
+    activeConnectorType: 'straight',
+    zoom: 1,
+    pan: { x: 0, y: 0 },
+  });
+
   const [history, setHistory] = useState<SavedDiagram[]>([]);
   const [currentId, setCurrentId] = useState<string | null>(null);
 
@@ -43,10 +61,17 @@ export const useDiagramEditor = () => {
       const savedSession = localStorage.getItem(AUTOSAVE_KEY);
       if (savedSession) {
         const parsed = JSON.parse(savedSession);
-        setState(prev => ({
+        // Load elements into history
+        if (parsed.elements) {
+            resetHistory(parsed.elements);
+        }
+        
+        // Load UI state
+        setUiState(prev => ({
           ...prev,
-          ...parsed,
-          // Reset transient states
+          zoom: parsed.zoom ?? 1,
+          pan: parsed.pan ?? { x: 0, y: 0 },
+          activeConnectorType: parsed.activeConnectorType ?? 'straight',
           activeTool: 'select',
           selectedIds: [],
         }));
@@ -59,7 +84,7 @@ export const useDiagramEditor = () => {
     } catch (e) {
       console.error('Failed to load session', e);
     }
-  }, []);
+  }, [resetHistory]);
 
   const generateName = useCallback((elems: DiagramElement[]) => {
       // Find first text-containing element, prioritized by y position (top-most) then x position
@@ -82,16 +107,16 @@ export const useDiagramEditor = () => {
     const timeout = setTimeout(() => {
       // 1. Save current session state (autosave for crash recovery)
       const dataToSave = {
-        elements: state.elements,
-        zoom: state.zoom,
-        pan: state.pan,
-        activeConnectorType: state.activeConnectorType, 
+        elements: elements,
+        zoom: uiState.zoom,
+        pan: uiState.pan,
+        activeConnectorType: uiState.activeConnectorType, 
       };
       localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(dataToSave));
 
       // 2. Save to history list
-      if (state.elements.length > 0) {
-          const name = generateName(state.elements);
+      if (elements.length > 0) {
+          const name = generateName(elements);
           const now = Date.now();
 
           setHistory(prev => {
@@ -108,13 +133,13 @@ export const useDiagramEditor = () => {
                               name: name.startsWith('Untitled -') ? name : h.name === name ? h.name : name, // Smart renaming logic
                               lastModified: now,
                               data: {
-                                  elements: state.elements,
-                                  zoom: state.zoom,
-                                  pan: state.pan,
+                                  elements: elements,
+                                  zoom: uiState.zoom,
+                                  pan: uiState.pan,
                                   // Don't carry over selection
                                   selectedIds: [],
                                   activeTool: 'select' as const,
-                                  activeConnectorType: state.activeConnectorType, 
+                                  activeConnectorType: uiState.activeConnectorType, 
                               }
                           };
                       }
@@ -128,12 +153,12 @@ export const useDiagramEditor = () => {
                       name: name,
                       lastModified: now,
                       data: {
-                          elements: state.elements,
-                          zoom: state.zoom,
-                          pan: state.pan,
+                          elements: elements,
+                          zoom: uiState.zoom,
+                          pan: uiState.pan,
                           selectedIds: [],
                           activeTool: 'select' as const,
-                          activeConnectorType: state.activeConnectorType,
+                          activeConnectorType: uiState.activeConnectorType,
                       }
                   };
                   newHistory = [newEntry, ...prev];
@@ -148,19 +173,19 @@ export const useDiagramEditor = () => {
     }, 1000);
 
     return () => clearTimeout(timeout);
-  }, [state.elements, state.zoom, state.pan, state.activeConnectorType, currentId, generateName]);
+  }, [elements, uiState, currentId, generateName]);
 
-  const elements = useMemo(() => state.elements, [state.elements]);
-  const selectedIds = useMemo(() => state.selectedIds, [state.selectedIds]);
-  const activeTool = useMemo(() => state.activeTool, [state.activeTool]);
-  const activeConnectorType = useMemo(() => state.activeConnectorType, [state.activeConnectorType]);
-
-  const setElements = useCallback((elements: DiagramElement[]) => {
-    setState((prev) => ({ ...prev, elements }));
-  }, []);
+  // No need for separate setElements here as we have it from useHistory
+  // But for compatibility if needed, or if we want to augment it, 
+  // We can just use the destructured setElements directly in code.
+  // Actually, we exposed setElements from hook, so we can use it.
+  
+  const selectedIds = useMemo(() => uiState.selectedIds, [uiState.selectedIds]);
+  const activeTool = useMemo(() => uiState.activeTool, [uiState.activeTool]);
+  const activeConnectorType = useMemo(() => uiState.activeConnectorType, [uiState.activeConnectorType]);
 
   const setSelectedIds = useCallback((ids: string[]) => {
-    setState((prev) => {
+    setUiState((prev) => {
       if (prev.selectedIds.length === ids.length && prev.selectedIds.every((id, i) => id === ids[i])) {
         return prev;
       }
@@ -169,11 +194,11 @@ export const useDiagramEditor = () => {
   }, []);
 
   const setActiveTool = useCallback((tool: DiagramEditorState['activeTool']) => {
-    setState((prev) => ({ ...prev, activeTool: tool }));
+    setUiState((prev) => ({ ...prev, activeTool: tool }));
   }, []);
 
   const setConnectorType = useCallback((type: ConnectorType) => {
-    setState((prev) => ({ ...prev, activeConnectorType: type }));
+    setUiState((prev) => ({ ...prev, activeConnectorType: type }));
   }, []);
 
   const addElement = useCallback((type: ElementType, x: number, y: number, initialProps?: Partial<DiagramElement>) => {
@@ -194,47 +219,42 @@ export const useDiagramEditor = () => {
       fontSize: 14,
       fontWeight: 'normal',
       ...initialProps,
-      connectorType: type === 'connector' ? state.activeConnectorType : undefined,
+      connectorType: type === 'connector' ? uiState.activeConnectorType : undefined,
     };
 
-    setState((prev) => ({
+    setElements([...elements, newElement]);
+    
+    setUiState((prev) => ({
       ...prev,
-      elements: [...prev.elements, newElement],
       selectedIds: [newElement.id],
       activeTool: 'select',
     }));
     
     return id;
-  }, [state.activeConnectorType]);
+  }, [elements, uiState.activeConnectorType, setElements]);
 
   const updateElement = useCallback((id: string, updates: Partial<DiagramElement>) => {
-    setState((prev) => ({
-      ...prev,
-      elements: prev.elements.map((el) => (el.id === id ? { ...el, ...updates } : el)),
-    }));
-  }, []);
+    setElements(elements.map((el) => (el.id === id ? { ...el, ...updates } : el)));
+  }, [elements, setElements]);
 
   const deleteSelected = useCallback(() => {
-    setState((prev) => ({
-      ...prev,
-      elements: prev.elements.filter((el) => !prev.selectedIds.includes(el.id)),
-      selectedIds: [],
-    }));
-  }, []);
+    setElements(elements.filter((el) => !uiState.selectedIds.includes(el.id)));
+    setUiState(prev => ({ ...prev, selectedIds: [] }));
+  }, [elements, uiState.selectedIds, setElements]);
 
   const setPan = useCallback((newPan: { x: number; y: number }) => {
-    setState((prev) => ({ ...prev, pan: newPan }));
+    setUiState((prev) => ({ ...prev, pan: newPan }));
   }, []);
 
   const handleWheel = useCallback((e: React.WheelEvent) => {
     if (e.ctrlKey || e.metaKey) {
       const delta = -e.deltaY * 0.001;
-      setState((prev) => ({
+      setUiState((prev) => ({
         ...prev,
         zoom: Math.min(Math.max(prev.zoom + delta, 0.1), 5.0),
       }));
     } else {
-      setState((prev) => ({
+      setUiState((prev) => ({
         ...prev,
         pan: {
           x: prev.pan.x - e.deltaX,
@@ -252,9 +272,12 @@ export const useDiagramEditor = () => {
       name,
       lastModified: Date.now(),
       data: {
-        ...state,
+        elements,
+        zoom: uiState.zoom,
+        pan: uiState.pan,
         selectedIds: [], 
-        activeTool: 'select'
+        activeTool: 'select',
+        activeConnectorType: uiState.activeConnectorType
       }
     };
     
@@ -267,21 +290,22 @@ export const useDiagramEditor = () => {
     // Switch context to the new copy? 
     setCurrentId(newEntryId);
     localStorage.setItem(CURRENT_ID_KEY, newEntryId);
-  }, [state]); 
+  }, [elements, uiState]); 
 
   const loadDiagram = useCallback((diagram: SavedDiagram) => {
-    // Save current state before switching? (Auto-save handles it)
-    setState(prev => ({
+    resetHistory(diagram.data.elements);
+    
+    setUiState(prev => ({
       ...prev,
-      elements: diagram.data.elements,
       zoom: diagram.data.zoom || 1,
       pan: diagram.data.pan || { x: 0, y: 0 },
       activeTool: 'select',
       selectedIds: []
     }));
+    
     setCurrentId(diagram.id);
     localStorage.setItem(CURRENT_ID_KEY, diagram.id);
-  }, []);
+  }, [resetHistory]);
 
   const deleteFromHistory = useCallback((id: string) => {
     setHistory(prev => {
@@ -296,20 +320,25 @@ export const useDiagramEditor = () => {
   }, [currentId]);
 
   const createNew = useCallback(() => {
-    setState({
-        ...INITIAL_STATE,
-        elements: [], 
-    });
+    resetHistory([]);
+    setUiState(prev => ({
+        ...prev,
+        activeTool: 'select',
+        selectedIds: [],
+        pan: {x: 0, y: 0},
+        zoom: 1
+    }));
     setCurrentId(null);
     localStorage.removeItem(CURRENT_ID_KEY);
-  }, []);
+  }, [resetHistory]);
 
   return {
+    // Map UI state to match expected interface + add history
     elements,
     selectedIds,
     activeTool,
-    zoom: state.zoom,
-    pan: state.pan,
+    zoom: uiState.zoom,
+    pan: uiState.pan,
     setElements,
     setSelectedIds,
     setActiveTool,
@@ -325,6 +354,10 @@ export const useDiagramEditor = () => {
     saveToHistory,
     loadDiagram,
     deleteFromHistory,
-    createNew
+    createNew,
+    undo,
+    redo,
+    canUndo,
+    canRedo
   };
 };

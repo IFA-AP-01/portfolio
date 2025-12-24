@@ -27,7 +27,9 @@ export const DiagramEditor: React.FC = () => {
     saveToHistory,
     loadDiagram,
     deleteFromHistory,
-    createNew
+    createNew,
+    undo,
+    redo
   } = useDiagramEditor();
 
   const { handleExport, isExporting } = useDiagramExport();
@@ -58,12 +60,26 @@ export const DiagramEditor: React.FC = () => {
         setActiveTool('text');
       } else if (e.key === 'l') {
         setActiveTool('connector');
+      } else if ((e.metaKey || e.ctrlKey) && e.key === 'z') {
+        if (e.shiftKey) {
+          e.preventDefault();
+          redo();
+        } else {
+          e.preventDefault();
+          undo();
+        }
+      } else if ((e.metaKey || e.ctrlKey) && e.key === 'y') {
+        // Support Ctrl+Y for Windows/Linux Redo habits
+        e.preventDefault();
+        redo();
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [deleteSelected, setActiveTool]);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [deleteSelected, setActiveTool, undo, redo]);
 
   return (
     <div className="flex bg-[#faf8f1] dark:bg-[#191C1E] overflow-hidden relative h-full w-full">
