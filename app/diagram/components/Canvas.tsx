@@ -17,7 +17,7 @@ interface CanvasProps {
   onPan: (pan: { x: number; y: number }) => void;
 }
 
-export const Canvas: React.FC<CanvasProps> = ({
+export const Canvas = React.forwardRef<HTMLDivElement, CanvasProps>(({
   elements,
   selectedIds,
   zoom,
@@ -29,12 +29,14 @@ export const Canvas: React.FC<CanvasProps> = ({
   onUpdateElement,
   onWheel,
   onPan,
-}) => {
-  const containerRef = useRef<HTMLDivElement>(null);
+}, ref) => {
+  const localRef = useRef<HTMLDivElement>(null);
+  
+  React.useImperativeHandle(ref, () => localRef.current as HTMLDivElement);
 
   const handlePointerDown = (e: React.PointerEvent) => {
     // Only execute canvas actions if clicking directly on the canvas container
-    if (e.target !== containerRef.current) return;
+    if (e.target !== localRef.current) return;
 
     if (activeTool === 'hand') {
        // Pan Logic
@@ -62,7 +64,7 @@ export const Canvas: React.FC<CanvasProps> = ({
     }
 
     if (activeTool !== 'select') {
-      const rect = containerRef.current?.getBoundingClientRect();
+      const rect = localRef.current?.getBoundingClientRect();
       if (rect) {
         const startX = (e.clientX - rect.left - pan.x) / zoom;
         const startY = (e.clientY - rect.top - pan.y) / zoom;
@@ -114,7 +116,7 @@ export const Canvas: React.FC<CanvasProps> = ({
 
   return (
     <div
-      ref={containerRef}
+      ref={localRef}
       className={clsx(
         "w-full h-full relative overflow-hidden bg-[#faf8f1] dark:bg-[#191C1E]",
         activeTool === 'hand' ? "cursor-grab active:cursor-grabbing" : 
@@ -147,4 +149,6 @@ export const Canvas: React.FC<CanvasProps> = ({
       </div>
     </div>
   );
-};
+});
+
+Canvas.displayName = 'Canvas';

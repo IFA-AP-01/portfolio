@@ -14,7 +14,7 @@ export const Header: React.FC<HeaderProps> = ({ onClose, title = "Screenshot Gen
   return (
     <div className="flex items-center justify-between gap-4">
       <div className="flex items-center gap-4">
-        <Link href="/" className="flex items-center">
+        <Link href="/tools" className="flex items-center">
           <div className="neo-shadow border-black border-2 w-10 flex items-center justify-center bg-[#E9945B]">
             <Image
               src={teamImage}

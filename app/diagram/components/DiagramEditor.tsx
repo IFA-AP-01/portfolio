@@ -3,8 +3,9 @@
 import React, { useEffect } from 'react';
 import { useDiagramEditor } from '@/hooks/useDiagramEditor';
 import { Canvas } from './Canvas';
-import { Header } from '@/app/mockup/components/control/Header';
 import { Toolbar } from './Toolbar';
+import { DiagramSidebar } from './DiagramSidebar';
+import { useDiagramExport } from '@/hooks/useDiagramExport';
 
 export const DiagramEditor: React.FC = () => {
   const {
@@ -22,7 +23,16 @@ export const DiagramEditor: React.FC = () => {
     setPan,
     activeConnectorType,
     setConnectorType,
+    history,
+    saveToHistory,
+    loadDiagram,
+    deleteFromHistory,
+    createNew
   } = useDiagramEditor();
+
+  const { handleExport, isExporting } = useDiagramExport();
+  const canvasRef = React.useRef<HTMLDivElement>(null);
+  const [isSidebarOpen, setIsSidebarOpen] = React.useState(true);
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -56,84 +66,105 @@ export const DiagramEditor: React.FC = () => {
   }, [deleteSelected, setActiveTool]);
 
   return (
-    <div className="flex flex-col h-full bg-[#faf8f1] dark:bg-[#191C1E] overflow-hidden relative">
-      <div className="bg-white dark:bg-[#252526] border-b-2 border-black p-4 z-50">
-        <Header title="Diagram Maker" showCloseButton={false}/>
-      </div>
-      
-      <div className="flex-1 relative">
-        <Canvas
-          elements={elements}
-          selectedIds={selectedIds}
-          zoom={zoom}
-          pan={pan}
-          activeTool={activeTool}
-          onSelect={(id, shiftKey) => {
-            if (shiftKey) {
-              setSelectedIds(
-                selectedIds.includes(id)
-                  ? selectedIds.filter((i) => i !== id)
-                  : [...selectedIds, id]
-              );
-            } else {
-              setSelectedIds([id]);
-            }
-          }}
-          onDeselect={() => setSelectedIds([])}
-          onAddElement={addElement}
-          onUpdateElement={updateElement}
-          onWheel={handleWheel}
-          onPan={setPan}
-        />
+    <div className="flex bg-[#faf8f1] dark:bg-[#191C1E] overflow-hidden relative h-full w-full">
+      <DiagramSidebar 
+        isOpen={isSidebarOpen} 
+        onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
+        history={history}
+        onLoad={loadDiagram}
+        onDelete={deleteFromHistory}
+        onNew={createNew}
+        onSave={saveToHistory}
+      />
 
-        <Toolbar
-          activeTool={activeTool}
-          onSelectTool={setActiveTool}
-          activeConnectorType={activeConnectorType}
-          onSelectConnectorType={setConnectorType}
-        />
+      <div className={`flex-1 flex flex-col h-full relative transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-0'}`}>
         
-        {/* Selection Info / Controls Floating Panel? To be implemented if needed */}
-        {selectedIds.length > 0 && (
-          <div className="fixed top-24 right-8 z-40 p-4 bg-white dark:bg-[#252526] border-2 border-black neo-shadow-sm rounded-lg flex flex-col gap-2 min-w-[200px]">
-            <h3 className="text-xs font-black uppercase text-gray-500 mb-1">Properties</h3>
-            <div className="flex flex-col gap-3">
-              <div className="flex flex-col gap-1">
-                <label className="text-xs font-bold">Text</label>
-                <input 
-                  type="text"
-                  className="neo-input text-sm p-1"
-                  value={elements.find(el => el.id === selectedIds[0])?.text || ''}
-                  onChange={(e) => updateElement(selectedIds[0], { text: e.target.value })}
-                />
-              </div>
-              <div className="flex flex-col gap-1">
-                <label className="text-xs font-bold">Fill Color</label>
-                <div className="flex gap-2">
-                   <input 
-                    type="color"
-                    className="w-full h-8 cursor-pointer"
-                    value={elements.find(el => el.id === selectedIds[0])?.fill || '#ffffff'}
-                    onChange={(e) => updateElement(selectedIds[0], { fill: e.target.value })}
+        {/* Top Right Export Button */}
+        <div className="absolute top-6 right-6 z-30 pointer-events-none">
+           <button
+            onClick={() => handleExport(canvasRef, elements)}
+            disabled={isExporting}
+            className="pointer-events-auto px-4 py-2 bg-[#E9945B] hover:bg-[#d8844b] text-black font-black uppercase text-xs border-2 border-black neo-shadow active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all disabled:opacity-50"
+          >
+            {isExporting ? 'Exporting...' : 'Export'}
+          </button>
+        </div>
+        
+        <div className="flex-1 relative overflow-hidden">
+          <Canvas
+            ref={canvasRef}
+            elements={elements}
+            selectedIds={selectedIds}
+            zoom={zoom}
+            pan={pan}
+            activeTool={activeTool}
+            onSelect={(id, shiftKey) => {
+              if (shiftKey) {
+                setSelectedIds(
+                  selectedIds.includes(id)
+                    ? selectedIds.filter((i) => i !== id)
+                    : [...selectedIds, id]
+                );
+              } else {
+                setSelectedIds([id]);
+              }
+            }}
+            onDeselect={() => setSelectedIds([])}
+            onAddElement={addElement}
+            onUpdateElement={updateElement}
+            onWheel={handleWheel}
+            onPan={setPan}
+          />
+
+          <Toolbar
+            activeTool={activeTool}
+            onSelectTool={setActiveTool}
+            activeConnectorType={activeConnectorType}
+            onSelectConnectorType={setConnectorType}
+          />
+          
+          {/* Selection Info / Controls Floating Panel? To be implemented if needed */}
+          {selectedIds.length > 0 && (
+            <div className="fixed top-24 right-6 z-40 p-4 neo-card flex flex-col gap-2 min-w-[200px]">
+              <h3 className="text-xs font-black uppercase text-gray-500 mb-1">Properties</h3>
+              <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-1">
+                  <label className="text-xs font-bold">Text</label>
+                  <input 
+                    type="text"
+                    className="neo-input text-sm p-1"
+                    value={elements.find(el => el.id === selectedIds[0])?.text || ''}
+                    onChange={(e) => updateElement(selectedIds[0], { text: e.target.value })}
                   />
                 </div>
+                <div className="flex flex-col gap-1">
+                  <label className="text-xs font-bold">Fill Color</label>
+                  <div className="flex gap-2">
+                     <input 
+                      type="color"
+                      className="w-full h-8 cursor-pointer"
+                      value={elements.find(el => el.id === selectedIds[0])?.fill || '#ffffff'}
+                      onChange={(e) => updateElement(selectedIds[0], { fill: e.target.value })}
+                    />
+                  </div>
+                </div>
+                <button 
+                  onClick={deleteSelected}
+                  className="mt-2 neo-button bg-red-500 text-white text-xs py-1.5"
+                >
+                  Delete Element
+                </button>
               </div>
-              <button 
-                onClick={deleteSelected}
-                className="mt-2 neo-button bg-red-500 text-white text-xs py-1.5"
-              >
-                Delete Element
-              </button>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
 
-      {/* Instructions footer? */}
-      <div className="absolute top-24 left-8 z-40 hidden md:block">
-        <div className="p-3 bg-white/80 dark:bg-[#252526]/80 backdrop-blur-sm border border-black/10 rounded-lg text-[10px] text-gray-500 uppercase font-bold tracking-wider space-y-1">
-          <p>Drag to move • Shift+Click to multiselect</p>
-          <p>Space + Drag to pan • Ctrl + Scroll to zoom</p>
+        {/* Instructions footer? */}
+        <div className="absolute bottom-4 right-4 z-20 hidden md:block pointer-events-none">
+          <div className="p-3 border border-black/10 text-[10px] text-gray-500 uppercase font-bold tracking-wider space-y-1 pointer-events-auto">
+            <p>Drag to move • Shift+Click to multiselect</p>
+            <p>Space + Drag to pan • Ctrl + Scroll to zoom</p>
+          </div>
         </div>
       </div>
     </div>

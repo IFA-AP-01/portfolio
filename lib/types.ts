@@ -113,3 +113,10 @@ export interface DiagramEditorState {
   zoom: number;
   pan: { x: number; y: number };
 }
+
+export interface SavedDiagram {
+  id: string;
+  name: string;
+  lastModified: number;
+  data: DiagramEditorState;
+}
