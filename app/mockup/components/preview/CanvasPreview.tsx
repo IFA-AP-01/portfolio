@@ -1,9 +1,11 @@
 "use client";
 
-import React, { forwardRef, useMemo, memo, useRef } from "react";
+import React, { forwardRef, useMemo, memo, useRef, useState } from "react";
 import { ScreenshotData, Template } from "@/lib/types";
 import Image from "next/image";
 import { DEFAULT_ANDROID_SCALE, DEFAULT_IOS_SCALE } from "@/lib/constants";
+
+import { FloatingTextEditor } from "./FloatingTextEditor";
 
 interface CanvasPreviewProps {
   data: ScreenshotData;
@@ -25,6 +27,30 @@ const CanvasPreviewComponent = forwardRef<HTMLDivElement, CanvasPreviewProps>(
     const textRef = useRef<HTMLDivElement>(null);
     const deviceWrapperRef = useRef<HTMLDivElement>(null);
     const deviceInnerRef = useRef<HTMLDivElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const titleRef = useRef<HTMLHeadingElement>(null);
+    const subtitleRef = useRef<HTMLHeadingElement>(null);
+
+    // State for selection and editing
+    const [selectedId, setSelectedId] = useState<
+      "text" | "device" | "rotate" | null
+    >(null);
+    // Track which text field is currently being edited: null, 'title', or 'subtitle'
+    const [editingTextId, setEditingTextId] = useState<
+      "title" | "subtitle" | null
+    >(null);
+    
+    // Track which text field is "active" for the floating editor (even if not editing content)
+    const [activeTextField, setActiveTextField] = useState<"title" | "subtitle">("title");
+
+    // Auto-focus when entering edit mode
+    React.useEffect(() => {
+      if (editingTextId === "title" && titleRef.current) {
+        titleRef.current.focus();
+      } else if (editingTextId === "subtitle" && subtitleRef.current) {
+        subtitleRef.current.focus();
+      }
+    }, [editingTextId]);
 
     const [dragState, setDragState] = React.useState<{
       type: "text" | "device" | "rotate";
@@ -33,13 +59,41 @@ const CanvasPreviewComponent = forwardRef<HTMLDivElement, CanvasPreviewProps>(
       startData: ScreenshotData;
     } | null>(null);
 
+    // Handle Image Drop
+    const handleDragOver = (e: React.DragEvent) => {
+      if (!onChange) return;
+      e.preventDefault();
+      e.stopPropagation();
+    };
+
+    const handleDrop = (e: React.DragEvent) => {
+      if (!onChange) return;
+      e.preventDefault();
+      e.stopPropagation();
+
+      const files = Array.from(e.dataTransfer.files);
+      const imageFile = files.find((f) => f.type.startsWith("image/"));
+
+      if (imageFile) {
+        const url = URL.createObjectURL(imageFile);
+        // By default, update the screenshot image
+        onChange({ screenshotImage: url });
+      }
+    };
+
     const handleMouseDown = (
       e: React.MouseEvent,
       type: "text" | "device" | "rotate"
     ) => {
       if (!onChange) return;
+      // If we are currently editing text, don't start dragging
+      if (editingTextId) return;
+
       e.stopPropagation();
       e.preventDefault();
+
+      setSelectedId(type);
+
       setDragState({
         type,
         startX: e.clientX,
@@ -47,6 +101,7 @@ const CanvasPreviewComponent = forwardRef<HTMLDivElement, CanvasPreviewProps>(
         startData: { ...data },
       });
     };
+
     const [isSafari, setIsSafari] = React.useState(false);
 
     React.useEffect(() => {
@@ -157,6 +212,54 @@ const CanvasPreviewComponent = forwardRef<HTMLDivElement, CanvasPreviewProps>(
       };
     }, [dragState, onChange, scale, interactionScale, screenScale]);
 
+    // Handle clicking background to deselect
+    const handleBackgroundClick = () => {
+      setSelectedId(null);
+      setEditingTextId(null);
+    };
+
+    // Text editing handlers
+    const handleTextClick = (
+       e: React.MouseEvent,
+       field: "title" | "subtitle"
+    ) => {
+       if (!onChange) return;
+       // We don't stop propagation here so drag can still start from the container handler
+       // But we do want to update the active field for the floating editor
+       setActiveTextField(field);
+    };
+
+    const handleTextDoubleClick = (
+      e: React.MouseEvent,
+      field: "title" | "subtitle"
+    ) => {
+      if (!onChange) return;
+      e.stopPropagation();
+      setEditingTextId(field);
+      setActiveTextField(field);
+      setSelectedId("text");
+    };
+
+    const handleTextBlur = (
+      e: React.FocusEvent<HTMLHeadingElement>,
+      field: "title" | "subtitle"
+    ) => {
+      if (!onChange) return;
+      setEditingTextId(null);
+      const newValue = e.target.innerText;
+      
+      // Only update if changed prevents unnecessary renders
+      if (newValue !== data[field]) {
+         onChange({ [field]: newValue });
+      }
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+      // Blur on Enter? Maybe not for multi-line, strictly speaking title probably single line.
+      // But let's allow multi-line for now unless shift+enter?
+      // Common behavior: just standard contentEditable behavior.
+    };
+
     return (
       <div
         className="relative overflow-hidden bg-white"
@@ -166,6 +269,9 @@ const CanvasPreviewComponent = forwardRef<HTMLDivElement, CanvasPreviewProps>(
           transform: `scale(${scale})`,
           transformOrigin: "top left",
         }}
+        onClick={handleBackgroundClick}
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
       >
         <div
           ref={ref}
@@ -177,32 +283,55 @@ const CanvasPreviewComponent = forwardRef<HTMLDivElement, CanvasPreviewProps>(
                 : data.backgroundColor,
           }}
         >
-          {/* Background Image if present */}
-          {data.backgroundImage && (
-            <div className="absolute inset-0 z-0">
-              <Image
-                src={data.backgroundImage}
-                alt="Background"
-                width={width}
-                height={height}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          )}
+          {/* ... (background image) */}
 
           {/* Content Container */}
           <div className="relative z-10 w-full h-full">
             {/* Text Section */}
             <div
               ref={textRef}
-              className="absolute left-1/2 top-[10%] z-30 flex flex-col justify-center p-8 w-full pointer-events-auto will-change-transform"
+              className={`absolute left-1/2 top-[10%] z-30 flex flex-col justify-center p-8 w-full pointer-events-auto will-change-transform group`}
               style={{
                 transform: `translate(-50%, -50%) translate(${data.textTranslateX}px, ${data.textTranslateY}px)`,
-                cursor: onChange ? "move" : "default",
+                cursor: onChange ? (editingTextId ? "text" : "move") : "default",
               }}
               onMouseDown={(e) => handleMouseDown(e, "text")}
             >
+              {/* Selection Border - Excluded from export - THICKER */}
+              {selectedId === "text" && onChange && (
+                <div className="absolute inset-0 border-[3px] border-blue-500 rounded-lg pointer-events-none export-exclude z-50">
+                  {/* Reuse handles with slight adjust for thicker border */}
+                  <div className="absolute -top-1.5 -left-1.5 w-3 h-3 bg-white border border-blue-500 rounded-full" />
+                  <div className="absolute -top-1.5 -right-1.5 w-3 h-3 bg-white border border-blue-500 rounded-full" />
+                  <div className="absolute -bottom-1.5 -left-1.5 w-3 h-3 bg-white border border-blue-500 rounded-full" />
+                  <div className="absolute -bottom-1.5 -right-1.5 w-3 h-3 bg-white border border-blue-500 rounded-full" />
+                </div>
+              )}
+              
+              {/* Floating Text Editor */}
+              {selectedId === "text" && onChange && (
+                 <FloatingTextEditor 
+                    data={data}
+                    field={activeTextField}
+                    onChange={onChange}
+                    interactionScale={interactionScale}
+                 />
+              )}
+
+              {/* Hover Border - Excluded from export */}
+              {!selectedId && onChange && (
+                <div className="absolute inset-0 border border-transparent group-hover:border-blue-300 rounded-lg pointer-events-none export-exclude transition-colors" />
+              )}
+
               <h1
+                ref={titleRef}
+                contentEditable={editingTextId === "title"}
+                suppressContentEditableWarning
+                onMouseDown={(e) => handleTextClick(e, "title")} 
+                onDoubleClick={(e) => handleTextDoubleClick(e, "title")}
+                onBlur={(e) => handleTextBlur(e, "title")}
+                onKeyDown={handleKeyDown}
+                className={`outline-none border-none bg-transparent min-h-[1em] ${editingTextId === "title" ? "cursor-text select-text relative z-[60]" : "cursor-inherit select-none"}`}
                 style={{
                   color: data.titleColor,
                   fontFamily: data.titleFontFamily,
@@ -212,6 +341,7 @@ const CanvasPreviewComponent = forwardRef<HTMLDivElement, CanvasPreviewProps>(
                   textDecoration: data.titleTextDecoration,
                   letterSpacing: `${data.titleLetterSpacing}em`,
                   lineHeight: data.titleLineHeight,
+                  opacity: data.titleOpacity ?? 1,
                   textShadow: data.titleTextShadow
                     ? "2px 2px 4px rgba(0,0,0,0.5)"
                     : "none",
@@ -222,6 +352,14 @@ const CanvasPreviewComponent = forwardRef<HTMLDivElement, CanvasPreviewProps>(
                 {data.title}
               </h1>
               <h2
+                ref={subtitleRef}
+                contentEditable={editingTextId === "subtitle"}
+                suppressContentEditableWarning
+                onMouseDown={(e) => handleTextClick(e, "subtitle")}
+                onDoubleClick={(e) => handleTextDoubleClick(e, "subtitle")}
+                onBlur={(e) => handleTextBlur(e, "subtitle")}
+                onKeyDown={handleKeyDown}
+                className={`outline-none border-none bg-transparent min-h-[1em] ${editingTextId === "subtitle" ? "cursor-text select-text relative z-[60]" : "cursor-inherit select-none"}`}
                 style={{
                   color: data.subtitleColor,
                   fontFamily: data.subtitleFontFamily,
@@ -231,6 +369,7 @@ const CanvasPreviewComponent = forwardRef<HTMLDivElement, CanvasPreviewProps>(
                   textDecoration: data.subtitleTextDecoration,
                   letterSpacing: `${data.subtitleLetterSpacing}em`,
                   lineHeight: data.subtitleLineHeight,
+                  opacity: data.subtitleOpacity ?? 1,
                   textShadow: data.subtitleTextShadow
                     ? "2px 2px 4px rgba(0,0,0,0.5)"
                     : "none",
@@ -241,18 +380,34 @@ const CanvasPreviewComponent = forwardRef<HTMLDivElement, CanvasPreviewProps>(
               </h2>
             </div>
 
+
             {/* Device Frame Section */}
             <div
               ref={deviceWrapperRef}
-              className="absolute left-1/2 top-[58%] pointer-events-auto will-change-transform"
+              className={`absolute left-1/2 top-[58%] pointer-events-auto will-change-transform group`}
               onMouseDown={(e) => handleMouseDown(e, "device")}
               style={{
                 cursor: onChange ? "move" : "default",
                 transform: `translate(-50%, -50%) translate(${data.deviceTranslateX}px, ${data.deviceTranslateY}px)`,
               }}
             >
+              {/* Selection Border - Excluded from export - THICKER */}
+              {selectedId === "device" && onChange && (
+                <div className="absolute -inset-2 border-[3px] border-blue-500 rounded-lg pointer-events-none export-exclude z-50">
+                   <div className="absolute -top-1.5 -left-1.5 w-3 h-3 bg-white border border-blue-500 rounded-full" />
+                   <div className="absolute -top-1.5 -right-1.5 w-3 h-3 bg-white border border-blue-500 rounded-full" />
+                   <div className="absolute -bottom-1.5 -left-1.5 w-3 h-3 bg-white border border-blue-500 rounded-full" />
+                   <div className="absolute -bottom-1.5 -right-1.5 w-3 h-3 bg-white border border-blue-500 rounded-full" />
+                </div>
+              )}
+               {/* Hover Border - Excluded from export */}
+              {!selectedId && onChange && (
+                <div className="absolute -inset-2 border border-transparent group-hover:border-blue-300 rounded-lg pointer-events-none export-exclude transition-colors" />
+              )}
+
               <div
                 ref={deviceInnerRef}
+
                 className={`relative w-full h-auto aspect-[1/2.16]`}
                 style={{
                   width: template.defaultDimensions.width,
@@ -321,3 +476,4 @@ CanvasPreviewComponent.displayName = "CanvasPreview";
 
 // Memoize the component to prevent unnecessary re-renders
 export const CanvasPreview = memo(CanvasPreviewComponent);
+

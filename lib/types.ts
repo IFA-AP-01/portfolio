@@ -54,6 +54,8 @@ export interface ScreenshotData {
   subtitleTextShadow: boolean;
   titleColor: string;
   subtitleColor: string;
+  titleOpacity: number;
+  subtitleOpacity: number;
   backgroundColor: string;
   backgroundType: 'solid' | 'gradient';
   gradientColorFrom: string;

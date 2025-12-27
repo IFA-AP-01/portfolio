@@ -75,6 +75,8 @@ export const INITIAL_DATA: ScreenshotData = {
   subtitleTextShadow: false,
   titleColor: "#ffffff",
   subtitleColor: "#e0e0e0",
+  titleOpacity: 1,
+  subtitleOpacity: 1,
   backgroundColor: "#1a1a1a",
   backgroundType: "gradient",
   gradientColorFrom: "#4094b0",
