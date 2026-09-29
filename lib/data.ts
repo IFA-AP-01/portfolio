@@ -1,5 +1,5 @@
 import liveSpeakerImg from "@/public/liveSpeakerImg.webp";
-import stoneFabberImg from "@/public/stonefabber.webp";
+import metacamImg from "@/public/metacam.webp";
 import aioScannerImg from "@/public/aioScanner.webp";
 import colorNoteImg from "@/public/colorNoteImg.webp";
 import taskManagementImg from "@/public/taskManagementImg.webp";
@@ -43,7 +43,13 @@ export const heroStats = [
 // ---------------------------------------------------------------------------
 
 export type ProjectStatus = "live" | "beta";
-export type BentoSpan = 8 | 4 | 6;
+export type BentoSpan = 8 | 4 | 6 | 12;
+
+export type ProjectLink = {
+  label: string;
+  href: string;
+  kind: "site" | "github" | "play" | "appstore";
+};
 
 export type FeaturedProject = {
   slug: string;
@@ -54,11 +60,57 @@ export type FeaturedProject = {
   image: typeof liveSpeakerImg | null;
   videoUrl?: string;
   viewUrl: string;
+  links?: readonly ProjectLink[];
   status: ProjectStatus;
   span: BentoSpan;
 };
 
 export const featuredProjects: FeaturedProject[] = [
+  {
+    slug: "metacam",
+    title: "MetaCam",
+    kicker: "EXIF watermark generator",
+    description:
+      "Camera app that stamps every shot with your camera's real EXIF data — brand, lens, shutter, ISO and location — into studio-crafted watermark templates. 30+ layouts, batch export, built for photographers who want credit on every frame.",
+    tags: ["iOS", "Swift", "EXIF", "Templates"],
+    image: metacamImg,
+    viewUrl: "https://metacam.pics/",
+    links: [
+      {
+        label: "App Store",
+        href: "https://apps.apple.com/us/app/metacam-exif-frame-watermark/id6762182218",
+        kind: "appstore",
+      },
+      {
+        label: "Google Play",
+        href: "https://play.google.com/store/apps/dev?id=5238090906090965084",
+        kind: "play",
+      },
+    ],
+    status: "live",
+    span: 8,
+  },
+  {
+    slug: "battery-meter",
+    title: "Battery Meter",
+    kicker: "Real-time battery widget",
+    description:
+      "A lightweight Android battery monitor with a customizable Glance home-screen widget — live status, health and charge history. 40,000+ installs on Google Play, fully open source.",
+    tags: ["Android", "Kotlin", "Jetpack Compose", "Glance"],
+    image: tiziImg,
+    videoUrl: "https://cdn.ifateam.dev/battery.mp4",
+    viewUrl: "https://github.com/huyhunhngc/battery_meter",
+    links: [
+      {
+        label: "Play Store",
+        href: "https://play.google.com/store/apps/details?id=io.github.ifa.glancewidget",
+        kind: "play",
+      },
+      { label: "GitHub", href: "https://github.com/huyhunhngc/battery_meter", kind: "github" },
+    ],
+    status: "live",
+    span: 4,
+  },
   {
     slug: "snapbyte",
     title: "Snapbyte",
@@ -70,7 +122,7 @@ export const featuredProjects: FeaturedProject[] = [
     videoUrl: "https://cdn.ifateam.dev/snapbyte.mp4",
     viewUrl: "https://snapbyte.io",
     status: "live",
-    span: 8,
+    span: 6,
   },
   {
     slug: "aio-scanner",
@@ -82,32 +134,27 @@ export const featuredProjects: FeaturedProject[] = [
     image: aioScannerImg,
     viewUrl: "https://scanner.ifateam.dev",
     status: "live",
-    span: 4,
+    span: 6,
   },
   {
     slug: "live-speaker",
     title: "Live Speaker",
     kicker: "Real-time speech translation",
     description:
-      "The innovative voice translation tool that facilitates multilingual communication.",
-    tags: ["KMP", "Kotlin", "Deepgram", "Gemini"],
+      "Real-time speech translation and live captions for macOS meetings — open source, SwiftUI + Gemini Live API.",
+    tags: ["Swift", "SwiftUI", "Gemini", "ScreenCaptureKit"],
     image: liveSpeakerImg,
     videoUrl: "https://cdn.ifateam.dev/OhaioLiveSpeaker.mp4",
-    viewUrl: "https://speaker.ohaio.io",
+    viewUrl: "https://github.com/IFA-AP-01/gemini-live-translate-macos",
+    links: [
+      {
+        label: "GitHub",
+        href: "https://github.com/IFA-AP-01/gemini-live-translate-macos",
+        kind: "github",
+      },
+    ],
     status: "live",
-    span: 6,
-  },
-  {
-    slug: "stone-fabbers",
-    title: "Stone Fabbers",
-    kicker: "Publishing platform for the stone industry",
-    description:
-      "E-magazine for the stone industry, providing information about stone processing machines and tools.",
-    tags: ["WordPress", "PHP", "Custom Theme"],
-    image: stoneFabberImg,
-    viewUrl: "https://stonefabber.com",
-    status: "beta",
-    span: 6,
+    span: 12,
   },
 ];
 
@@ -122,16 +169,6 @@ export const otherProjects = [
     imageUrl: null,
     videoUrl: "https://cdn.ifateam.dev/Aardwolf.mp4",
     viewUrl: "https://aardwolf.co.in",
-  },
-  {
-    title: "Battery Meter",
-    timeline: "Sep 2024 - Nov 2024",
-    description:
-      "A lightweight application designed to monitor the battery status of a device, providing real-time updates on battery health.",
-    tags: ["Android", "Kotlin", "Jetpack Compose", "Glance Widget"],
-    imageUrl: tiziImg,
-    videoUrl: "https://cdn.ifateam.dev/battery.mp4",
-    viewUrl: "https://play.google.com/store/apps/details?id=io.github.ifa.glancewidget",
   },
   {
     title: "King Of Vietnamese",
@@ -244,6 +281,16 @@ export const capabilityGroups: CapabilityGroup[] = [
 export const siteMeta = {
   name: "IFA Team",
   email: "hi@ifateam.dev",
+  stores: [
+    {
+      label: "Google Play",
+      href: "https://play.google.com/store/apps/dev?id=5238090906090965084",
+    },
+    {
+      label: "App Store",
+      href: "https://apps.apple.com/us/app/metacam-exif-frame-watermark/id6762182218",
+    },
+  ],
   socials: [
     { label: "GitHub", href: "https://github.com/huyhunhngc" },
     { label: "Discord", href: "https://discord.gg/DaeSfrkfnS" },

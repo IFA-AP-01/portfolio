@@ -108,3 +108,73 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+  /* Featured project card — layered glass, engages without lifting off the grid */
+  .project-card {
+    position: relative;
+    isolation: isolate;
+    background-color: rgba(18, 19, 26, 0.55);
+    background-image: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0) 42%
+    );
+    backdrop-filter: blur(20px) saturate(170%);
+    -webkit-backdrop-filter: blur(20px) saturate(170%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 18px 40px -24px rgba(0, 0, 0, 0.9);
+    transition: border-radius 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+      border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .project-card:hover,
+  .project-card:focus-within {
+    border-radius: 28px;
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      0 32px 64px -28px rgba(0, 0, 0, 1);
+  }
+
+  /* Dotted seam between neighbouring cards — fades out as one is engaged */
+  .project-seam {
+    position: absolute;
+    top: 14px;
+    bottom: 14px;
+    left: -10px;
+    width: 2px;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.16) 12%,
+      rgba(255, 255, 255, 0.16) 88%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 2px 6px;
+    background-repeat: repeat-y;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Small external link chip (stores / repos) */
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #d1d5db;
+    font-size: 12px;
+    line-height: 1.4;
+    font-weight: 500;
+    text-decoration: none;
+    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+  }
+
+  .project-link:hover {
+    border-color: rgba(255, 255, 255, 0.22);
+    color: #f4f5f8;
+    background: rgba(255, 255, 255, 0.07);
+  }
