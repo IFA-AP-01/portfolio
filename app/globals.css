@@ -1,227 +1,78 @@
-@import "@/app/prism-vscode.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html {
-  --line-color: #e5e7eb;
-  font-family: var(
-    --font-sans,
-    ui-sans-serif,
-    system-ui,
-    sans-serif,
-    "Apple Color Emoji",
-    "Segoe UI Emoji",
-    "Segoe UI Symbol",
-    "Noto Color Emoji"
-  );
-  position: relative;
-  min-height: 100vh;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-html.dark {
-  --line-color: rgba(255, 255, 255, 0.2);
-}
-
-.borderBlack {
-  @apply border border-black/10;
-}
-
-/* Ensure the body can scroll */
 body {
   min-height: 100vh;
   margin: 0;
+  background-color: #090a0f;
+  color: #f4f5f8;
 }
 
-.highlight {
-  position: relative;
-  display: inline-block;
+::selection {
+  background: rgba(255, 255, 255, 0.9);
+  color: #090a0f;
 }
 
-.highlight::after {
-  content: "";
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 100%;
-  height: 30px;
-  background-image: url("/text_highlight.svg");
-  background-repeat: no-repeat;
-  background-position: bottom center;
-  background-size: 100%;
-  z-index: -1;
-  clip-path: inset(0 100% 0 0);
-  animation: drawHighlight 2s linear infinite;
-}
-
-@keyframes drawHighlight {
-  0% {
-    clip-path: inset(0 100% 0 0);
+@layer components {
+  /* Dynamic Notch header */
+  .notch-nav {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(18, 19, 26, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: none;
+    border-radius: 0 0 20px 20px;
+    padding: 10px 20px;
+    box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.7);
+    z-index: 50;
   }
-  50% {
-    clip-path: inset(0 0 0 0);
+
+  /* Tech stack capsule */
+  .tech-pill {
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-size: 12px;
+    line-height: 1.4;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #d1d5db;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
   }
-  100% {
-    clip-path: inset(0 0 0 0);
+
+  /* Bento showcase card */
+  .bento-card {
+    background: #12131a;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+      border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .bento-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.22);
+    box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.6);
   }
 }
 
 .grecaptcha-badge {
   visibility: hidden !important;
-}
-
-#canvas {
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.canvas-wrap {
-  position: relative;
-}
-
-div.canvas-content {
-  position: relative;
-  z-index: 10;
-}
-
-div.canvas-content::after {
-  content: "";
-  position: fixed;
-  bottom: -5px;
-  left: 0;
-  width: 100%;
-  height: 70px;
-  background: linear-gradient(
-    to bottom,
-    rgba(250, 248, 241, 0),
-    rgba(250, 248, 241, 0.9) 90%
-  );
-  filter: blur(5px);
-  pointer-events: none;
-  z-index: 10;
-}
-
-div.canvas-content.dark::after {
-  background: linear-gradient(
-    to bottom,
-    rgba(19, 19, 19, 0),
-    rgba(19, 19, 19, 0.9) 90%
-  );
-}
-
-/* Performance utilities */
-.gpu-accelerated {
-  transform: translateZ(0);
-  will-change: auto;
-}
-
-.smooth-scroll {
-  scroll-behavior: smooth;
-}
-
-/* Neo-Brutalism Utilities */
-@layer components {
-  .neo-border {
-    @apply border-2 border-black;
-  }
-
-  .neo-shadow {
-    box-shadow: 3px 3px 0px 0px #c5c5c5;
-  }
-
-  .dark .neo-shadow {
-    box-shadow: 3px 3px 0px 0px #404040;
-  }
-
-  .neo-card {
-    @apply border-2 border-black bg-white dark:bg-[#252526];
-    box-shadow: 3px 3px 0px 0px #c5c5c5;
-  }
-
-  .dark .neo-card {
-    box-shadow: 3px 3px 0px 0px #404040;
-  }
-
-  .neo-button {
-    @apply px-6 py-2 border-2 border-black text-black font-bold transition-all duration-200 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none;
-    box-shadow: 3px 3px 0px 0px #c5c5c5;
-  }
-
-  .dark .neo-button {
-    box-shadow: 3px 3px 0px 0px #404040;
-  }
-
-  /* Hover effects for cards */
-  .neo-hover {
-    @apply transition-all duration-200 hover:-translate-y-1 hover:-translate-x-1;
-  }
-
-  .neo-hover:hover {
-    box-shadow: 6px 6px 0px 0px #c5c5c5;
-  }
-
-  .dark .neo-hover:hover {
-    box-shadow: 6px 6px 0px 0px #404040;
-  }
-}
-
-/* Reduce motion for accessibility and performance */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-code[class*="language-"],
-pre[class*="language-"] {
-  background: transparent !important;
-}
-
-.markdown-content table {
-  display: block;
-  width: 100%;
-  overflow-x: auto;
-  border-collapse: collapse;
-  margin-bottom: 1.5rem;
-  border: none;
-}
-
-.markdown-content th,
-.markdown-content td {
-  padding: 0.75rem 1rem;
-  text-align: left;
-}
-
-.markdown-content th {
-  background-color: #e9945b;
-  color: #000;
-  font-weight: 800;
-}
-
-.dark .markdown-content th {
-  background-color: #e9945b;
-}
-
-@media screen and (max-width: 500px) {
-  .markdown-content table {
-    overflow-x: auto;
-  }
-  .markdown-content h2,
-  .markdown-content h3,
-  .markdown-content h4,
-  .markdown-content h5,
-  .markdown-content h6,
-  .markdown-content p {
-    font-size: 16px !important;
-  }
 }
 
 /* Custom Scrollbar */
@@ -235,22 +86,25 @@ pre[class*="language-"] {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 99px;
   border: 2px solid transparent;
   background-clip: content-box;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(255, 255, 255, 0.4);
   border: 2px solid transparent;
   background-clip: content-box;
 }
 
-.dark .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.4);
+/* Reduce motion for accessibility and performance */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

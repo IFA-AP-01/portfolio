@@ -1,3 +1,5 @@
+"use client";
+
 import {
   GoogleReCaptchaProvider,
   useGoogleReCaptcha,
@@ -10,6 +12,9 @@ import React, { useState, useTransition, useRef } from "react";
 const RECAPTCHA_ERROR = "reCAPTCHA is not ready. Please try again later.";
 const SUBMISSION_ERROR = "An error occurred while sending the email.";
 const SUBMISSION_SUCCESS = "Email sent successfully!";
+
+const inputClasses =
+  "w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-[15px] text-fg placeholder:text-fg-subtle outline-none transition-colors duration-200 focus:border-white/30 disabled:opacity-60";
 
 const ContactForm = () => {
   const { executeRecaptcha } = useGoogleReCaptcha();
@@ -51,9 +56,9 @@ const ContactForm = () => {
   };
 
   return (
-    <form className="mt-10 flex flex-col" onSubmit={handleSubmit} ref={formRef}>
+    <form className="flex flex-col gap-3" onSubmit={handleSubmit} ref={formRef}>
       <input
-        className="h-14 px-4 neo-border focus:neo-shadow bg-white dark:bg-[#252526] transition-all focus:neo-shadow outline-none"
+        className={inputClasses}
         name="senderEmail"
         type="email"
         required
@@ -62,7 +67,7 @@ const ContactForm = () => {
         disabled={isLoading}
       />
       <textarea
-        className="h-52 my-3 p-4 neo-border focus:neo-shadow bg-white dark:bg-[#252526] transition-all resize-none focus:neo-shadow outline-none"
+        className={`${inputClasses} h-48 resize-none`}
         name="message"
         placeholder="Your message"
         required

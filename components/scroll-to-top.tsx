@@ -1,62 +1,45 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-const ScrollToTop = () => {
+export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
 
-  const handleScroll = () => {
-    // Show the button when the user scrolls down
-    if (window.scrollY > 100) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
   useEffect(() => {
-    // Add scroll event listener when the component mounts
+    const handleScroll = () => {
+      setIsVisible(window.scrollY > 100);
+    };
     window.addEventListener("scroll", handleScroll);
-
-    // Remove the event listener when the component unmounts
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  return (
-    <>
-      {isVisible && (
-        <button
-          onClick={scrollToTop}
-          className="neo-button fixed right-5 bottom-8 sm:right-8 flex items-center justify-center p-2 bg-[#E9945B] text-black hover:bg-[#d6854f] z-50 dark:bg-[#E9945B] dark:text-white"
-          aria-label="Scroll to top"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 15l7-7 7 7"
-            />
-          </svg>
-        </button>
-      )}
-    </>
-  );
-};
+  if (!isVisible) {
+    return null;
+  }
 
-export default ScrollToTop;
+  return (
+    <button
+      type="button"
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      className="fixed bottom-8 right-5 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-surface/85 text-fg-muted shadow-notch backdrop-blur-xl transition-colors duration-200 hover:border-white/25 hover:text-fg sm:right-8"
+      aria-label="Scroll to top"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-5 w-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M5 15l7-7 7 7"
+        />
+      </svg>
+    </button>
+  );
+}

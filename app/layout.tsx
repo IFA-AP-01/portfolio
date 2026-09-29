@@ -1,40 +1,35 @@
-import "@/lib/fontawesome";
 import "./globals.css";
-import "./markdown.css";
 
+import type { Metadata, Viewport } from "next";
+import { Toaster } from "react-hot-toast";
 import ActiveSectionContextProvider from "@/context/active-section-context";
 import SiteLayout from "@/components/site-layout";
-import ThemeSwitch from "@/components/theme-switch";
-import ThemeContextProvider from "@/context/theme-context";
-import { Toaster } from "react-hot-toast";
-import { bodyFont } from "@/lib/fontawesome";
-
 import ScrollToTop from "@/components/scroll-to-top";
-import { Metadata, Viewport } from "next";
-import NextTopLoader from "nextjs-toploader";
+import { GeistSans, GeistMono } from "@/lib/fonts";
+
+const title = "IFA Team — Product Studio";
+const description =
+  "IFA Team builds web, mobile and edge software that ships — from real-time voice translation to globally-cached asset delivery.";
 
 export const metadata: Metadata = {
   title: {
-    default: "IFA Team - Application Development Experts",
+    default: title,
     template: "%s | IFA Team",
   },
-  description:
-    "Welcome to The IFA Team! We are experts in application development, delivering high-quality solutions for web, mobile, and enterprise platforms.",
+  description,
   keywords: [
     "IFA Team",
-    "IFA Team - Application Development Experts",
-    "IFA Team - Application Development Experts",
+    "product studio",
+    "app development",
+    "web development",
+    "mobile development",
   ],
   openGraph: {
-    title: {
-      default: "IFA Team - Application Development Experts",
-      template: "%s | IFA Team",
-    },
-    description:
-      "Welcome to The IFA Team! We are experts in application development, delivering high-quality solutions for web, mobile, and enterprise platforms.",
+    title: { default: title, template: "%s | IFA Team" },
+    description,
     images: ["https://cdn.ifateam.dev/thumnail-ifa.jpg"],
     url: "https://ifateam.dev",
-    siteName: "IFA Team - Application Development Experts",
+    siteName: title,
     locale: "en",
     type: "website",
   },
@@ -44,7 +39,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#faf8f1",
+  themeColor: "#090A0F",
 };
 
 export default function RootLayout({
@@ -53,22 +48,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="!scroll-smooth" suppressHydrationWarning>
-      <head>
-        <title>IFA Team - Application Development Experts</title>
-      </head>
-      <body
-        suppressHydrationWarning
-        className={`${bodyFont.className} bg-[#faf8f1] text-gray-950 relative dark:bg-[#191C1E] dark:text-gray-50 dark:text-opacity-90 transition-colors duration-300`}
-      >
-        <NextTopLoader color="#E9945B" height={3} showSpinner={false} />
-        <ThemeContextProvider>
-          <ActiveSectionContextProvider>
-            <SiteLayout>{children}</SiteLayout>
-            <Toaster position="top-right" />
-            <ScrollToTop />
-          </ActiveSectionContextProvider>
-        </ThemeContextProvider>
+    <html
+      lang="en"
+      className={`${GeistSans.variable} ${GeistMono.variable} !scroll-smooth`}
+    >
+      <body className="bg-canvas font-sans text-fg antialiased">
+        <ActiveSectionContextProvider>
+          <SiteLayout>{children}</SiteLayout>
+          <Toaster position="top-right" />
+          <ScrollToTop />
+        </ActiveSectionContextProvider>
       </body>
     </html>
   );

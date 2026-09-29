@@ -1,126 +1,134 @@
-import { faHome, faBook, faUsers, faFolder, faTools, faPhone, faRocket } from '@fortawesome/free-solid-svg-icons';
-import AndroidImg from "@/public/Android.webp";
-import AppleImg from "@/public/Apple.webp";
-import DevDungImg from "@/public/DevDung.webp";
-import HuyDevImg from "@/public/HuyDev.webp";
-import KotlinImg from "@/public/Kotlin.webp";
-import MyJournalImg from "@/public/MyJournalImg.webp";
-import NestJsImg from "@/public/NestJs.webp";
-import NextJsImg from "@/public/NextJs.webp";
-import SwiftImg from "@/public/Swift.webp";
-import ThangDevImg from "@/public/ThangDev.webp";
-import colorNoteImg from "@/public/colorNoteImg.webp";
-import flutterImg from "@/public/Flutter.webp";
 import liveSpeakerImg from "@/public/liveSpeakerImg.webp";
+import stoneFabberImg from "@/public/stonefabber.webp";
+import aioScannerImg from "@/public/aioScanner.webp";
+import colorNoteImg from "@/public/colorNoteImg.webp";
 import taskManagementImg from "@/public/taskManagementImg.webp";
 import tiziImg from "@/public/tiziImg.webp";
 import vtvImg from "@/public/vtvImg.webp";
-import vueImg from "@/public/VueImg.webp";
-import woocommerceImg from "@/public/woocommerce.webp";
-import wordpressImg from "@/public/wordpress.webp";
-import appDevelopmentImg from "@/public/7050114.webp";
-import webDevelopmentImg from "@/public/7050121.webp";
-import uiuxDesignImg from "@/public/7141006.webp";
-import seoOptimizeImg from "@/public/7141024.webp";
-import springImg from "@/public/springImg.webp";
-import stoneFabberImg from "@/public/stonefabber.webp";
-import aioScannerImg from "@/public/aioScanner.webp";
 
-export const links = [
-  {
-    name: "Home",
-    hash: "#home",
-    icon: faHome,
-  },
-  {
-    name: "About",
-    hash: "#about",
-    icon: faBook,
-  },
-  {
-    name: "Skills",
-    hash: "#skills",
-    icon: faTools,
-  },
-  {
-    name: "Tools",
-    hash: "#tools",
-    icon: faRocket,
-  },
-  {
-    name: "Members",
-    hash: "#members",
-    icon: faUsers,
-  },
-  {
-    name: "Projects",
-    hash: "#projects",
-    icon: faFolder,
-  },
-  {
-    name: "Contact",
-    hash: "#contact",
-    icon: faPhone,
-  },
+// ---------------------------------------------------------------------------
+// Navigation (anchors on the single home page)
+// ---------------------------------------------------------------------------
+
+export type NavItem = {
+  label: string;
+  hash: `#${string}`;
+};
+
+export const navItems = [
+  { label: "Home", hash: "#home" },
+  { label: "Projects", hash: "#projects" },
+  { label: "Stack", hash: "#stack" },
+  { label: "Contact", hash: "#contact" },
 ] as const;
 
-export const projectsData = [
+// ---------------------------------------------------------------------------
+// Hero
+// ---------------------------------------------------------------------------
+
+export const availability = {
+  label: "Available for new projects",
+  period: "Q4 2026",
+} as const;
+
+export const heroStats = [
+  { value: "40+", label: "Projects launched" },
+  { value: "12", label: "Apps on the stores" },
+  { value: "9", label: "Years shipping" },
+  { value: "100%", label: "Client retention" },
+] as const;
+
+// ---------------------------------------------------------------------------
+// Featured Projects (bento grid)
+// ---------------------------------------------------------------------------
+
+export type ProjectStatus = "live" | "beta";
+export type BentoSpan = 8 | 4 | 6;
+
+export type FeaturedProject = {
+  slug: string;
+  title: string;
+  kicker: string;
+  description: string;
+  tags: readonly string[];
+  image: typeof liveSpeakerImg | null;
+  videoUrl?: string;
+  viewUrl: string;
+  status: ProjectStatus;
+  span: BentoSpan;
+};
+
+export const featuredProjects: FeaturedProject[] = [
   {
-    title: "snapbyte.io - File & Object Caching System",
-    timeline: "June 2025 - Present",
+    slug: "snapbyte",
+    title: "Snapbyte",
+    kicker: "File & object caching at the edge",
     description:
-      "Snapbyte is a file & object caching system designed to help website owners cut bandwidth costs by caching and offloading large files to a globally distributed edge layer.",
-    tags: ["Node.js", "Next.js", "Astro", "Clouldflare", "Redis"],
-    imageUrl: liveSpeakerImg,
+      "A file & object caching system that helps website owners cut bandwidth costs by caching and offloading large files to a globally distributed edge layer.",
+    tags: ["Next.js", "Node.js", "Cloudflare", "Redis"],
+    image: liveSpeakerImg,
     videoUrl: "https://cdn.ifateam.dev/snapbyte.mp4",
     viewUrl: "https://snapbyte.io",
+    status: "live",
+    span: 8,
   },
   {
-    title: "AIO Scanner - OCR Android & iOS App",
-    timeline: "Oct 2025 - Present",
+    slug: "aio-scanner",
+    title: "AIO Scanner",
+    kicker: "OCR for Android & iOS",
     description:
-      "Transform any document into digital text with our advanced OCR scanner. From business cards to handwritten notes, experience the future of document digitization",
-    tags: ["Kotlin", "Swift", "Firebase", "MLKit", "OpenCV", "LLM", "OCR", "App Check"],
-    imageUrl: aioScannerImg,
-    videoUrl: "",
+      "Transform any document into digital text with our advanced OCR scanner. From business cards to handwritten notes.",
+    tags: ["Kotlin", "Swift", "ML Kit", "Firebase"],
+    image: aioScannerImg,
     viewUrl: "https://scanner.ifateam.dev",
+    status: "live",
+    span: 4,
   },
   {
-    title: "Live Speaker - Speech to Translation Software & SAAS",
-    timeline: "Jan 2025 - Present",
+    slug: "live-speaker",
+    title: "Live Speaker",
+    kicker: "Real-time speech translation",
     description:
-      "Discover Livespeaker, the innovative voice translation tool that facilitates multilingual communication.",
-    tags: ["Kotlin", "KMP", "Firebase", "Deepgram", "Gemini"],
-    imageUrl: liveSpeakerImg,
+      "The innovative voice translation tool that facilitates multilingual communication.",
+    tags: ["KMP", "Kotlin", "Deepgram", "Gemini"],
+    image: liveSpeakerImg,
     videoUrl: "https://cdn.ifateam.dev/OhaioLiveSpeaker.mp4",
     viewUrl: "https://speaker.ohaio.io",
+    status: "live",
+    span: 6,
   },
+  {
+    slug: "stone-fabbers",
+    title: "Stone Fabbers",
+    kicker: "Publishing platform for the stone industry",
+    description:
+      "E-magazine for the stone industry, providing information about stone processing machines and tools.",
+    tags: ["WordPress", "PHP", "Custom Theme"],
+    image: stoneFabberImg,
+    viewUrl: "https://stonefabber.com",
+    status: "beta",
+    span: 6,
+  },
+];
+
+// Projects kept for a future "More work" strip — not rendered in the bento.
+export const otherProjects = [
   {
     title: "Aardwolf India - Sales page for material handling",
     timeline: "Mar 2025 - Apr 2025",
     description:
-      "Aardwolf manufactures material handling equipment for the stone, glass and metal industries. ",
-    tags: ["Wordpress", "PHP", "Elementor", "Woocomerce", "Custom Plugin", "Custom Theme"],
-    imageUrl: "",
+      "Aardwolf manufactures material handling equipment for the stone, glass and metal industries.",
+    tags: ["Wordpress", "PHP", "Elementor", "Woocomerce", "Custom Plugin"],
+    imageUrl: null,
     videoUrl: "https://cdn.ifateam.dev/Aardwolf.mp4",
     viewUrl: "https://aardwolf.co.in",
-  },
-  {
-    title: "Stone Fabbers - E-magazine for the stone industry",
-    timeline: "Feb 2025",
-    description:
-      "E-magazine for the stone industry, providing information about stone processing machines and tools.",
-    tags: ["Wordpress", "PHP", "Flatsome", "Custom Plugin", "Custom Theme"],
-    imageUrl: stoneFabberImg,
-    videoUrl: "",
-    viewUrl: "https://stonefabber.com",
   },
   {
     title: "Battery Meter",
     timeline: "Sep 2024 - Nov 2024",
     description:
       "A lightweight application designed to monitor the battery status of a device, providing real-time updates on battery health.",
-    tags: ["Android", "Kotlin", "Jetpack Compose", "Glance Widget", "Dynamic Color", "Jetpack Library"],
+    tags: ["Android", "Kotlin", "Jetpack Compose", "Glance Widget"],
     imageUrl: tiziImg,
     videoUrl: "https://cdn.ifateam.dev/battery.mp4",
     viewUrl: "https://play.google.com/store/apps/details?id=io.github.ifa.glancewidget",
@@ -133,14 +141,15 @@ export const projectsData = [
     tags: ["Android", "Kotlin", "Jetpack Compose", "Motion Layout"],
     imageUrl: vtvImg,
     videoUrl: "https://cdn.ifateam.dev/King%20of%20Vietnamese.mp4",
-    viewUrl: "https://play.google.com/store/apps/details?id=com.dunghn2201.vuatiengviet_kov",
+    viewUrl:
+      "https://play.google.com/store/apps/details?id=com.dunghn2201.vuatiengviet_kov",
   },
   {
     title: "Tizi News",
     timeline: "Mar 2021 - Jun 2021",
     description:
       "Channel for buying and selling real estate, jobs, classifieds. Managed and operated by VNCT Investment and Trading Joint Stock Company.",
-    tags: ["React", "Next.js", "MongoDB", "Tailwind", "Android", "Java"],
+    tags: ["React", "Next.js", "MongoDB", "Tailwind"],
     imageUrl: tiziImg,
     videoUrl: "",
     viewUrl: "",
@@ -167,88 +176,76 @@ export const projectsData = [
   },
 ] as const;
 
-export const membersData = [
-  {
-    title: "Le Duc Thang",
-    description:
-      "5+ years of in-depth experience in iOS application development. Participated in numerous projects requiring performance optimization and enhanced security.",
-    tags: [ AppleImg, SwiftImg, flutterImg, springImg, wordpressImg, woocommerceImg],
-    imageUrl: ThangDevImg,
-  },
-  {
-    title: "Huynh Ngoc Huy",
-    description:
-      "Experienced in developing high-performance applications with a focus on following best practices. Participated in projects related to e-commerce, social networks, chat, and work reservations.",
-    tags: [AndroidImg, KotlinImg, flutterImg, NestJsImg, vueImg, NextJsImg, wordpressImg, woocommerceImg],
-    imageUrl: HuyDevImg,
-  },
-  // {
-  //   title: "Ho Ngoc Dung",
-  //   description:
-  //     "A mobile developer. Having 3+ years of experience and strong knowledge of Android/Kotlin, Flutter/Dart. Having extensive experience in publishing applications.",
-  //   tags: [flutterImg, AndroidImg, SwiftImg, KotlinImg, AppleImg, vueImg, wordpressImg, woocommerceImg],
-  //   imageUrl: DevDungImg,
-  // }, 
-] as const;
+// ---------------------------------------------------------------------------
+// Tech Stack & Capabilities
+// ---------------------------------------------------------------------------
 
-export const skillsData = [
-  "Android",
-  "iOS",
-  "KMP",
-  "Kotlin",
-  "Swift",
-  "Flutter",
-  "HTML",
-  "CSS",
-  "JavaScript",
-  "TypeScript",
-  "React",
-  "Next.js",
-  "Vue",
-  "Node.js",
-  "Spring",
-  "NestJs",
-  "Express",
-  "MongoDB",
-  "MySQL",
-  "Supabase",
-  "Firebase",
-  "GraphQL",
-  "Redux",
-  "Python",
-  "Django",
-  "WordPress",
-  "WooCommerce",
-  "Vercel",
-] as const;
+export type CapabilityGroup = {
+  id: string;
+  title: string;
+  blurb: string;
+  items: { name: string }[];
+};
 
-export const skillsJob = [
+export const capabilityGroups: CapabilityGroup[] = [
   {
-    title: "App Developement",
-    imageUrl: appDevelopmentImg,
-    description: "",
-    tags: ["Android", "Kotlin", "Flutter", "iOS",  "Swift"],
-    color: "#EA4C88",
+    id: "frontend",
+    title: "Frontend & Native",
+    blurb: "Pixel-perfect interfaces and native apps that feel instant.",
+    items: [
+      { name: "React" },
+      { name: "Next.js" },
+      { name: "Vue" },
+      { name: "TypeScript" },
+      { name: "Kotlin" },
+      { name: "Swift" },
+      { name: "KMP" },
+      { name: "Flutter" },
+    ],
   },
   {
-    title: "Web Developement",
-    imageUrl: webDevelopmentImg,
-    description: "",
-    tags: ["React", "Next.js", "Node.js", "NestJs", "Vue", "WordPress"],
-    color: "#1CA091",
+    id: "backend",
+    title: "Backend & Cloud",
+    blurb: "Scalable APIs and infrastructure that survive launch day.",
+    items: [
+      { name: "Node.js" },
+      { name: "NestJS" },
+      { name: "Spring" },
+      { name: "PostgreSQL" },
+      { name: "MongoDB" },
+      { name: "Supabase" },
+      { name: "Firebase" },
+      { name: "Cloudflare" },
+      { name: "Vercel" },
+      { name: "GraphQL" },
+    ],
   },
   {
-    title: "AI Integration",
-    imageUrl: uiuxDesignImg,
-    description: "",
-    tags: ["Chatbot", "RAG", "Object Detection", "ML Kit", "Vertex AI", "Cloudflare Workers AI"],
-    color: "#F9CC47",
+    id: "design",
+    title: "Design & Motion",
+    blurb: "Craft, motion and brand systems that ship with the code.",
+    items: [
+      { name: "Figma" },
+      { name: "Design Systems" },
+      { name: "Framer Motion" },
+      { name: "Lottie" },
+      { name: "Motion Layout" },
+      { name: "Brand & Identity" },
+      { name: "Accessibility" },
+      { name: "Performance" },
+    ],
   },
-  {
-    title: "SEO Optimization",
-    imageUrl: seoOptimizeImg,
-    description: "",
-    tags: ["Schema.org", "Google Analytics", "Google Search Console"],
-    color: "#8FA6E9",
-  },
-]
+];
+
+// ---------------------------------------------------------------------------
+// Site meta / socials
+// ---------------------------------------------------------------------------
+
+export const siteMeta = {
+  name: "IFA Team",
+  email: "hi@ifateam.dev",
+  socials: [
+    { label: "GitHub", href: "https://github.com/huyhunhngc" },
+    { label: "Discord", href: "https://discord.gg/DaeSfrkfnS" },
+  ],
+} as const;
