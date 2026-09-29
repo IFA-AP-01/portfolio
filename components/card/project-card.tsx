@@ -42,13 +42,24 @@ export default function ProjectCard({ project }: { project: FeaturedProject }) {
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="project-card group isolate flex h-full flex-col overflow-hidden"
+      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+      onMouseMove={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        e.currentTarget.style.setProperty(
+          "--mouse-x",
+          `${e.clientX - rect.left}px`
+        );
+        e.currentTarget.style.setProperty(
+          "--mouse-y",
+          `${e.clientY - rect.top}px`
+        );
+      }}
+      className="project-card group flex h-full flex-col"
     >
-      <div className="relative aspect-[16/10] shrink-0 overflow-hidden bg-canvas">
+      <div className="media-wrap relative aspect-[16/10] shrink-0 overflow-hidden bg-canvas">
         {videoUrl ? (
           <video
             src={videoUrl}
@@ -61,7 +72,7 @@ export default function ProjectCard({ project }: { project: FeaturedProject }) {
             disablePictureInPicture
             preload="metadata"
             onContextMenu={(e) => e.preventDefault()}
-            className="h-full w-full object-cover object-top"
+            className="h-full w-full object-cover object-top transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
           />
         ) : image ? (
           <Image
@@ -69,10 +80,9 @@ export default function ProjectCard({ project }: { project: FeaturedProject }) {
             alt={`${title} preview`}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="object-cover object-top"
+            className="object-cover object-top transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
           />
         ) : null}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-60" />
       </div>
 
       <div className="flex flex-1 flex-col gap-4 p-6">
