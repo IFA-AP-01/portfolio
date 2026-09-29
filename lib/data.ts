@@ -43,7 +43,6 @@ export const heroStats = [
 // ---------------------------------------------------------------------------
 
 export type ProjectStatus = "live" | "beta";
-export type BentoSpan = 8 | 4 | 6 | 12;
 
 export type ProjectLink = {
   label: string;
@@ -62,7 +61,6 @@ export type FeaturedProject = {
   viewUrl: string;
   links?: readonly ProjectLink[];
   status: ProjectStatus;
-  span: BentoSpan;
 };
 
 export const featuredProjects: FeaturedProject[] = [
@@ -88,7 +86,6 @@ export const featuredProjects: FeaturedProject[] = [
       },
     ],
     status: "live",
-    span: 8,
   },
   {
     slug: "battery-meter",
@@ -109,7 +106,6 @@ export const featuredProjects: FeaturedProject[] = [
       { label: "GitHub", href: "https://github.com/huyhunhngc/battery_meter", kind: "github" },
     ],
     status: "live",
-    span: 4,
   },
   {
     slug: "snapbyte",
@@ -122,7 +118,6 @@ export const featuredProjects: FeaturedProject[] = [
     videoUrl: "https://cdn.ifateam.dev/snapbyte.mp4",
     viewUrl: "https://snapbyte.io",
     status: "live",
-    span: 6,
   },
   {
     slug: "aio-scanner",
@@ -134,7 +129,6 @@ export const featuredProjects: FeaturedProject[] = [
     image: aioScannerImg,
     viewUrl: "https://scanner.ifateam.dev",
     status: "live",
-    span: 6,
   },
   {
     slug: "live-speaker",
@@ -154,7 +148,6 @@ export const featuredProjects: FeaturedProject[] = [
       },
     ],
     status: "live",
-    span: 12,
   },
 ];
 
