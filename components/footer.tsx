@@ -1,163 +1,94 @@
-import React from "react";
-import Link from "next/link";
 import Image from "next/image";
 import logo from "@/public/logo.webp";
-import { FaGithub, FaArrowRight } from "react-icons/fa";
+import { navItems, siteMeta } from "@/lib/data";
+import { FaGithub } from "react-icons/fa";
 import { BsDiscord } from "react-icons/bs";
+
+const socialIcons: Record<string, React.ReactNode> = {
+  GitHub: <FaGithub className="text-[18px]" />,
+  Discord: <BsDiscord className="text-[18px]" />,
+};
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative z-10 w-full border-t-2 px-4 border-black bg-white dark:bg-[#191C1E] dark:border-white/10 pt-16 pb-8 flex justify-center items-center">
-      {/* Main Container */}
-      <div className="max-w-5xl inset-x-0 mx-auto">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-          {/* Brand Section */}
-          <div className="flex flex-col items-start space-y-4">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="neo-shadow border-2 border-black p-1 bg-[#E9945B]">
-                <Image
-                  src={logo}
-                  alt="IFA"
-                  width={30}
-                  height={30}
-                  className="rounded-sm"
-                />
-              </div>
-              <span className="text-xl font-bold text-black dark:text-white">
-                IFA Team
+    <footer className="border-t border-white/10 py-16">
+      <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
+          {/* Brand */}
+          <div className="flex flex-col items-start gap-4">
+            <a href="#home" className="flex items-center gap-2.5">
+              <Image
+                src={logo}
+                alt="IFA"
+                width={30}
+                height={30}
+                className="h-7 w-7 rounded-lg object-contain"
+              />
+              <span className="text-[17px] font-semibold tracking-[-0.015em] text-fg">
+                {siteMeta.name}
               </span>
-            </Link>
-            <p className="text-sm text-gray-600 dark:text-gray-300 max-w-xs">
-              IFA Team is a team of passionate developers who are always looking
-              for new ways to improve their skills and create innovative
-              solutions for their clients.
+            </a>
+            <p className="max-w-xs text-[14px] leading-relaxed text-fg-muted">
+              A product studio building web, mobile and edge software that ships.
             </p>
-            <div className="flex items-center gap-3 mt-4">
-              <Link
-                href="https://github.com/huyhunhngc"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="neo-button p-2 bg-white hover:bg-gray-50 flex items-center justify-center w-10 h-10"
-                aria-label="GitHub"
-              >
-                <FaGithub className="text-lg" />
-              </Link>
-              <Link
-                href="https://discord.gg/DaeSfrkfnS"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Join us on Discord"
-                className="neo-button p-2 bg-white hover:bg-gray-50 flex items-center justify-center w-10 h-10"
-              >
-                <BsDiscord className="text-lg" />
-              </Link>
-            </div>
-          </div>
-
-          {/* Product Section */}
-          <div className="flex flex-col space-y-4">
-            <h3 className="font-black text-gray-900 dark:text-white uppercase tracking-wider text-sm">
-              Product
-            </h3>
-            <ul className="space-y-3 text-sm text-gray-600 dark:text-gray-300">
-              <li>
-                <Link
-                  href="https://www.producthunt.com/products/tools-for-indie-developers?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-indietools"
+            <div className="flex items-center gap-3">
+              {siteMeta.socials.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={social.label}
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-fg-muted transition-colors duration-200 hover:border-white/25 hover:text-fg"
                 >
-                  <Image
-                    alt="IndieTools - Boost Productivity with Fast App Screenshots &amp; Diagrams | Product Hunt"
-                    width="250"
-                    height="54"
-                    src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1053286&amp;theme=light&amp;t=1766550922169"
-                  />
-                </Link>
-              </li>
-              <li>
-                <Link href="https://twelve.tools" target="_blank">
-                  <Image
-                    src="https://twelve.tools/badge0-light.svg"
-                    alt="Featured on Twelve Tools"
-                    width="200"
-                    height="54"
-                  />
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Resources Section */}
-          <div className="flex flex-col space-y-4">
-            <h3 className="font-black text-gray-900 dark:text-white uppercase tracking-wider text-sm">
-              Resources
-            </h3>
-            <ul className="space-y-3 text-sm text-gray-600 dark:text-gray-300">
-              <li>
-                <Link
-                  href="/blog"
-                  className="hover:text-black dark:hover:text-white transition-colors"
-                >
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/#about"
-                  className="hover:text-black dark:hover:text-white transition-colors"
-                >
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/#contact"
-                  className="hover:text-black dark:hover:text-white transition-colors"
-                >
-                  Contact
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/explore"
-                  className="hover:text-black dark:hover:text-white transition-colors"
-                >
-                  Explore
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* CTA Section */}
-          <div className="flex flex-col">
-            <div className="neo-card p-4 bg-[#faf8f1] dark:bg-[#252526] relative overflow-hidden group mb-4">
-              <div className="relative z-10">
-                <div className="flex items-center gap-2 mb-2 text-[#E9945B] font-bold text-xs uppercase tracking-wide">
-                  <span>App screenshot generator</span>
-                </div>
-                <h3 className="text-lg font-bold text-black dark:text-white mb-2">
-                  Free & easy to use
-                </h3>
-                <p className="text-xs text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-                  Generate app screenshots with our free & easy to use service.
-                </p>
-                <Link
-                  href="/mockup"
-                  className="neo-button bg-[#E9945B] text-black text-xs inline-flex items-center gap-2 w-full justify-center"
-                >
-                  Try it now <FaArrowRight className="text-[10px]" />
-                </Link>
-              </div>
+                  {socialIcons[social.label]}
+                </a>
+              ))}
             </div>
+          </div>
+
+          {/* Navigate */}
+          <div>
+            <h3 className="font-mono text-[13px] uppercase tracking-[0.12em] text-fg-subtle">
+              Navigate
+            </h3>
+            <ul className="mt-4 space-y-2.5">
+              {navItems.map((item) => (
+                <li key={item.label}>
+                  <a
+                    href={item.hash}
+                    className="text-[14px] text-fg-muted transition-colors duration-200 hover:text-fg"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h3 className="font-mono text-[13px] uppercase tracking-[0.12em] text-fg-subtle">
+              Contact
+            </h3>
+            <a
+              href={`mailto:${siteMeta.email}`}
+              className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 font-mono text-[13px] text-fg transition-colors duration-200 hover:border-white/25"
+            >
+              {siteMeta.email}
+            </a>
+            <p className="mt-4 text-[14px] text-fg-muted">
+              Available for new projects this quarter.
+            </p>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-16 pt-8 border-t border-gray-200 dark:border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
-          <p>© {currentYear} IFA Team. All rights reserved.</p>
-          <div className="flex items-center gap-1"></div>
+        <div className="mt-14 border-t border-white/10 pt-6">
+          <p className="text-[13px] text-fg-subtle">
+            &copy; {currentYear} {siteMeta.name}. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

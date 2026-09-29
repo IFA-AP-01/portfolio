@@ -1,23 +1,15 @@
-import About from "@/components/section/about";
+import Hero from "@/components/section/hero";
+import FeaturedProjects from "@/components/section/featured-projects";
+import Capabilities from "@/components/section/capabilities";
 import Contact from "@/components/section/contact";
-import Intro from "@/components/section/intro";
-import Members from "@/components/section/members";
-import Projects from "@/components/section/projects";
-import Skills from "@/components/section/skills";
-import SectionNavigation from "@/components/section-navigation";
-import Tools from "@/components/section/tools";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center px-4">
-      <Intro />
-      <Tools />
-      <Skills />
-      <Members />
-      <About />
-      <Projects />
+    <main className="flex flex-col">
+      <Hero />
+      <FeaturedProjects />
+      <Capabilities />
       <Contact />
-      <SectionNavigation />
     </main>
   );
 }
