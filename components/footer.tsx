@@ -13,9 +13,9 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/10 py-16">
+    <footer className="bg-navy-deep py-20 text-white">
       <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="flex flex-col items-start gap-4">
             <a href="#home" className="flex items-center gap-2.5">
@@ -24,13 +24,13 @@ export default function Footer() {
                 alt="IFA"
                 width={30}
                 height={30}
-                className="h-7 w-7 rounded-lg object-contain"
+                className="h-7 w-7 object-contain"
               />
-              <span className="text-[17px] font-semibold tracking-[-0.015em] text-fg">
+              <span className="font-heading text-[20px] font-medium tracking-[-0.01em]">
                 {siteMeta.name}
               </span>
             </a>
-            <p className="max-w-xs text-[14px] leading-relaxed text-fg-muted">
+            <p className="max-w-xs text-[15px] leading-relaxed text-white/70">
               A product studio building web, mobile and edge software that ships.
             </p>
             <div className="flex items-center gap-3">
@@ -41,7 +41,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-fg-muted transition-colors duration-200 hover:border-white/25 hover:text-fg"
+                  className="btn-outline flex h-10 w-10 items-center justify-center"
                 >
                   {socialIcons[social.label]}
                 </a>
@@ -51,7 +51,7 @@ export default function Footer() {
 
           {/* Navigate */}
           <div>
-            <h3 className="font-mono text-[13px] uppercase tracking-[0.12em] text-fg-subtle">
+            <h3 className="eyebrow text-white/60">
               Navigate
             </h3>
             <ul className="mt-4 space-y-2.5">
@@ -59,7 +59,29 @@ export default function Footer() {
                 <li key={item.label}>
                   <a
                     href={item.hash}
-                    className="text-[14px] text-fg-muted transition-colors duration-200 hover:text-fg"
+                    className="text-[15px] text-white/70 transition-colors duration-300 ease-out hover:text-white"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Find us */}
+          <div>
+            <h3 className="eyebrow text-white/60">Find us</h3>
+            <ul className="mt-4 space-y-2.5">
+              {[
+                ...siteMeta.socials.filter((social) => social.label === "GitHub"),
+                ...siteMeta.stores,
+              ].map((item) => (
+                <li key={item.label}>
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[15px] text-white/70 transition-colors duration-300 ease-out hover:text-white"
                   >
                     {item.label}
                   </a>
@@ -70,23 +92,23 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="font-mono text-[13px] uppercase tracking-[0.12em] text-fg-subtle">
+            <h3 className="eyebrow text-white/60">
               Contact
             </h3>
             <a
               href={`mailto:${siteMeta.email}`}
-              className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 font-mono text-[13px] text-fg transition-colors duration-200 hover:border-white/25"
+              className="btn-outline mt-4 inline-flex items-center px-4 py-2 text-[14px]"
             >
               {siteMeta.email}
             </a>
-            <p className="mt-4 text-[14px] text-fg-muted">
+            <p className="mt-4 text-[15px] text-white/70">
               Available for new projects this quarter.
             </p>
           </div>
         </div>
 
-        <div className="mt-14 border-t border-white/10 pt-6">
-          <p className="text-[13px] text-fg-subtle">
+        <div className="mt-16 border-t border-white/15 pt-6">
+          <p className="text-[13px] text-white/50">
             &copy; {currentYear} {siteMeta.name}. All rights reserved.
           </p>
         </div>

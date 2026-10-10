@@ -8,44 +8,49 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        canvas: "#090A0F",
-        surface: {
-          DEFAULT: "#12131A",
-          hover: "#1A1C26",
+        ink: "#0D0F26",
+        navy: {
+          DEFAULT: "#001A72",
+          deep: "#0A0C20",
         },
-        fg: {
-          DEFAULT: "#F4F5F8",
-          muted: "#9CA3AF",
-          subtle: "#52525B",
+        indigo: "#524BF4",
+        paper: "#FFFFFF",
+        mist: "#F4F5FA",
+        periwinkle: {
+          DEFAULT: "#EDF0FE",
+          edge: "#D5DBF8",
         },
-        line: "rgba(255, 255, 255, 0.08)",
+        cream: "#FBF5EE",
+        accent: {
+          orange: "#F6A656",
+          blue: "#97A5ED",
+          coral: "#F07A6E",
+        },
         live: "#10B981",
         beta: "#F59E0B",
       },
       fontFamily: {
-        sans: [
-          "var(--font-geist-sans)",
+        heading: [
+          "var(--font-heading)",
           "-apple-system",
           "BlinkMacSystemFont",
           "Segoe UI",
           "sans-serif",
         ],
-        mono: ["var(--font-geist-mono)", "ui-monospace", "monospace"],
-      },
-      borderRadius: {
-        card: "20px",
+        body: [
+          "var(--font-body)",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "sans-serif",
+        ],
       },
       maxWidth: {
         shell: "1200px",
-        notch: "760px",
-        hero: "840px",
+        hero: "880px",
       },
       spacing: {
-        section: "128px",
-      },
-      boxShadow: {
-        notch: "0 16px 36px -10px rgba(0, 0, 0, 0.7)",
-        lift: "0 24px 48px -12px rgba(0, 0, 0, 0.6)",
+        section: "120px",
       },
     },
   },

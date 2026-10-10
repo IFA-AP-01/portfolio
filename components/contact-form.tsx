@@ -13,8 +13,10 @@ const RECAPTCHA_ERROR = "reCAPTCHA is not ready. Please try again later.";
 const SUBMISSION_ERROR = "An error occurred while sending the email.";
 const SUBMISSION_SUCCESS = "Email sent successfully!";
 
+const labelClasses = "mb-1.5 block text-[14px] font-medium text-ink";
+
 const inputClasses =
-  "w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-[15px] text-fg placeholder:text-fg-subtle outline-none transition-colors duration-200 focus:border-white/30 disabled:opacity-60";
+  "w-full border border-transparent bg-mist px-3.5 py-3 text-[15px] text-ink placeholder:text-ink/40 outline-none transition-colors duration-300 ease-out focus:border-indigo disabled:opacity-60";
 
 const ContactForm = () => {
   const { executeRecaptcha } = useGoogleReCaptcha();
@@ -56,24 +58,36 @@ const ContactForm = () => {
   };
 
   return (
-    <form className="flex flex-col gap-3" onSubmit={handleSubmit} ref={formRef}>
-      <input
-        className={inputClasses}
-        name="senderEmail"
-        type="email"
-        required
-        maxLength={500}
-        placeholder="Your email"
-        disabled={isLoading}
-      />
-      <textarea
-        className={`${inputClasses} h-48 resize-none`}
-        name="message"
-        placeholder="Your message"
-        required
-        maxLength={5000}
-        disabled={isLoading}
-      />
+    <form className="flex flex-col gap-5" onSubmit={handleSubmit} ref={formRef}>
+      <div>
+        <label htmlFor="message" className={labelClasses}>
+          Your message <span className="text-accent-coral">*</span>
+        </label>
+        <textarea
+          id="message"
+          className={`${inputClasses} h-40 resize-none`}
+          name="message"
+          placeholder="Tell us what you're building and how we can help."
+          required
+          maxLength={5000}
+          disabled={isLoading}
+        />
+      </div>
+      <div>
+        <label htmlFor="senderEmail" className={labelClasses}>
+          Your email <span className="text-accent-coral">*</span>
+        </label>
+        <input
+          id="senderEmail"
+          className={inputClasses}
+          name="senderEmail"
+          type="email"
+          required
+          maxLength={500}
+          placeholder="name@company.com"
+          disabled={isLoading}
+        />
+      </div>
       <SubmitBtn pending={isLoading} />
     </form>
   );

@@ -1,5 +1,5 @@
 import liveSpeakerImg from "@/public/liveSpeakerImg.webp";
-import metacamImg from "@/public/metacam.webp";
+import metacamImg from "@/public/metacam-og.webp";
 import aioScannerImg from "@/public/aioScanner.webp";
 import colorNoteImg from "@/public/colorNoteImg.webp";
 import taskManagementImg from "@/public/taskManagementImg.webp";
@@ -18,6 +18,7 @@ export type NavItem = {
 export const navItems = [
   { label: "Home", hash: "#home" },
   { label: "Projects", hash: "#projects" },
+  { label: "Reviews", hash: "#reviews" },
   { label: "Stack", hash: "#stack" },
   { label: "Contact", hash: "#contact" },
 ] as const;
@@ -57,7 +58,11 @@ export type FeaturedProject = {
   description: string;
   tags: readonly string[];
   image: typeof liveSpeakerImg | null;
+  /** CSS object-position for the cover crop (default: "top") */
+  imagePosition?: string;
   videoUrl?: string;
+  /** YouTube video id — renders a click-to-play embed instead of an mp4 */
+  youtubeId?: string;
   viewUrl: string;
   links?: readonly ProjectLink[];
   status: ProjectStatus;
@@ -72,6 +77,7 @@ export const featuredProjects: FeaturedProject[] = [
       "Camera app that stamps every shot with your camera's real EXIF data — brand, lens, shutter, ISO and location — into studio-crafted watermark templates. 30+ layouts, batch export, built for photographers who want credit on every frame.",
     tags: ["iOS", "Swift", "EXIF", "Templates"],
     image: metacamImg,
+    imagePosition: "30% center",
     viewUrl: "https://metacam.pics/",
     links: [
       {
@@ -81,7 +87,7 @@ export const featuredProjects: FeaturedProject[] = [
       },
       {
         label: "Google Play",
-        href: "https://play.google.com/store/apps/dev?id=5238090906090965084",
+        href: "https://play.google.com/store/apps/details?id=com.dotsdev.metacam",
         kind: "play",
       },
     ],
@@ -104,6 +110,25 @@ export const featuredProjects: FeaturedProject[] = [
         kind: "play",
       },
       { label: "GitHub", href: "https://github.com/huyhunhngc/battery_meter", kind: "github" },
+    ],
+    status: "live",
+  },
+  {
+    slug: "smart-iptv",
+    title: "Smart IPTV",
+    kicker: "Live TV & VOD player",
+    description:
+      "Watch live TV, movies and series from your own M3U/M3U8 playlists, Xtream Codes or RTSP streams — with auto subtitles, continue watching, player gestures, picture-in-picture and cast to TV.",
+    tags: ["Android", "M3U / Xtream", "Picture-in-Picture", "Cast"],
+    image: null,
+    youtubeId: "crLtk14ehIw",
+    viewUrl: "https://play.google.com/store/apps/details?id=com.mapdev.iptv",
+    links: [
+      {
+        label: "Play Store",
+        href: "https://play.google.com/store/apps/details?id=com.mapdev.iptv",
+        kind: "play",
+      },
     ],
     status: "live",
   },
@@ -148,6 +173,102 @@ export const featuredProjects: FeaturedProject[] = [
       },
     ],
     status: "live",
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Testimonials
+// ---------------------------------------------------------------------------
+export type Testimonial = {
+  id: string;
+  /** Verbatim quote. Leave empty until the real text is in — empty entries
+   *  render as a dashed "missing quote" card in dev and are hidden in prod. */
+  quote: string;
+  author: string;
+  /** "Role, Company" for clients; "Google Play review" etc. for app users */
+  role: string;
+  project: string;
+  rating?: 1 | 2 | 3 | 4 | 5;
+  href?: string;
+};
+
+const batteryReviews =
+  "https://play.google.com/store/apps/details?id=io.github.ifa.glancewidget&showAllReviews=true";
+
+export const testimonials: Testimonial[] = [
+  {
+    id: "samfw",
+    // DRAFT — written by us, confirm the wording with samfw before launch
+    quote:
+      "IFA Team took Snapbyte from an idea to a working edge caching product. Communication was clear, releases landed on time, and they handled the infrastructure details so we could focus on our customers.",
+    author: "samfw",
+    role: "Client, Snapbyte",
+    project: "Snapbyte",
+  },
+  {
+    id: "battery-dany",
+    quote: "perfect app. monitors all battery levels with no ads, no fees, and a stylish UI!",
+    author: "Dany Stasolla",
+    role: "Google Play review",
+    project: "Battery Meter",
+    rating: 5,
+    href: batteryReviews,
+  },
+  {
+    id: "khanh-pluto",
+    // DRAFT — written by us, confirm the wording with Khanh Pluto before launch
+    quote:
+      "Live Speaker gives us real-time translated captions right inside our meetings. The team understood exactly what we needed and shipped a polished, reliable macOS app quickly.",
+    author: "Khanh Pluto",
+    role: "Client, Live Speaker",
+    project: "Live Speaker",
+  },
+  {
+    id: "battery-rayan",
+    quote:
+      "This one of those apps you don't know I need until u actually use it. props to Dev for the really nice ui ....🙌🙌",
+    author: "Rayan Aponsu",
+    role: "Google Play review",
+    project: "Battery Meter",
+    rating: 5,
+    href: batteryReviews,
+  },
+  {
+    id: "battery-abdessamad",
+    quote: "nice ui, all essential information, and no ads great job 🥰",
+    author: "AbdeSSamad",
+    role: "Google Play review",
+    project: "Battery Meter",
+    rating: 5,
+    href: batteryReviews,
+  },
+  {
+    id: "battery-lyra",
+    quote:
+      "This is exactly what I was looking for! A like-stock widget that looks good and doesn't have ads or some other complication.",
+    author: "Lyra F.",
+    role: "Google Play review",
+    project: "Battery Meter",
+    rating: 4,
+    href: batteryReviews,
+  },
+  {
+    id: "battery-howard",
+    quote: "Just installed it, like it so far! … Anyway, thanks for the useful app!",
+    author: "Howard Kistler",
+    role: "Google Play review",
+    project: "Battery Meter",
+    rating: 5,
+    href: batteryReviews,
+  },
+  {
+    id: "battery-tim",
+    quote: "informational, responsive, helpful, simple, no nonsense",
+    author: "Tim Hancock",
+    role: "Google Play review",
+    project: "Battery Meter",
+    rating: 5,
+    href: batteryReviews,
   },
 ];
 
@@ -281,11 +402,11 @@ export const siteMeta = {
     },
     {
       label: "App Store",
-      href: "https://apps.apple.com/us/app/metacam-exif-frame-watermark/id6762182218",
+      href: "https://apps.apple.com/us/developer/le-duc-thang/id1854295627",
     },
   ],
   socials: [
-    { label: "GitHub", href: "https://github.com/huyhunhngc" },
+    { label: "GitHub", href: "https://github.com/IFA-AP-01" },
     { label: "Discord", href: "https://discord.gg/DaeSfrkfnS" },
   ],
 } as const;

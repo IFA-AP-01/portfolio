@@ -5,10 +5,10 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import clsx from "clsx";
 import logo from "@/public/logo.webp";
-import { navItems } from "@/lib/data";
+import { navItems, siteMeta } from "@/lib/data";
 import { useActiveSectionContext } from "@/context/active-section-context";
 
-export default function NotchNav() {
+export default function SiteNav() {
   const [open, setOpen] = useState(false);
   const { activeSection, setActiveSection, setTimeOfLastClick } =
     useActiveSectionContext();
@@ -20,42 +20,45 @@ export default function NotchNav() {
   };
 
   return (
-    <nav className="notch-nav" aria-label="Main navigation">
-      <div className="mx-auto flex w-full max-w-notch items-center justify-between gap-3">
+    <nav
+      className="sticky top-0 z-50 border-b border-navy/15 bg-white text-navy"
+      aria-label="Main navigation"
+    >
+      <div className="mx-auto flex h-16 w-full max-w-shell items-center justify-between gap-6 px-4 sm:px-6">
         <a
           href="#home"
           onClick={() => handleClick("Home")}
-          className="flex shrink-0 items-center"
+          className="flex shrink-0 items-center gap-2.5"
           aria-label="IFA Team - home"
         >
           <Image
             src={logo}
             alt="IFA"
-            width={26}
-            height={26}
+            width={30}
+            height={30}
             priority
-            className="h-6 w-6 rounded-md object-contain"
+            className="h-7 w-7 object-contain"
           />
+          <span className="font-heading text-[18px] font-medium leading-none tracking-[-0.01em]">
+            {siteMeta.name}
+          </span>
         </a>
 
-        <ul className="hidden items-center gap-1 md:flex">
-          {navItems.map((item) => {
+        <ul className="hidden items-center gap-2 md:flex">
+          {navItems.slice(1).map((item) => {
             const isActive = activeSection === item.label;
             return (
               <li key={item.label}>
                 <a
                   href={item.hash}
                   onClick={() => handleClick(item.label)}
-                  className={clsx(
-                    "relative block px-3 py-1.5 text-[14px] transition-colors duration-200",
-                    isActive ? "text-fg" : "text-fg-muted hover:text-fg"
-                  )}
+                  className="relative block px-4 py-2 text-[16px] transition-colors duration-300 ease-out hover:bg-periwinkle"
                 >
                   {item.label}
                   {isActive && (
                     <motion.span
-                      layoutId="notch-active"
-                      className="absolute inset-x-2 -bottom-0.5 h-px bg-white/70"
+                      layoutId="nav-active"
+                      className="absolute inset-x-4 bottom-0 h-[2px] bg-indigo"
                       transition={{ type: "spring", stiffness: 400, damping: 32 }}
                     />
                   )}
@@ -69,18 +72,18 @@ export default function NotchNav() {
           <a
             href="#contact"
             onClick={() => handleClick("Contact")}
-            className="hidden rounded-full bg-white px-4 py-1.5 text-[13px] font-semibold text-canvas transition-colors duration-200 hover:bg-fg/90 sm:inline-flex"
+            className="hidden rounded-full bg-ink px-5 py-2 text-[15px] font-medium text-white transition-colors duration-300 ease-out hover:bg-indigo sm:inline-flex"
           >
             Hire us
           </a>
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="flex h-8 w-8 items-center justify-center rounded-full text-fg-muted transition-colors hover:text-fg md:hidden"
+            className="flex h-9 w-9 items-center justify-center md:hidden"
             aria-expanded={open}
             aria-label={open ? "Close menu" : "Open menu"}
           >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden>
               {open ? (
                 <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
               ) : (
@@ -98,38 +101,27 @@ export default function NotchNav() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="overflow-hidden md:hidden"
+            className="overflow-hidden border-t border-navy/10 px-4 md:hidden"
           >
-            <li className="pt-3">
-              <a
-                href="#home"
-                onClick={() => handleClick("Home")}
-                className="block py-2 text-[15px] text-fg-muted transition-colors hover:text-fg"
-              >
-                Home
-              </a>
-            </li>
-            {navItems.slice(1).map((item) => (
-              <li key={item.label}>
+            {navItems.map((item) => (
+              <li key={item.label} className="border-b border-navy/10">
                 <a
                   href={item.hash}
                   onClick={() => handleClick(item.label)}
                   className={clsx(
-                    "block py-2 text-[15px] transition-colors",
-                    activeSection === item.label
-                      ? "text-fg"
-                      : "text-fg-muted hover:text-fg"
+                    "block py-3 text-[16px]",
+                    activeSection === item.label ? "font-semibold" : "opacity-80"
                   )}
                 >
                   {item.label}
                 </a>
               </li>
             ))}
-            <li className="pb-1 pt-2">
+            <li className="py-4">
               <a
                 href="#contact"
                 onClick={() => handleClick("Contact")}
-                className="inline-flex rounded-full bg-white px-4 py-1.5 text-[13px] font-semibold text-canvas"
+                className="btn-outline inline-flex px-5 py-1.5 text-[15px]"
               >
                 Hire us
               </a>
