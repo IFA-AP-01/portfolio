@@ -2,62 +2,65 @@
 
 import { siteMeta } from "@/lib/data";
 import Container from "@/components/ui/container";
+import Section from "@/components/ui/section";
 import SectionHeading from "@/components/section-heading";
 import Reveal from "@/components/ui/reveal";
 import ContactForm from "@/components/contact-form";
+import ProfileLinks from "@/components/ui/profile-links";
 import { useSectionInView } from "@/lib/hooks";
-import { FaGithub } from "react-icons/fa";
 import { BsDiscord } from "react-icons/bs";
-
-const socialIcons: Record<string, React.ReactNode> = {
-  GitHub: <FaGithub className="text-[18px]" />,
-  Discord: <BsDiscord className="text-[18px]" />,
-};
 
 export default function Contact() {
   const { ref } = useSectionInView("Contact");
 
   return (
-    <section id="contact" ref={ref} className="scroll-mt-[96px] py-section">
+    <Section tone="cream" id="contact" ref={ref} className="py-section">
       <Container>
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-16">
           <Reveal>
-            <SectionHeading eyebrow="Get in touch">
-              Let&apos;s build something together
+            <SectionHeading eyebrow="Contact">
+              Got a project?
+              <br />
+              We have the skills to make it happen.
             </SectionHeading>
-            <p className="mt-5 text-[16px] leading-relaxed text-fg-muted">
+            <p className="mt-5 max-w-md text-[16px] leading-relaxed text-ink/70">
               Tell us about the product, the timeline and the platform. We reply to
               every serious enquiry.
             </p>
 
             <a
               href={`mailto:${siteMeta.email}`}
-              className="mt-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-5 py-2.5 font-mono text-[14px] text-fg transition-colors duration-200 hover:border-white/25"
+              className="btn-outline mt-8 inline-flex items-center px-5 py-2.5 text-[15px] font-medium"
             >
               {siteMeta.email}
             </a>
 
-            <div className="mt-6 flex items-center gap-3">
-              {siteMeta.socials.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-fg-muted transition-colors duration-200 hover:border-white/25 hover:text-fg"
-                >
-                  {socialIcons[social.label]}
-                </a>
-              ))}
+            <div className="mt-4 flex flex-wrap items-center gap-2">
+              <ProfileLinks />
+              {siteMeta.socials
+                .filter((social) => social.label === "Discord")
+                .map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-outline inline-flex items-center gap-2 px-4 py-2 text-[14px] font-medium"
+                  >
+                    <BsDiscord aria-hidden="true" className="text-[15px]" />
+                    {social.label}
+                  </a>
+                ))}
             </div>
           </Reveal>
 
-          <Reveal delay={0.08}>
-            <ContactForm />
+          <Reveal delay={0.08} className="pb-[10px] pr-[10px]">
+            <div className="slab p-6 sm:p-8">
+              <ContactForm />
+            </div>
           </Reveal>
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

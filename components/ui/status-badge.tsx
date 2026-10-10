@@ -10,12 +10,7 @@ export default function StatusBadge({ status }: { status: ProjectStatus }) {
   const { label, dot } = statusConfig[status];
 
   return (
-    <span
-      className={clsx(
-        "inline-flex items-center gap-1.5 font-mono text-[12px] font-medium",
-        status === "live" ? "text-live" : "text-beta"
-      )}
-    >
+    <span className="tech-pill shrink-0 text-ink/80">
       <span className={clsx("h-1.5 w-1.5 rounded-full", dot)} />
       {label}
     </span>

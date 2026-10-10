@@ -11,91 +11,132 @@ html {
 body {
   min-height: 100vh;
   margin: 0;
-  background-color: #090a0f;
-  color: #f4f5f8;
+  background-color: #ffffff;
+  color: #0d0f26;
 }
 
 ::selection {
-  background: rgba(255, 255, 255, 0.9);
-  color: #090a0f;
+  background: #d5dbf8;
+  color: #0d0f26;
 }
 
 @layer components {
-  /* Dynamic Notch header */
-  .notch-nav {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(18, 19, 26, 0.85);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-top: none;
-    border-radius: 0 0 20px 20px;
-    padding: 10px 20px;
-    box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.7);
-    z-index: 50;
+  /* Uppercase tracked section label */
+  .eyebrow {
+    font-family: var(--font-body), sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
   }
 
-  /* Tech stack capsule */
+  /* Square card with an extruded edge on the right and bottom.
+     Edge colors inherit from the section via --slab-side / --slab-bottom. */
+  .slab {
+    --slab-depth: 10px;
+    position: relative;
+    background: #ffffff;
+    color: #0d0f26;
+    box-shadow: 0 0 0 1px rgba(13, 15, 38, 0.08);
+    transition: box-shadow 0.3s cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .slab::before,
+  .slab::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    transition: background-color 0.3s cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .slab::before {
+    top: 0;
+    right: calc(-1 * var(--slab-depth));
+    width: var(--slab-depth);
+    height: calc(100% + var(--slab-depth));
+    background-color: var(--slab-side, #e4e7f2);
+    clip-path: polygon(
+      0 0,
+      100% var(--slab-depth),
+      100% 100%,
+      0 calc(100% - var(--slab-depth))
+    );
+  }
+
+  .slab::after {
+    left: 0;
+    bottom: calc(-1 * var(--slab-depth));
+    width: calc(100% + var(--slab-depth));
+    height: var(--slab-depth);
+    background-color: var(--slab-bottom, #cdd2e6);
+    clip-path: polygon(
+      0 0,
+      calc(100% - var(--slab-depth)) 0,
+      100% 100%,
+      var(--slab-depth) 100%
+    );
+  }
+
+  /* Hover only recolors — nothing moves or resizes */
+  .slab-interactive:hover,
+  .slab-interactive:focus-within {
+    --slab-side: #c9cff0;
+    --slab-bottom: #a9b2e6;
+    box-shadow: 0 0 0 1px rgba(82, 75, 244, 0.35);
+  }
+
+  /* Outlined capsule that adapts to the surrounding text color */
   .tech-pill {
-    font-family: var(--font-geist-mono), ui-monospace, monospace;
-    font-size: 12px;
-    line-height: 1.4;
-    font-weight: 500;
-    padding: 4px 10px;
-    border-radius: 9999px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    color: #d1d5db;
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    border: 1px solid color-mix(in srgb, currentColor 28%, transparent);
+    font-size: 12px;
+    line-height: 1.4;
+    font-weight: 500;
     white-space: nowrap;
   }
 
-  /* Bento showcase card */
-  .bento-card {
-    background: #12131a;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 20px;
-    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
-      border-color 0.3s ease, box-shadow 0.3s ease;
+  /* Outlined pill button that adapts to the surrounding text color */
+  .btn-outline {
+    border-radius: 9999px;
+    border: 1px solid currentColor;
+    transition: background-color 0.3s cubic-bezier(0, 0, 0.2, 1);
   }
 
-  .bento-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.22);
-    box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.6);
+  .btn-outline:hover,
+  .btn-outline:focus-visible {
+    background-color: color-mix(in srgb, currentColor 12%, transparent);
+  }
+
+  /* Small external link chip (stores / repos) */
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 9999px;
+    border: 1px solid rgba(13, 15, 38, 0.18);
+    color: #0d0f26;
+    font-size: 13px;
+    line-height: 1.4;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.3s cubic-bezier(0, 0, 0.2, 1),
+      border-color 0.3s cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .project-link:hover {
+    background-color: #edf0fe;
+    border-color: #524bf4;
   }
 }
 
 .grecaptcha-badge {
   visibility: hidden !important;
-}
-
-/* Custom Scrollbar */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 99px;
-  border: 2px solid transparent;
-  background-clip: content-box;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.4);
-  border: 2px solid transparent;
-  background-clip: content-box;
 }
 
 /* Reduce motion for accessibility and performance */
@@ -108,90 +149,3 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
-
-  /* Featured project card — opaque dark panel, Apple-like precision */
-  .project-card {
-    position: relative;
-    isolation: isolate;
-    background-color: #12131a;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow:
-      0 0 0 0.5px rgba(0, 0, 0, 0.5),
-      0 1px 2px rgba(0, 0, 0, 0.3),
-      0 4px 16px -4px rgba(0, 0, 0, 0.4);
-    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
-      border-color 0.35s ease,
-      box-shadow 0.35s ease;
-    will-change: transform;
-  }
-
-  .project-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    border-radius: inherit;
-    opacity: 0;
-    background: radial-gradient(
-      600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(255, 255, 255, 0.04),
-      transparent 40%
-    );
-    transition: opacity 0.35s ease;
-    pointer-events: none;
-  }
-
-  .project-card:hover,
-  .project-card:focus-within {
-    transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.16);
-    box-shadow:
-      0 0 0 0.5px rgba(0, 0, 0, 0.5),
-      0 2px 4px rgba(0, 0, 0, 0.2),
-      0 8px 24px -6px rgba(0, 0, 0, 0.5),
-      0 24px 48px -12px rgba(0, 0, 0, 0.4);
-  }
-
-  .project-card:hover::before,
-  .project-card:focus-within::before {
-    opacity: 1;
-  }
-
-  /* Image container — subtle inner shadow like a recessed display */
-  .project-card .media-wrap {
-    position: relative;
-  }
-
-  .project-card .media-wrap::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    pointer-events: none;
-    box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.3);
-  }
-
-  /* Small external link chip (stores / repos) */
-  .project-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 5px 10px;
-    border-radius: 9999px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    color: #d1d5db;
-    font-size: 12px;
-    line-height: 1.4;
-    font-weight: 500;
-    text-decoration: none;
-    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
-  }
-
-  .project-link:hover {
-    border-color: rgba(255, 255, 255, 0.18);
-    color: #f4f5f8;
-    background: rgba(255, 255, 255, 0.06);
-  }

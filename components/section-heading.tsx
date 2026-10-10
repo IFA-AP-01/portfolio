@@ -14,12 +14,8 @@ export default function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <div className={clsx("max-w-2xl", className)}>
-      {eyebrow && (
-        <p className="mb-3 font-mono text-[13px] font-medium uppercase tracking-[0.14em] text-fg-subtle">
-          {eyebrow}
-        </p>
-      )}
-      <h2 className="text-[32px] font-semibold leading-[1.2] tracking-[-0.025em] text-fg sm:text-[40px]">
+      {eyebrow && <p className="eyebrow mb-4 opacity-70">{eyebrow}</p>}
+      <h2 className="font-heading text-[32px] font-normal leading-[1.15] tracking-[-0.01em] sm:text-[44px]">
         {children}
       </h2>
     </div>
