@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import logo from "@/public/logo.webp";
 import { navItems, siteMeta } from "@/lib/data";
 import { FaGithub } from "react-icons/fa";
@@ -107,10 +108,24 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 border-t border-white/15 pt-6">
+        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-white/15 pt-6 sm:flex-row sm:items-center">
           <p className="text-[13px] text-white/50">
             &copy; {currentYear} {siteMeta.name}. All rights reserved.
           </p>
+          <div className="flex items-center gap-6 text-[13px] text-white/50">
+            <Link
+              href="/privacy"
+              className="transition-colors duration-300 hover:text-white"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/terms"
+              className="transition-colors duration-300 hover:text-white"
+            >
+              Terms of Service
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { headlineFont, bodyFont } from "@/lib/fontawesome";
+import { headlineFont, bodyFont } from "@/lib/fonts";
 import Link from "next/link";
 
 export const metadata: Metadata = {

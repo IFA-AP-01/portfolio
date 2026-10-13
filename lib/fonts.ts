@@ -7,6 +7,8 @@ export const headingFont = Instrument_Sans({
   display: "swap",
 });
 
+export const headlineFont = headingFont;
+
 export const bodyFont = DM_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],

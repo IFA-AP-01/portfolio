@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { headlineFont, bodyFont } from "@/lib/fontawesome";
+import { headlineFont, bodyFont } from "@/lib/fonts";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -35,12 +35,37 @@ export default function PrivacyIndex() {
         {/* Privacy Policies List */}
         <div className="space-y-6">
           <div className="bg-white/80 dark:bg-white/5 backdrop-blur-lg border border-white/30 dark:border-white/10 rounded-3xl p-8 hover:bg-white/90 dark:hover:bg-white/10 transition-all duration-300 shadow-lg">
-            <Link href="/privacy/scanner" className="block">
+            <Link href="/privacy/scanner-ios" className="block">
               <h2 className={`${headlineFont.className} text-2xl font-bold text-gray-900 dark:text-white mb-3`}>
-                AIO Scanner Mobile App
+                AIO Scanner iOS App
               </h2>
               <p className={`${bodyFont.className} text-gray-700 dark:text-gray-300 mb-4`}>
-                Privacy policy for our mobile scanning application, including camera permissions and data handling for OCR functionality.
+                Privacy policy for our iOS scanning application - zero data collection, camera permissions and local on-device document processing.
+              </p>
+              <div className="flex items-center space-x-4">
+                <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">
+                  Mobile App
+                </span>
+                <span className="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">
+                  Apple Compliant
+                </span>
+                <span className="text-gray-500 dark:text-gray-400 text-sm">
+                  iOS
+                </span>
+              </div>
+              <div className="mt-4 text-blue-600 dark:text-blue-400 font-medium">
+                Read Privacy Policy →
+              </div>
+            </Link>
+          </div>
+
+          <div className="bg-white/80 dark:bg-white/5 backdrop-blur-lg border border-white/30 dark:border-white/10 rounded-3xl p-8 hover:bg-white/90 dark:hover:bg-white/10 transition-all duration-300 shadow-lg">
+            <Link href="/privacy/scanner" className="block">
+              <h2 className={`${headlineFont.className} text-2xl font-bold text-gray-900 dark:text-white mb-3`}>
+                AIO Scanner Android App
+              </h2>
+              <p className={`${bodyFont.className} text-gray-700 dark:text-gray-300 mb-4`}>
+                Privacy policy for our Android scanning application, including camera permissions and data handling for OCR functionality.
               </p>
               <div className="flex items-center space-x-4">
                 <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">
