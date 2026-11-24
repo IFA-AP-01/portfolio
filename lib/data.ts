@@ -4,6 +4,7 @@ import aioScannerImg from "@/public/aioScanner.webp";
 import colorNoteImg from "@/public/colorNoteImg.webp";
 import taskManagementImg from "@/public/taskManagementImg.webp";
 import tiziImg from "@/public/tiziImg.webp";
+import batteryMeterImg from "@/public/batteryMeter.webp";
 import vtvImg from "@/public/vtvImg.webp";
 
 // ---------------------------------------------------------------------------
@@ -96,13 +97,12 @@ export const featuredProjects: FeaturedProject[] = [
   {
     slug: "battery-meter",
     title: "Battery Meter",
-    kicker: "Real-time battery widget",
+    kicker: "Battery health & widgets",
     description:
-      "A lightweight Android battery monitor with a customizable Glance home-screen widget — live status, health and charge history. 40,000+ installs on Google Play, fully open source.",
+      "Android battery monitor with real-time health, charging watts, cycle count, temperature and Bluetooth earbuds — plus 17+ Material 3 home-screen widgets. 45,000+ installs on Google Play, no account needed.",
     tags: ["Android", "Kotlin", "Jetpack Compose", "Glance"],
-    image: tiziImg,
-    videoUrl: "https://cdn.ifateam.dev/battery.mp4",
-    viewUrl: "https://github.com/huyhunhngc/battery_meter",
+    image: batteryMeterImg,
+    viewUrl: "https://battery.ifateam.dev",
     links: [
       {
         label: "Play Store",
