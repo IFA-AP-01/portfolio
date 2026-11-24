@@ -10,6 +10,14 @@ function absoluteUrl(path: string): string {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date()
 
+  const legalPages = [
+    '/privacy',
+    '/privacy/scanner',
+    '/privacy/scanner-ios',
+    '/terms',
+    '/terms/scanner-ios',
+  ]
+
   return [
     {
       url: absoluteUrl('/'),
@@ -17,5 +25,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 1,
     },
+    ...legalPages.map((path) => ({
+      url: absoluteUrl(path),
+      lastModified: now,
+      changeFrequency: 'yearly' as const,
+      priority: 0.3,
+    })),
   ]
 }

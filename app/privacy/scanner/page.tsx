@@ -3,9 +3,10 @@ import { headlineFont, bodyFont } from "@/lib/fonts";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy - AIO Scanner | IFA Team",
+  title: "Privacy Policy - AIO Scanner",
   description: "Privacy policy for AIO Scanner mobile application - How we handle your data and protect your privacy",
   robots: "index, follow",
+  alternates: { canonical: "/privacy/scanner" },
 };
 
 export default function ScannerPrivacyPolicy() {

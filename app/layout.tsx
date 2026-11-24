@@ -12,6 +12,7 @@ const description =
   "IFA Team builds web, mobile and edge software that ships — from real-time voice translation to globally-cached asset delivery.";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.ifateam.dev"),
   title: {
     default: title,
     template: "%s | IFA Team",
@@ -28,12 +29,11 @@ export const metadata: Metadata = {
     title: { default: title, template: "%s | IFA Team" },
     description,
     images: ["https://cdn.ifateam.dev/thumnail-ifa.jpg"],
-    url: "https://ifateam.dev",
     siteName: title,
     locale: "en",
     type: "website",
   },
-  alternates: { canonical: "https://ifateam.dev" },
+  alternates: { canonical: "/" },
 };
 
 export const viewport: Viewport = {

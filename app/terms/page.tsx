@@ -3,9 +3,10 @@ import { headlineFont, bodyFont } from "@/lib/fonts";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | IFA Team",
+  title: "Terms of Service",
   description: "Terms of service for IFA Team applications and services",
   robots: "index, follow",
+  alternates: { canonical: "/terms" },
 };
 
 export default function PrivacyIndex() {

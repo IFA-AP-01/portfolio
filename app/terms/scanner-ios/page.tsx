@@ -3,10 +3,11 @@ import { headlineFont, bodyFont } from "@/lib/fonts";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Terms of Service - AIO Scanner | IFA Team",
+  title: "Terms of Service - AIO Scanner",
   description:
     "Terms of Service for AIO Scanner mobile application - Usage rules, user responsibilities, limitations, and legal terms.",
   robots: "index, follow",
+  alternates: { canonical: "/terms/scanner-ios" },
 };
 
 export default function ScannerTermsOfService() {
