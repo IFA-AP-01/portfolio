@@ -5,6 +5,7 @@ import colorNoteImg from "@/public/colorNoteImg.webp";
 import taskManagementImg from "@/public/taskManagementImg.webp";
 import tiziImg from "@/public/tiziImg.webp";
 import batteryMeterImg from "@/public/batteryMeter.webp";
+import simcamLiteImg from "@/public/simcamLite.webp";
 import vtvImg from "@/public/vtvImg.webp";
 
 // ---------------------------------------------------------------------------
@@ -110,6 +111,20 @@ export const featuredProjects: FeaturedProject[] = [
         kind: "play",
       },
       { label: "GitHub", href: "https://github.com/huyhunhngc/battery_meter", kind: "github" },
+    ],
+    status: "live",
+  },
+  {
+    slug: "simcam-lite",
+    title: "SimCam Lite",
+    kicker: "Camera for the iOS Simulator",
+    description:
+      "Free, open-source macOS app that gives the iOS Simulator a working camera. Stream photos, 4K video, QR codes or your Mac webcam into any app — no code changes, no SDK.",
+    tags: ["macOS", "Swift", "AVFoundation", "Open Source"],
+    image: simcamLiteImg,
+    viewUrl: "https://simcam.ifateam.dev/",
+    links: [
+      { label: "GitHub", href: "https://github.com/huyhunhngc/SimCamLite", kind: "github" },
     ],
     status: "live",
   },
