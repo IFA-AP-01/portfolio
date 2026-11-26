@@ -124,7 +124,7 @@ export const featuredProjects: FeaturedProject[] = [
     image: simcamLiteImg,
     viewUrl: "https://simcam.ifateam.dev/",
     links: [
-      { label: "GitHub", href: "https://github.com/huyhunhngc/SimCamLite", kind: "github" },
+      { label: "GitHub", href: "https://github.com/huyhunhngc/simulator-camera", kind: "github" },
     ],
     status: "live",
   },
