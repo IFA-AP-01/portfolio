@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import clsx from "clsx";
@@ -12,6 +13,7 @@ export default function SiteNav() {
   const [open, setOpen] = useState(false);
   const { activeSection, setActiveSection, setTimeOfLastClick } =
     useActiveSectionContext();
+  const onHome = usePathname() === "/";
 
   const handleClick = (label: (typeof navItems)[number]["label"]) => {
     setActiveSection(label);
@@ -27,7 +29,7 @@ export default function SiteNav() {
       <div className="mx-auto w-full max-w-[880px] rounded-[18px] bg-surface/90 backdrop-blur-[10px]">
         <div className="flex h-14 items-center justify-between gap-6 pl-4 pr-2">
           <a
-            href="#home"
+            href="/#home"
             onClick={() => handleClick("Home")}
             className="flex shrink-0 items-center gap-2.5"
             aria-label="IFA Team - home"
@@ -47,11 +49,11 @@ export default function SiteNav() {
 
           <ul className="hidden items-center gap-1 md:flex">
             {navItems.slice(1).map((item) => {
-              const isActive = activeSection === item.label;
+              const isActive = onHome && activeSection === item.label;
               return (
                 <li key={item.label}>
                   <a
-                    href={item.hash}
+                    href={`/${item.hash}`}
                     onClick={() => handleClick(item.label)}
                     className={clsx(
                       "relative block rounded-lg px-3 py-1.5 text-[14px] font-medium transition-colors duration-150 ease-out hover:text-ink",
@@ -80,7 +82,7 @@ export default function SiteNav() {
 
           <div className="flex items-center gap-2">
             <a
-              href="#contact"
+              href="/#contact"
               onClick={() => handleClick("Contact")}
               className="btn btn-primary btn-sm hidden sm:inline-flex"
             >
@@ -132,11 +134,11 @@ export default function SiteNav() {
               {navItems.map((item) => (
                 <li key={item.label}>
                   <a
-                    href={item.hash}
+                    href={`/${item.hash}`}
                     onClick={() => handleClick(item.label)}
                     className={clsx(
                       "block rounded-[10px] px-3 py-2.5 text-[15px] font-medium transition-colors duration-150 hover:bg-canvas",
-                      activeSection === item.label
+                      onHome && activeSection === item.label
                         ? "bg-canvas text-ink"
                         : "text-ink-muted",
                     )}
@@ -147,7 +149,7 @@ export default function SiteNav() {
               ))}
               <li className="px-1 pb-3 pt-2">
                 <a
-                  href="#contact"
+                  href="/#contact"
                   onClick={() => handleClick("Contact")}
                   className="btn btn-primary btn-sm"
                 >

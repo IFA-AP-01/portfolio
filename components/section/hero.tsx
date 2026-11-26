@@ -1,7 +1,6 @@
 "use client";
 
 import { availability, heroStats } from "@/lib/data";
-import metacamPoster from "@/public/metacamHeaderPoster.webp";
 import Container from "@/components/ui/container";
 import Reveal from "@/components/ui/reveal";
 import Section from "@/components/ui/section";
@@ -71,24 +70,7 @@ export default function Hero() {
           </div>
         </Reveal>
 
-        <Reveal delay={0.26} className="mt-12 w-full max-w-[1100px]">
-          <div className="overflow-hidden rounded-card bg-black">
-            <video
-              src="https://cdn.ifateam.dev/header-metacam.mp4"
-              poster={metacamPoster.src}
-              autoPlay
-              loop
-              muted
-              playsInline
-              disablePictureInPicture
-              preload="metadata"
-              aria-label="MetaCam photos with EXIF frames hanging on a string"
-              className="aspect-[4/3] w-full object-cover sm:aspect-[21/9]"
-            />
-          </div>
-        </Reveal>
-
-        <Reveal delay={0.28} className="mt-5 w-full max-w-[1100px]">
+        <Reveal delay={0.28} className="mt-12 w-full max-w-[1100px]">
           <dl className="card grid grid-cols-2 gap-y-8 p-6 text-left sm:grid-cols-4 sm:p-8">
             {heroStats.map((stat) => (
               <div key={stat.label} className="flex flex-col-reverse justify-end sm:px-2">

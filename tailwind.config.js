@@ -17,6 +17,7 @@ module.exports = {
           deep: "#EFE9E2",
         },
         surface: "#FFFFFF",
+        night: "#0A0806",
         accent: {
           orange: "#F6A656",
         },

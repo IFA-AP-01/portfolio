@@ -50,7 +50,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bodyFont.variable} !scroll-smooth`}
+      className={`${bodyFont.variable}`}
     >
       <body className="bg-canvas font-body text-ink antialiased">
         <ActiveSectionContextProvider>
