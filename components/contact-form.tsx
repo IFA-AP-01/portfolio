@@ -16,7 +16,7 @@ const SUBMISSION_SUCCESS = "Email sent successfully!";
 const labelClasses = "mb-1.5 block text-[14px] font-medium text-ink";
 
 const inputClasses =
-  "w-full border border-transparent bg-mist px-3.5 py-3 text-[15px] text-ink placeholder:text-ink/40 outline-none transition-colors duration-300 ease-out focus:border-indigo disabled:opacity-60";
+  "w-full rounded-[12px] border border-transparent bg-canvas px-3.5 py-3 text-[15px] text-ink placeholder:text-ink/40 outline-none transition-colors duration-150 ease-out focus:border-accent-orange disabled:opacity-60";
 
 const ContactForm = () => {
   const { executeRecaptcha } = useGoogleReCaptcha();
@@ -61,7 +61,7 @@ const ContactForm = () => {
     <form className="flex flex-col gap-5" onSubmit={handleSubmit} ref={formRef}>
       <div>
         <label htmlFor="message" className={labelClasses}>
-          Your message <span className="text-accent-coral">*</span>
+          Your message <span className="text-accent-orange">*</span>
         </label>
         <textarea
           id="message"
@@ -75,7 +75,7 @@ const ContactForm = () => {
       </div>
       <div>
         <label htmlFor="senderEmail" className={labelClasses}>
-          Your email <span className="text-accent-coral">*</span>
+          Your email <span className="text-accent-orange">*</span>
         </label>
         <input
           id="senderEmail"

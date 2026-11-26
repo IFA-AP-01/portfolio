@@ -5,10 +5,9 @@ import type { ComponentPropsWithoutRef, ReactNode } from "react";
 type Variant = "primary" | "inverse" | "outline" | "link";
 
 const variantClasses: Record<Variant, string> = {
-  primary: "rounded-full bg-ink px-6 py-2.5 text-white hover:bg-indigo",
-  inverse: "rounded-full bg-white px-6 py-2.5 text-ink hover:bg-periwinkle",
-  outline:
-    "btn-outline px-6 py-2.5",
+  primary: "btn btn-primary",
+  inverse: "btn btn-secondary",
+  outline: "btn btn-secondary",
   link: "group underline-offset-4 hover:underline",
 };
 
@@ -53,7 +52,7 @@ export default function Button({
   ...rest
 }: ButtonProps) {
   const classes = clsx(
-    "group inline-flex items-center justify-center gap-2 text-[15px] font-medium transition-colors duration-300 ease-out",
+    "group inline-flex items-center justify-center gap-2 text-[15px] font-semibold",
     variantClasses[variant],
     className
   );

@@ -1,6 +1,7 @@
 import liveSpeakerImg from "@/public/liveSpeakerImg.webp";
-import metacamImg from "@/public/metacam-og.webp";
-import aioScannerImg from "@/public/aioScanner.webp";
+import metacamImg from "@/public/metacamCard.webp";
+import aioScannerImg from "@/public/aioScannerCard.webp";
+import smartIptvImg from "@/public/smartIptvCard.webp";
 import colorNoteImg from "@/public/colorNoteImg.webp";
 import taskManagementImg from "@/public/taskManagementImg.webp";
 import tiziImg from "@/public/tiziImg.webp";
@@ -79,7 +80,7 @@ export const featuredProjects: FeaturedProject[] = [
       "Camera app that stamps every shot with your camera's real EXIF data — brand, lens, shutter, ISO and location — into studio-crafted watermark templates. 30+ layouts, batch export, built for photographers who want credit on every frame.",
     tags: ["iOS", "Swift", "EXIF", "Templates"],
     image: metacamImg,
-    imagePosition: "30% center",
+    imagePosition: "35% center",
     viewUrl: "https://metacam.pics/",
     links: [
       {
@@ -135,7 +136,7 @@ export const featuredProjects: FeaturedProject[] = [
     description:
       "Watch live TV, movies and series from your own M3U/M3U8 playlists, Xtream Codes or RTSP streams — with auto subtitles, continue watching, player gestures, picture-in-picture and cast to TV.",
     tags: ["Android", "M3U / Xtream", "Picture-in-Picture", "Cast"],
-    image: null,
+    image: smartIptvImg,
     youtubeId: "crLtk14ehIw",
     viewUrl: "https://play.google.com/store/apps/details?id=com.mapdev.iptv",
     links: [
@@ -167,6 +168,7 @@ export const featuredProjects: FeaturedProject[] = [
       "Transform any document into digital text with our advanced OCR scanner. From business cards to handwritten notes.",
     tags: ["Kotlin", "Swift", "ML Kit", "Firebase"],
     image: aioScannerImg,
+    imagePosition: "100% center",
     viewUrl: "https://scanner.ifateam.dev",
     status: "live",
   },

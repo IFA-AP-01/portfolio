@@ -13,7 +13,7 @@ const profiles = [
   })),
 ];
 
-/** GitHub org + store developer pages as outlined pills; inherits text color. */
+/** GitHub org + store developer pages as small white buttons. */
 export default function ProfileLinks({ className }: { className?: string }) {
   return (
     <ul className={clsx("flex flex-wrap items-center gap-2", className)}>
@@ -23,7 +23,7 @@ export default function ProfileLinks({ className }: { className?: string }) {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-outline inline-flex items-center gap-2 px-4 py-2 text-[14px] font-medium"
+            className="btn btn-secondary btn-sm"
           >
             <Icon aria-hidden="true" className="text-[15px]" />
             {label}

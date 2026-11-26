@@ -14,7 +14,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-navy-deep py-20 text-white">
+    <footer className="bg-surface pb-20 pt-16 text-ink">
       <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
@@ -27,11 +27,11 @@ export default function Footer() {
                 height={30}
                 className="h-7 w-7 object-contain"
               />
-              <span className="font-heading text-[20px] font-medium tracking-[-0.01em]">
+              <span className="font-heading text-[18px] font-bold tracking-[-0.04em]">
                 {siteMeta.name}
               </span>
             </a>
-            <p className="max-w-xs text-[15px] leading-relaxed text-white/70">
+            <p className="max-w-xs text-[14px] leading-relaxed text-ink-muted">
               A product studio building web, mobile and edge software that ships.
             </p>
             <div className="flex items-center gap-3">
@@ -42,7 +42,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="btn-outline flex h-10 w-10 items-center justify-center"
+                  className="flex h-10 w-10 items-center justify-center rounded-[10px] bg-canvas transition-colors duration-150 hover:bg-canvas-deep"
                 >
                   {socialIcons[social.label]}
                 </a>
@@ -52,15 +52,13 @@ export default function Footer() {
 
           {/* Navigate */}
           <div>
-            <h3 className="eyebrow text-white/60">
-              Navigate
-            </h3>
-            <ul className="mt-4 space-y-2.5">
+            <h3 className="text-[13px] font-semibold">Navigate</h3>
+            <ul className="mt-3.5 space-y-2.5">
               {navItems.map((item) => (
                 <li key={item.label}>
                   <a
                     href={item.hash}
-                    className="text-[15px] text-white/70 transition-colors duration-300 ease-out hover:text-white"
+                    className="text-[14px] text-ink-muted transition-colors duration-150 ease-out hover:text-ink"
                   >
                     {item.label}
                   </a>
@@ -71,8 +69,8 @@ export default function Footer() {
 
           {/* Find us */}
           <div>
-            <h3 className="eyebrow text-white/60">Find us</h3>
-            <ul className="mt-4 space-y-2.5">
+            <h3 className="text-[13px] font-semibold">Find us</h3>
+            <ul className="mt-3.5 space-y-2.5">
               {[
                 ...siteMeta.socials.filter((social) => social.label === "GitHub"),
                 ...siteMeta.stores,
@@ -82,7 +80,7 @@ export default function Footer() {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[15px] text-white/70 transition-colors duration-300 ease-out hover:text-white"
+                    className="text-[14px] text-ink-muted transition-colors duration-150 ease-out hover:text-ink"
                   >
                     {item.label}
                   </a>
@@ -93,35 +91,33 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="eyebrow text-white/60">
-              Contact
-            </h3>
+            <h3 className="text-[13px] font-semibold">Contact</h3>
             <a
               href={`mailto:${siteMeta.email}`}
-              className="btn-outline mt-4 inline-flex items-center px-4 py-2 text-[14px]"
+              className="mt-4 inline-flex items-center rounded-[10px] bg-canvas px-3.5 py-2 text-[14px] font-medium transition-colors duration-150 hover:bg-canvas-deep"
             >
               {siteMeta.email}
             </a>
-            <p className="mt-4 text-[15px] text-white/70">
+            <p className="mt-4 text-[14px] text-ink-muted">
               Available for new projects this quarter.
             </p>
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-white/15 pt-6 sm:flex-row sm:items-center">
-          <p className="text-[13px] text-white/50">
+        <div className="mt-12 flex flex-col items-start justify-between gap-4 pt-6 sm:flex-row sm:items-center">
+          <p className="text-[13px] text-ink/50">
             &copy; {currentYear} {siteMeta.name}. All rights reserved.
           </p>
-          <div className="flex items-center gap-6 text-[13px] text-white/50">
+          <div className="flex items-center gap-6 text-[13px] text-ink/60">
             <Link
               href="/privacy"
-              className="transition-colors duration-300 hover:text-white"
+              className="transition-colors duration-150 hover:text-ink"
             >
               Privacy Policy
             </Link>
             <Link
               href="/terms"
-              className="transition-colors duration-300 hover:text-white"
+              className="transition-colors duration-150 hover:text-ink"
             >
               Terms of Service
             </Link>

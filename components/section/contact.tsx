@@ -14,7 +14,7 @@ export default function Contact() {
   const { ref } = useSectionInView("Contact");
 
   return (
-    <Section tone="cream" id="contact" ref={ref} className="py-section">
+    <Section id="contact" ref={ref}>
       <Container>
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-16">
           <Reveal>
@@ -23,14 +23,14 @@ export default function Contact() {
               <br />
               We have the skills to make it happen.
             </SectionHeading>
-            <p className="mt-5 max-w-md text-[16px] leading-relaxed text-ink/70">
+            <p className="mt-4 max-w-md text-[16px] leading-relaxed text-ink-muted">
               Tell us about the product, the timeline and the platform. We reply to
               every serious enquiry.
             </p>
 
             <a
               href={`mailto:${siteMeta.email}`}
-              className="btn-outline mt-8 inline-flex items-center px-5 py-2.5 text-[15px] font-medium"
+              className="btn btn-primary mt-8"
             >
               {siteMeta.email}
             </a>
@@ -45,7 +45,7 @@ export default function Contact() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-outline inline-flex items-center gap-2 px-4 py-2 text-[14px] font-medium"
+                    className="btn btn-secondary btn-sm"
                   >
                     <BsDiscord aria-hidden="true" className="text-[15px]" />
                     {social.label}
@@ -54,8 +54,8 @@ export default function Contact() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.08} className="pb-[10px] pr-[10px]">
-            <div className="slab p-6 sm:p-8">
+          <Reveal delay={0.08}>
+            <div className="card p-6 sm:p-8">
               <ContactForm />
             </div>
           </Reveal>

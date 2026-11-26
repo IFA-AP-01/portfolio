@@ -8,30 +8,22 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        ink: "#0D0F26",
-        navy: {
-          DEFAULT: "#001A72",
-          deep: "#0A0C20",
+        ink: {
+          DEFAULT: "#111111",
+          muted: "#6E6862",
         },
-        indigo: "#524BF4",
-        paper: "#FFFFFF",
-        mist: "#F4F5FA",
-        periwinkle: {
-          DEFAULT: "#EDF0FE",
-          edge: "#D5DBF8",
+        canvas: {
+          DEFAULT: "#FBF5EE",
+          deep: "#EFE9E2",
         },
-        cream: "#FBF5EE",
+        surface: "#FFFFFF",
         accent: {
           orange: "#F6A656",
-          blue: "#97A5ED",
-          coral: "#F07A6E",
         },
-        live: "#10B981",
-        beta: "#F59E0B",
       },
       fontFamily: {
         heading: [
-          "var(--font-heading)",
+          "var(--font-body)",
           "-apple-system",
           "BlinkMacSystemFont",
           "Segoe UI",
@@ -47,10 +39,10 @@ module.exports = {
       },
       maxWidth: {
         shell: "1200px",
-        hero: "880px",
       },
-      spacing: {
-        section: "120px",
+      borderRadius: {
+        card: "30px",
+        media: "20px",
       },
     },
   },

@@ -14,7 +14,12 @@ const items = testimonials.filter((t) => t.quote || showPlaceholders);
 
 function QuoteMark({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden
+    >
       <path d="M10 4 7.2 12H10.6v8H1.5v-7.6L5.2 4H10Zm11.9 0L19 12h3.5v8h-9.1v-7.6L17.1 4h4.8Z" />
     </svg>
   );
@@ -22,7 +27,10 @@ function QuoteMark({ className }: { className?: string }) {
 
 function Stars({ rating }: { rating: number }) {
   return (
-    <span className="flex gap-0.5 text-accent-orange" aria-label={`Rated ${rating} out of 5`}>
+    <span
+      className="flex gap-0.5 text-accent-orange"
+      aria-label={`Rated ${rating} out of 5`}
+    >
       {Array.from({ length: 5 }).map((_, i) => (
         <svg
           key={i}
@@ -46,20 +54,26 @@ function initials(name: string) {
     .join("");
 }
 
-function TestimonialCard({ item, decorative }: { item: Testimonial; decorative?: boolean }) {
+function TestimonialCard({
+  item,
+  decorative,
+}: {
+  item: Testimonial;
+  decorative?: boolean;
+}) {
   const missing = !item.quote;
 
   return (
     <article
       className={clsx(
-        "slab flex h-full flex-col gap-8 p-6 text-white xl:p-8",
-        missing ? "bg-transparent outline-dashed outline-1 outline-white/30" : "bg-[#1b1e45]"
+        "card flex h-full flex-col gap-8 p-6 xl:p-8",
+        missing && "!bg-transparent outline-dashed outline-1 outline-ink/25",
       )}
     >
       <blockquote className="flex flex-col items-start gap-4 text-[16px] leading-[1.6]">
-        <QuoteMark className="h-7 w-7 text-accent-blue" />
+        <QuoteMark className="h-7 w-7 text-ink/15" />
         {missing ? (
-          <span className="text-white/45">
+          <span className="text-ink/45">
             Quote missing — add it to <code>testimonials</code> in lib/data.ts.
           </span>
         ) : (
@@ -69,21 +83,21 @@ function TestimonialCard({ item, decorative }: { item: Testimonial; decorative?:
 
       <figure className="mt-auto flex items-center gap-3">
         <span
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent-blue font-heading text-[15px] font-medium text-ink"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-canvas font-heading text-[15px] font-bold text-ink"
           aria-hidden
         >
           {initials(item.author)}
         </span>
         <figcaption className="flex min-w-0 flex-col gap-1">
-          <strong className="text-[14px] font-medium">{item.author}</strong>
-          <span className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-white/60">
+          <strong className="text-[14px] font-semibold">{item.author}</strong>
+          <span className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-ink/60">
             {item.href ? (
               <a
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 tabIndex={decorative ? -1 : undefined}
-                className="underline decoration-white/25 underline-offset-4 transition-colors duration-300 ease-out hover:text-white hover:decoration-white"
+                className="underline decoration-ink/25 underline-offset-4 transition-colors duration-150 ease-out hover:text-ink hover:decoration-ink"
               >
                 {item.role}
               </a>
@@ -95,7 +109,7 @@ function TestimonialCard({ item, decorative }: { item: Testimonial; decorative?:
         </figcaption>
       </figure>
 
-      <span className="tech-pill w-fit text-white/70">{item.project}</span>
+      <span className="tech-pill w-fit">{item.project}</span>
     </article>
   );
 }
@@ -114,7 +128,7 @@ function CarouselButton({
       type="button"
       onClick={onClick}
       aria-label={label}
-      className="btn-outline flex h-11 w-11 items-center justify-center"
+      className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-surface text-ink transition-colors duration-150 hover:bg-canvas-deep active:scale-[0.985]"
     >
       {children}
     </button>
@@ -130,7 +144,10 @@ function Arrow({ direction }: { direction: "prev" | "next" }) {
       strokeWidth="1.75"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={clsx("h-4 w-4", direction === "prev" ? "-rotate-90" : "rotate-90")}
+      className={clsx(
+        "h-4 w-4",
+        direction === "prev" ? "-rotate-90" : "rotate-90",
+      )}
       aria-hidden
     >
       <path d="m5 12 7-7 7 7" />
@@ -154,7 +171,8 @@ export default function Testimonials() {
   const pos = useRef(0);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) setPaused(true);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+      setPaused(true);
   }, []);
 
   /** Slide offsets relative to the first slide, and the width of one copy. */
@@ -173,7 +191,8 @@ export default function Testimonials() {
     const left = m.track.scrollLeft;
     let nearest = 0;
     m.offsets.forEach((offset, i) => {
-      if (Math.abs(offset - left) < Math.abs(m.offsets[nearest] - left)) nearest = i;
+      if (Math.abs(offset - left) < Math.abs(m.offsets[nearest] - left))
+        nearest = i;
     });
     setActive(nearest % items.length);
   }, [measure]);
@@ -190,7 +209,8 @@ export default function Testimonials() {
       if (m && m.period > 0) {
         const { track, period } = m;
         // The user scrolled (wheel, swipe, buttons): continue from there.
-        if (Math.abs(track.scrollLeft - pos.current) > 2) pos.current = track.scrollLeft;
+        if (Math.abs(track.scrollLeft - pos.current) > 2)
+          pos.current = track.scrollLeft;
         if (!hovering.current && now >= holdUntil.current) {
           pos.current += SPEED * dt;
           if (pos.current >= period) pos.current -= period;
@@ -246,21 +266,18 @@ export default function Testimonials() {
   if (items.length === 0) return null;
 
   const loop = Array.from({ length: COPIES }, (_, copy) =>
-    items.map((item) => ({ item, copy }))
+    items.map((item) => ({ item, copy })),
   ).flat();
 
   return (
-    <Section
-      tone="ink"
-      id="reviews"
-      ref={ref}
-      className="overflow-hidden py-section [--slab-side:#2a2e63] [--slab-bottom:#363b7a]"
-    >
+    <Section id="reviews" ref={ref} className="overflow-hidden">
       <Container>
-        <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-2xl">
-            <SectionHeading eyebrow="Reviews">What clients and users say</SectionHeading>
-            <p className="mt-5 text-[16px] leading-relaxed text-white/70">
+        <div className="flex flex-col items-center gap-8 text-center">
+          <div className="mx-auto max-w-2xl">
+            <SectionHeading eyebrow="Reviews">
+              What clients and users say
+            </SectionHeading>
+            <p className="mt-4 text-[16px] leading-relaxed text-ink-muted">
               From teams we build for to people who use our apps every day.
             </p>
           </div>
@@ -273,11 +290,21 @@ export default function Testimonials() {
               onClick={() => setPaused((p) => !p)}
             >
               {paused ? (
-                <svg viewBox="0 0 24 24" fill="currentColor" className="ml-0.5 h-4 w-4" aria-hidden>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="ml-0.5 h-4 w-4"
+                  aria-hidden
+                >
                   <path d="M8 5.14v13.72a1 1 0 0 0 1.52.85l10.6-6.86a1 1 0 0 0 0-1.7L9.52 4.29A1 1 0 0 0 8 5.14Z" />
                 </svg>
               ) : (
-                <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4" aria-hidden>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="h-4 w-4"
+                  aria-hidden
+                >
                   <rect x="6" y="5" width="4" height="14" rx="1" />
                   <rect x="14" y="5" width="4" height="14" rx="1" />
                 </svg>
@@ -288,31 +315,33 @@ export default function Testimonials() {
             </CarouselButton>
           </div>
         </div>
+      </Container>
 
-        <ul
-          ref={trackRef}
-          onScroll={updateActive}
-          onMouseEnter={() => (hovering.current = true)}
-          onMouseLeave={() => (hovering.current = false)}
-          onFocus={() => (hovering.current = true)}
-          onBlur={() => (hovering.current = false)}
-          onPointerDown={() => hold(3000)}
-          onTouchMove={() => hold(3000)}
-          onWheel={() => hold(1500)}
-          className="relative -mx-4 mt-14 flex gap-6 overflow-x-auto px-4 pb-[10px] pr-[14px] [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:gap-8 [&::-webkit-scrollbar]:hidden"
-          aria-label="Reviews"
-        >
-          {loop.map(({ item, copy }) => (
-            <li
-              key={`${copy}-${item.id}`}
-              aria-hidden={copy > 0 || undefined}
-              className="w-[85%] shrink-0 sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-22px)]"
-            >
-              <TestimonialCard item={item} decorative={copy > 0} />
-            </li>
-          ))}
-        </ul>
+      <ul
+        ref={trackRef}
+        onScroll={updateActive}
+        onMouseEnter={() => (hovering.current = true)}
+        onMouseLeave={() => (hovering.current = false)}
+        onFocus={() => (hovering.current = true)}
+        onBlur={() => (hovering.current = false)}
+        onPointerDown={() => hold(3000)}
+        onTouchMove={() => hold(3000)}
+        onWheel={() => hold(1500)}
+        className="relative mt-12 flex gap-5 overflow-x-auto px-[max(1rem,calc((100%-1200px)/2+1rem))] [scrollbar-width:none] sm:px-[max(1.5rem,calc((100%-1200px)/2+1.5rem))] [&::-webkit-scrollbar]:hidden"
+        aria-label="Reviews"
+      >
+        {loop.map(({ item, copy }) => (
+          <li
+            key={`${copy}-${item.id}`}
+            aria-hidden={copy > 0 || undefined}
+            className="w-[85%] shrink-0 sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]"
+          >
+            <TestimonialCard item={item} decorative={copy > 0} />
+          </li>
+        ))}
+      </ul>
 
+      <Container>
         <div className="mt-8 flex justify-center gap-2">
           {items.map((item, i) => (
             <button
@@ -323,7 +352,7 @@ export default function Testimonials() {
               aria-current={i === active}
               className={clsx(
                 "h-2 w-2 rounded-full transition-colors duration-300 ease-out",
-                i === active ? "bg-white" : "bg-white/25 hover:bg-white/50"
+                i === active ? "bg-ink" : "bg-ink/20 hover:bg-ink/40",
               )}
             />
           ))}

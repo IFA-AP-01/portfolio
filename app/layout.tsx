@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 import ActiveSectionContextProvider from "@/context/active-section-context";
 import SiteLayout from "@/components/site-layout";
 import ScrollToTop from "@/components/scroll-to-top";
-import { bodyFont, headingFont } from "@/lib/fonts";
+import { bodyFont } from "@/lib/fonts";
 
 const title = "IFA Team — Product Studio";
 const description =
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0D0F26",
+  themeColor: "#FBF5EE",
 };
 
 export default function RootLayout({
@@ -50,9 +50,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${headingFont.variable} ${bodyFont.variable} !scroll-smooth`}
+      className={`${bodyFont.variable} !scroll-smooth`}
     >
-      <body className="bg-paper font-body text-ink antialiased">
+      <body className="bg-canvas font-body text-ink antialiased">
         <ActiveSectionContextProvider>
           <SiteLayout>{children}</SiteLayout>
           <Toaster position="top-right" />

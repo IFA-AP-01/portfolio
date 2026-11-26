@@ -38,7 +38,15 @@ function ProjectLinks({ links }: { links: readonly ProjectLink[] }) {
   );
 }
 
-function YouTubeMedia({ id, title }: { id: string; title: string }) {
+function YouTubeMedia({
+  id,
+  title,
+  poster,
+}: {
+  id: string;
+  title: string;
+  poster?: string;
+}) {
   const [playing, setPlaying] = useState(false);
 
   if (playing) {
@@ -62,12 +70,12 @@ function YouTubeMedia({ id, title }: { id: string; title: string }) {
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`}
+        src={poster ?? `https://i.ytimg.com/vi/${id}/hqdefault.jpg`}
         alt=""
         loading="lazy"
         className="absolute inset-0 h-full w-full object-cover"
       />
-      <span className="relative flex h-14 w-14 items-center justify-center rounded-full bg-white text-ink shadow-[0_0_0_1px_rgba(13,15,38,0.08)] transition-colors duration-300 ease-out group-hover/play:bg-indigo group-hover/play:text-white group-focus-visible/play:bg-indigo group-focus-visible/play:text-white">
+      <span className="relative flex h-14 w-14 items-center justify-center rounded-full bg-white text-ink transition-colors duration-150 ease-out group-hover/play:bg-canvas group-focus-visible/play:bg-canvas">
         <svg viewBox="0 0 24 24" fill="currentColor" className="ml-0.5 h-5 w-5" aria-hidden>
           <path d="M8 5.14v13.72a1 1 0 0 0 1.52.85l10.6-6.86a1 1 0 0 0 0-1.7L9.52 4.29A1 1 0 0 0 8 5.14Z" />
         </svg>
@@ -99,10 +107,10 @@ export default function ProjectCard({ project }: { project: FeaturedProject }) {
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
       className="h-full"
     >
-      <div className="slab slab-interactive group flex h-full flex-col">
-        <div className="relative aspect-[16/10] shrink-0 overflow-hidden border-b border-ink/10 bg-mist">
+      <div className="card group flex h-full flex-col p-3">
+        <div className="relative aspect-[16/10] shrink-0 overflow-hidden rounded-media bg-canvas">
           {youtubeId ? (
-            <YouTubeMedia id={youtubeId} title={title} />
+            <YouTubeMedia id={youtubeId} title={title} poster={image?.src} />
           ) : videoUrl ? (
             <video
               src={videoUrl}
@@ -129,24 +137,24 @@ export default function ProjectCard({ project }: { project: FeaturedProject }) {
           ) : null}
         </div>
 
-        <div className="flex flex-1 flex-col gap-4 p-6">
+        <div className="flex flex-1 flex-col gap-4 px-3 pb-3 pt-5">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="eyebrow text-[12px] text-ink/55">
+              <p className="text-[13px] font-medium text-ink/55">
                 {kicker}
               </p>
-              <h3 className="mt-2 font-heading text-[22px] font-medium leading-snug tracking-[-0.01em]">
+              <h3 className="mt-1 font-heading text-[20px] font-bold leading-tight tracking-[-0.05em]">
                 {title}
               </h3>
             </div>
             <StatusBadge status={status} />
           </div>
 
-          <p className="line-clamp-3 text-[15px] leading-relaxed text-ink/70">
+          <p className="line-clamp-3 text-[15px] leading-relaxed text-ink-muted">
             {description}
           </p>
 
-          <div className="flex flex-wrap items-center gap-2 text-ink/70">
+          <div className="flex flex-wrap items-center gap-2">
             {tags.slice(0, 4).map((tag) => (
               <TechPill key={tag}>{tag}</TechPill>
             ))}
@@ -160,7 +168,7 @@ export default function ProjectCard({ project }: { project: FeaturedProject }) {
                 href={viewUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex w-fit items-center gap-1.5 text-[15px] font-semibold text-indigo transition-colors duration-300 ease-out hover:text-ink"
+                className="inline-flex w-fit items-center gap-1.5 text-[15px] font-semibold text-ink transition-colors duration-150 ease-out hover:text-ink-muted"
               >
                 View project
                 <ArrowRight />
